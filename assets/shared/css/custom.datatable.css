@@ -13,3 +13,11 @@ select[name="nfFormTable_length"] {
     width: 25vw;
     margin-top: 20px;
 }
+
+.paginate_button {
+    margin: 10px;
+    color: #2271b1 !important;
+    border-color: #2271b1 !important;
+    background: #f6f7f7 !important;
+    border-radius: 3px !important;
+}
