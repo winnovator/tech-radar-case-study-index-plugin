@@ -9,7 +9,7 @@ class DB {
         $this->db = $wpdb;
     }
 
-    public function getDB() {
+    public function conn() {
         return $this->db;
     }
 }

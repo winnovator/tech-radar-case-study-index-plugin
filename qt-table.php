@@ -16,8 +16,9 @@ class QTTablePlugin {
     private $db;
     
     public function __construct() {
-        require(ABSPATH . 'wp-content/plugins/qt-table-plugin/includes/db.php');
-        $this->db = new DB();
+        require_once(ABSPATH . 'wp-content/plugins/qt-table-plugin/includes/db.php');
+        $db = new DB();
+        $this->db = $db->conn();
     }
 
     public static function checkAccess() {
@@ -28,7 +29,7 @@ class QTTablePlugin {
 
     public function activate() {
         flush_rewrite_rules();
-        $this->db->getDB()->query('CREATE TABLE wp_qt_published ( ID INT AUTO_INCREMENT PRIMARY KEY NOT NULL, form_id INT NOT NULL, seq_id INT NOT NULL, new TINYINT NOT NULL)');
+        $this->db->query("CREATE TABLE {$this->db->prefix}qt_published (ID INT AUTO_INCREMENT PRIMARY KEY NOT NULL, form_id INT NOT NULL, seq_id INT NOT NULL)");
     }
     
     public function deactivate() {

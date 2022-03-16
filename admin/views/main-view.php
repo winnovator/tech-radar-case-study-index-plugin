@@ -1,7 +1,9 @@
-<?php 
-require(plugin_dir_path(__DIR__) . "controllers/main-controller.php");
+<?php
+    require_once(ABSPATH . 'wp-content/plugins/qt-table-plugin/includes/nf.php');
+    NF::checkForNf();
 
-$mainControllerObj = new MainController();
+    require_once(plugin_dir_path(__DIR__) . "controllers/main-controller.php");
+    $mainControllerObj = new MainController();
 ?>
 
 <div class="wrap">

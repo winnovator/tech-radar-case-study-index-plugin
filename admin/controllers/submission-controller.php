@@ -1,5 +1,5 @@
 <?php
-require(plugin_dir_path(__DIR__) . "models/submission.php");
+require_once(plugin_dir_path(__DIR__) . "models/submission.php");
 
 class SubmissionController extends Submission {
     
@@ -30,6 +30,8 @@ class SubmissionController extends Submission {
     }
 
     public function convertSubArr($arr) {
+        if (!function_exists('Ninja_Forms')) { return; };
+
         $parrentArr = [];
 
         foreach ($arr as $dataArr) {
@@ -53,7 +55,7 @@ class SubmissionController extends Submission {
 
         foreach ($this->nfSubFields as $nfSubField) {
             if ($nfSubField->get_setting('key') == 'submit' || $nfSubField->get_setting('label') == 'Submit') { continue; }
-            echo '<th>' . $nfSubField->get_setting('label') . '</th>';
+            echo '<th>' . esc_html($nfSubField->get_setting('label')) . '</th>';
         }
 
         echo '<th>Published</th>';
@@ -61,23 +63,65 @@ class SubmissionController extends Submission {
     }
 
     public function renderFormData() {
+        $allSeqIdArr = $this->getAllPublishedSubmissionByFormID($this->formID, true);
+        
         foreach ($this->convertedSubDataArr as $convertedSubArr) {
             echo '<tr>';
 
             foreach ($convertedSubArr as $convertedSubValue) {
-                echo "<td> $convertedSubValue </td>";
+                echo "<td>". esc_html($convertedSubValue) . "</td>";
                 
             }
             
-            echo '<td> <input type="checkbox" name="sub_published" value="' . $convertedSubArr[0] . '"> </td>';
+            echo '<td>';
+            echo '<input type="checkbox" name="sub_seq_id_values[]" value="' . esc_attr($convertedSubArr[0]) . '" ';
+
+            if (count($allSeqIdArr) > 0) {
+                echo in_array($convertedSubArr[0], $allSeqIdArr) ? 'checked ' : '';
+            }
+
+            echo '></td>';
             echo '</tr>';
         }
-
     }
 
     public function renderSubmitButton() {
         if (count($this->convertedSubDataArr) > 0) {
-            echo "<div id='submit-wrap'><input id='submit-button' class='button action' type='submit' value='Submit'></div>";
+            echo "<div id='submit-wrap'><input id='submit-button' class='button action' type='submit' value='Save'></div>";
         }
     }
+
+    public function getNonce() {
+        return wp_create_nonce('publish_data_nonce');
+    }
+
+    public function savePublishedSubmissions($formID, $seqIdArr) {
+        $allSeqIdArr = $this->getAllPublishedSubmissionByFormID($formID, true);
+
+        if (count($seqIdArr) > 0) {
+            foreach ($seqIdArr as $seqIdVal) {
+                if ($this->checkForDuplicate($formID, $seqIdVal) > 0) {
+                    continue;
+                }
+    
+                $this->addSubmissionToPublished($formID, $seqIdVal);
+            }
+        }
+
+        if (count($seqIdArr) > 0) {
+            foreach ($allSeqIdArr as $seqIdVal) {
+                if (in_array($seqIdVal, $seqIdArr)) {
+                    continue;
+                }
+                
+                $this->deleteSubmissionFromPublished($formID, $seqIdVal);
+            }
+        }
+
+        if (count($seqIdArr) == 0) {
+            $this->deleteAllPublishedSubmissionByFormID($formID);
+        }
+    }
+
 }
+
