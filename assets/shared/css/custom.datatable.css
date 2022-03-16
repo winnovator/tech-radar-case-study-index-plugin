@@ -4,13 +4,12 @@ select[name="nfFormTable_length"] {
 
 #table-wrap {
     margin-top: 50px;
-    width: 20vw;
+    width: 40vw;
 }
 
 #submit-wrap {
     display: flex;
     justify-content: flex-end;
-    width: 25vw;
     margin-top: 20px;
 }
 

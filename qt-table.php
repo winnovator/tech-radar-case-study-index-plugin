@@ -36,8 +36,22 @@ class QTTablePlugin {
         flush_rewrite_rules();
     }
 
+    public function getTable($attr) {
+        include_once(ABSPATH . 'wp-content/plugins/qt-table-plugin/public/views/published-submission-view.php');
+        $publishedSubmissionViewObj = new PublishedSubmissionView();
+
+        $args = shortcode_atts( array(
+     
+            'form_id' => '',
+ 
+        ), $attr );
+
+        return $publishedSubmissionViewObj->getPublishedTable($args['form_id']);
+    }
+
     public function register() {
         add_action('admin_menu', [$this, 'addAdminPages']);
+        add_shortcode('qt-table', [$this, 'getTable']);
         $this->enqueue();
     }
 
