@@ -21,4 +21,8 @@
             return $output;
         }
     }
+
+    $output = new PublishedSubmissionView();
+
+    echo $output->getPublishedTable(7);
 ?>

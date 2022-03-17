@@ -1,4 +1,5 @@
 <?php
+require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
 
 class PublishedSubmission {
 
@@ -15,12 +16,6 @@ class PublishedSubmission {
         $this->dbObj = $db->conn();
     }
 
-    public function getFieldsFromFieldModelByFormID($formID) {
-        if (!function_exists('Ninja_Forms')) { return; };
-        $this->setNfObj();
-        return $this->nfObj->form($formID)->get_fields();
-    }
-
     public function getSubsFromSubModelByFormID($formID) {
         if (!function_exists('Ninja_Forms')) { return; };
 
@@ -31,7 +26,7 @@ class PublishedSubmission {
         $results = $this->nfObj->form($formID)->get_subs();
 
         foreach ($results as $result) {
-            if (in_array($result->get_field_values()['_seq_num'], $seqIDs)) {
+            if (in_array($result->get_extra_value('_seq_num'), $seqIDs)) {
                 array_push($arr, $result);
             }
         }
@@ -43,7 +38,7 @@ class PublishedSubmission {
         $arr = [];
 
         $this->setDbObj();
-        $preparedStmt = $this->dbObj->prepare("SELECT seq_id FROM {$this->dbObj->prefix}qt_published WHERE form_id = %d", [(int)$formID]);
+        $preparedStmt = $this->dbObj->prepare("SELECT seq_id FROM {$this->dbObj->prefix}csi_published WHERE form_id = %d", [(int)$formID]);
         $results = $this->dbObj->get_results($preparedStmt);
 
         if ($plainArr) {

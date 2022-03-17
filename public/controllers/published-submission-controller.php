@@ -2,67 +2,72 @@
 require(plugin_dir_path(__DIR__) . "models/published-submission.php");
 
 class PublishedSubmissionController extends PublishedSubmission {
+
+    private $formID;
+    private $nfSubData;
+    private $convertedSubDataArr;
+
+    public function __construct() {
+        $this->formID = 7;
+        $this->nfSubData = $this->getSubsFromSubModelByFormID($this->formID);
+        $this->convertedSubDataArr = $this->convertSubmissionArray($this->nfSubData);
+    }
     
-    private function removeDuplicateFieldValues($arr) {
-        $newArr = [];
-
-        foreach ($arr as $key => $value) {
-            if (substr($key, 0, 7) == '_field_') {
-                continue;
-            }
-
-            array_push($newArr, $value);
-        }
-
-        return $newArr;
-    }
-
-    public function convertSubArr($arr) {
-        if (!function_exists('Ninja_Forms')) { return; };
-
-        $parrentArr = [];
-
-        foreach ($arr as $dataArr) {
-            $fieldValues = $dataArr->get_field_values();
-            $fieldValuesWithoutDuplicates = $this->removeDuplicateFieldValues($fieldValues);
-            $fieldDataArr = array_slice($fieldValuesWithoutDuplicates, 0, count($fieldValuesWithoutDuplicates) - 2);
-
-            array_push($parrentArr, $fieldDataArr);
-        }
-
-        return array_reverse($parrentArr);
-    }
-
-    public function renderFormFields($formID) {
-        $this->nfSubFields = $this->getFieldsFromFieldModelByFormID($formID);
+    public function renderFormFields() {
         $output = '';
 
-        if ($this->nfSubFields == NULL) { return; }
-        
         $output .= '<tr>';
-        foreach ($this->nfSubFields as $nfSubField) {
-            if ($nfSubField->get_setting('key') == 'submit' || $nfSubField->get_setting('label') == 'Submit') { continue; }
-            $output .= '<th>' . esc_html($nfSubField->get_setting('label')) . '</th>';
-        }
-        
+        $output .= '<th>ID</th>';
+        $output .= '<th>Project Name</th>';
+        $output .= '<th>Windesheim Minor</th>';
+        $output .= '<th>Project Stage</th>';
+        $output .= '<th>Michael Porter\'s Value Chain</th>';
+        $output .= '<th>SBI-code</th>';
+        $output .= '<th>Technological Innovations Applied</th>';
+        $output .= '<th>Technology Provider(s)</th>';
+        $output .= '<th>Meta-trends</th>';
+        $output .= '<th>Company Sector</th>';
         $output .= '</tr>';
 
         return $output;
     }
 
-    public function renderFormData($formID) {
-        $nfSubData = $this->getSubsFromSubModelByFormID($formID);
-        $convertedSubDataArr = $this->convertSubArr($nfSubData);
+    public function convertSubmissionArray($arr) {
+        $parentArr = [];
+
+        foreach ($arr as $element) {
+            $childArr = [
+                'id' => $element->get_extra_value('_seq_num'),
+                'project_name' => $element->get_field_value('project_name'),
+                'minor' => $element->get_field_value('minor'),
+                'project_stage' => $element->get_field_value('project_stage'),
+                'porter' => $element->get_field_value('porter'),
+                'sbi' => $element->get_field_value('sbi'),
+                'tiv' => $element->get_field_value('tiv'),
+                'tp' => $element->get_field_value('tp'),
+                'meta_trends' => $element->get_field_value('meta_trends'),
+                'company_sector' => $element->get_field_value('company_sector')
+            ];
+
+            array_push($parentArr, $childArr);
+        }
+
+        return $parentArr;
+    }
+
+    public function renderFormData() {
         $output = '';
 
-        if ($nfSubData == NULL) { return; }
-        
-        foreach ($convertedSubDataArr as $convertedSubArr) {
+        foreach ($this->convertedSubDataArr as $convertedSubArr) {
             $output .= '<tr>';
-
-            foreach ($convertedSubArr as $convertedSubValue) {
-                $output .= "<td>". esc_html($convertedSubValue) . "</td>";
-                
+            
+            foreach ($convertedSubArr as $key => $element) {
+                if ($key == 'porter' || $key == 'meta_trends') {
+                    $output .= "<td>". implode(', ', $element) . "</td>";
+                }
+                else {
+                    $output .= "<td>". $element . "</td>";
+                }
             }
 
             $output .= '</tr>';
