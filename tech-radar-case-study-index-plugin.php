@@ -67,6 +67,9 @@ class TechRadarCaseStudyIndexPlugin {
         wp_enqueue_style("custom.datatable", plugins_url("/assets/admin/css/custom.datatable.css", __FILE__));
         wp_enqueue_script("datatables.min", plugins_url("/assets/admin/js/datatables.min.js", __FILE__));
         wp_enqueue_script("custom.datatable", plugins_url("/assets/admin/js/custom.datatable.js", __FILE__));
+        wp_enqueue_script("isotope", plugins_url("/assets/public/js/isotope.js", __FILE__));
+        wp_enqueue_style("published.submission.view", plugins_url("/assets/public/css/published.submission.view.css", __FILE__));
+        wp_enqueue_script("published.submission.view", plugins_url("/assets/public/js/published.submission.view.js", __FILE__));
     }
 }
 

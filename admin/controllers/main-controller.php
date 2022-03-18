@@ -25,6 +25,7 @@ class MainController extends Main {
         echo '<th>Technology Provider(s)</th>';
         echo '<th>Meta-trends</th>';
         echo '<th>Company Sector</th>';
+        echo '<th>Case Study URL</th>';
         echo '<th>Published</th>';
         echo '</tr>';
     }
@@ -43,7 +44,8 @@ class MainController extends Main {
                 'tiv' => $element->get_field_value('tiv'),
                 'tp' => $element->get_field_value('tp'),
                 'meta_trends' => $element->get_field_value('meta_trends'),
-                'company_sector' => $element->get_field_value('company_sector')
+                'company_sector' => $element->get_field_value('company_sector'),
+                'case_study_url' => $element->get_field_value('case_study_url')
             ];
 
             array_push($parentArr, $childArr);
@@ -60,7 +62,10 @@ class MainController extends Main {
             
             foreach ($convertedSubArr as $key => $element) {
                 if ($key == 'porter' || $key == 'meta_trends') {
-                    echo "<td>". implode(', ', $element) . "</td>";
+                    echo '<td>'. implode(', ', $element) . '</td>';
+                }
+                else if ($key == 'case_study_url') {
+                    echo '<td><a href="' . esc_url('http://'. $element) . '" target="_blank"> ' . esc_html($element) . ' </a></td>';
                 }
                 else {
                     echo "<td>". $element . "</td>";
@@ -71,7 +76,7 @@ class MainController extends Main {
             echo '<input type="checkbox" name="sub_seq_id_values[]" value="' . esc_attr($convertedSubArr['id']) . '" ';
 
             if (count($allSeqIdArr) > 0) {
-                echo in_array($convertedSubArr['id'], $allSeqIdArr) ? 'checked ' : '';
+                echo in_array($convertedSubArr['id'], $allSeqIdArr) ? esc_html('checked ') : '';
             }
 
             echo '></td>';

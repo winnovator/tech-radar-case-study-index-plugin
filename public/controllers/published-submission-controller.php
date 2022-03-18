@@ -46,7 +46,8 @@ class PublishedSubmissionController extends PublishedSubmission {
                 'tiv' => $element->get_field_value('tiv'),
                 'tp' => $element->get_field_value('tp'),
                 'meta_trends' => $element->get_field_value('meta_trends'),
-                'company_sector' => $element->get_field_value('company_sector')
+                'company_sector' => $element->get_field_value('company_sector'),
+                'case_study_url' => $element->get_field_value('case_study_url')
             ];
 
             array_push($parentArr, $childArr);
@@ -59,20 +60,65 @@ class PublishedSubmissionController extends PublishedSubmission {
         $output = '';
 
         foreach ($this->convertedSubDataArr as $convertedSubArr) {
-            $output .= '<tr>';
-            
-            foreach ($convertedSubArr as $key => $element) {
-                if ($key == 'porter' || $key == 'meta_trends') {
-                    $output .= "<td>". implode(', ', $element) . "</td>";
-                }
-                else {
-                    $output .= "<td>". $element . "</td>";
-                }
-            }
+            $classString = $this->createClassString($convertedSubArr);
 
-            $output .= '</tr>';
+            $output .= '<div id="element-container" class="element-item ' . $classString . '">';
+            $output .= '<h1> <a href="'. esc_url($convertedSubArr['case_study_url']) . '" target="_blank">' . esc_html($convertedSubArr['project_name']) . ' - ' . esc_html($convertedSubArr['tp']) . ' </a></h1>';
+            $output .= '<p>' . esc_html($convertedSubArr['minor']) . '</p>';
+            $output .= '<p>' . esc_html($convertedSubArr['project_stage']) . '</p>';
+            $output .= '<p>' . esc_html(implode(', ', $convertedSubArr['porter'])) . '</p>';
+            $output .= '<p>' . esc_html($convertedSubArr['sbi']) . '</p>';
+            $output .= '<p>' . esc_html(implode(', ', $convertedSubArr['meta_trends'])) . '</p>';
+            $output .= '</div>';
         }
 
         return $output;
+    }
+
+    public function getSubData($fieldKey, $unique = false) {
+        $arr = [];
+        $fieldArr = [];
+        $returnArr = NULL;
+        
+        foreach ($this->nfSubData as $element) {
+            if (is_array($element->get_field_value($fieldKey))) {
+                foreach ($element->get_field_value($fieldKey) as $fieldArrElement) {
+                    array_push($fieldArr, $fieldArrElement);
+                }
+
+                $returnArr = $fieldArr;
+            }
+            else {
+                array_push($arr, $element->get_field_value($fieldKey));
+                $returnArr = $arr;
+            }
+        }
+
+        if ($unique) {
+            return array_unique($returnArr);
+        }
+
+        return $returnArr;
+    }
+    
+    private function createClassString($arr) {
+        $string = '';
+
+        foreach ($arr as $key => $element) {
+            if ($key == 'minor' || $key == 'project_stage' || $key == 'porter' || $key == 'sbi' || $key == 'meta_trends') {
+                if (is_array($element) || is_array($element)) {
+                    foreach ($element as $subElement) {
+                        $string .= str_replace(' ', '-', strtolower($subElement));
+                        $string .= ' ';
+                    }
+                }
+                else {
+                    $string .= str_replace(' ', '-', strtolower($element));
+                    $string .= ' ';
+                }
+            }
+        }
+
+        return rtrim($string, ' ');
     }
 }
