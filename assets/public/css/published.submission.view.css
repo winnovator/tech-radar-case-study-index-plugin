@@ -42,7 +42,7 @@
     grid-template-columns: 1fr;
 }
 
-#element-container {
+.element-container {
     background-color: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.5);

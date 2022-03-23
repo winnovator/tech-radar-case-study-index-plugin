@@ -5,7 +5,7 @@ class PublishedSubmissionController extends PublishedSubmission {
 
     private $formID;
     private $nfSubData;
-    private $convertedSubDataArr;
+    public $convertedSubDataArr;
 
     public function __construct() {
         $this->formID = 7;
@@ -50,29 +50,128 @@ class PublishedSubmissionController extends PublishedSubmission {
                 'case_study_url' => $element->get_field_value('case_study_url')
             ];
 
-            array_push($parentArr, $childArr);
+            for ($i = 0 ; $i < 5 ; $i++) {
+                array_push($parentArr, $childArr);
+            }
         }
 
-        return $parentArr;
+        return array_reverse($parentArr);
     }
 
-    public function renderFormData() {
-        $output = '';
+    // public function renderFormData() {
+    //     $output = '';
 
-        foreach ($this->convertedSubDataArr as $convertedSubArr) {
-            $classString = $this->createClassString($convertedSubArr);
+    //     if (count($this->convertedSubDataArr) > 0) {
+    //         foreach ($this->convertedSubDataArr as $convertedSubArr) {
+    //             $classString = $this->createClassString($convertedSubArr);
+    
+    //             for ($test = 0 ; $test < 10 ; $test++) {
+    //                 $output .= '<div class="element-container element-item ' . $classString . '">';
+    //                 $output .= '<h1> <a href="'. esc_url($convertedSubArr['case_study_url']) . '" target="_blank">' . esc_html($convertedSubArr['project_name']) . ' - ' . esc_html($convertedSubArr['tp']) . ' </a></h1>';
+    //                 $output .= '<p>' . esc_html($convertedSubArr['minor']) . '</p>';
+    //                 $output .= '<p>' . esc_html($convertedSubArr['project_stage']) . '</p>';
+    //                 $output .= '<p>' . esc_html(implode(', ', $convertedSubArr['porter'])) . '</p>';
+    //                 $output .= '<p>' . esc_html($convertedSubArr['sbi']) . '</p>';
+    //                 $output .= '<p>' . esc_html(implode(', ', $convertedSubArr['meta_trends'])) . '</p>';
+    //                 $output .= '</div>';
+    //             }
+    //         }
+    //     }
+    //     else {
+    //         $output .= '<div id="element-container" class="element-item">No data available.</div>';
+    //     }
 
-            $output .= '<div id="element-container" class="element-item ' . $classString . '">';
-            $output .= '<h1> <a href="'. esc_url($convertedSubArr['case_study_url']) . '" target="_blank">' . esc_html($convertedSubArr['project_name']) . ' - ' . esc_html($convertedSubArr['tp']) . ' </a></h1>';
-            $output .= '<p>' . esc_html($convertedSubArr['minor']) . '</p>';
-            $output .= '<p>' . esc_html($convertedSubArr['project_stage']) . '</p>';
-            $output .= '<p>' . esc_html(implode(', ', $convertedSubArr['porter'])) . '</p>';
-            $output .= '<p>' . esc_html($convertedSubArr['sbi']) . '</p>';
-            $output .= '<p>' . esc_html(implode(', ', $convertedSubArr['meta_trends'])) . '</p>';
-            $output .= '</div>';
+    //     return $output;
+    // }
+
+    public function renderSidePanelData() {
+        $allMinorUniqueArr = $this->getSubData('minor', true);
+        $allProjectStageUniqueArr = $this->getSubData('project_stage', true);
+        $allPorterUniqueArr = $this->getSubData('porter', true);
+        $allSbiUniqueArr = $this->getSubData('sbi', true);
+        $allMetaTrendsUniqueArr = $this->getSubData('meta_trends', true);
+
+        if ($allMinorUniqueArr != NULL) {
+            if (count($allMinorUniqueArr) > 0) {
+                echo '<div>';
+                echo '<h1>Windesheim Minor</h1>';
+                echo '<ul>';
+    
+                foreach ($allMinorUniqueArr as $minor) {
+                    echo '<li><label for="minor"><input type="checkbox" name="minor" value="' . esc_attr($minor) . '"/>' . esc_html($minor) . '</label></li>';
+                }
+    
+                echo '</ul>';
+                echo '</div>';
+            }
         }
 
-        return $output;
+        if ($allProjectStageUniqueArr != NULL) {
+            if (count($allProjectStageUniqueArr) > 0) {
+                echo '<div>';
+                echo '<h1>Project Stage</h1>';
+                echo '<ul>';
+    
+                foreach ($allProjectStageUniqueArr as $projectStage) {
+                    echo '<li><label for="project-stage"><input type="checkbox" name="project-stage" value="' . esc_attr($projectStage) . '"/>' . esc_html($projectStage) . '</label></li>';
+                }
+    
+                echo '</ul>';
+                echo '</div>';
+            }
+        }
+
+        if ($allPorterUniqueArr != NULL) {
+            if (count($allPorterUniqueArr) > 0) {
+                echo '<div>';
+                echo '<h1>Michael Porter\'s Value Chain</h1>';
+                echo '<ul>';
+    
+                foreach ($allPorterUniqueArr as $porter) {
+                    echo '<li><label for="porter"><input type="checkbox" name="porter" value="' . esc_attr($porter) . '"/>' . esc_html($porter) . '</label></li>';
+                }
+    
+                echo '</ul>';
+                echo '</div>';
+            }
+        }
+
+        if ($allSbiUniqueArr != NULL) {
+            if (count($allSbiUniqueArr) > 0) {
+                echo '<div>';
+                echo '<h1>SBI-code</h1>';
+                echo '<ul>';
+    
+                foreach ($allSbiUniqueArr as $sbi) {
+                    echo '<li><label for="sbi"><input type="checkbox" name="sbi" value="' . esc_attr($sbi) . '"/>' . esc_html($sbi) . '</label></li>';
+                }
+    
+                echo '</ul>';
+                echo '</div>';
+            }
+        }
+
+        if ($allMetaTrendsUniqueArr != NULL) {
+            if (count($allMetaTrendsUniqueArr) > 0) {
+                echo '<div>';
+                echo '<h1>Meta-trends(s)</h1>';
+                echo '<ul>';
+    
+                foreach ($allMetaTrendsUniqueArr as $metaTrends) {
+                    echo '<li><label for="meta-trends"><input type="checkbox" name="meta-trends" value="' . esc_attr($metaTrends) . '"/>' . esc_html($metaTrends) . '</label></li>';
+                }
+    
+                echo '</ul>';
+                echo '</div>';
+            }
+        }
+
+        if ($allMinorUniqueArr == NULL && $allProjectStageUniqueArr == NULL && 
+        $allPorterUniqueArr == NULL && $allSbiUniqueArr == NULL && $allMetaTrendsUniqueArr == NULL) {
+            echo '<div>No filter data available.</div>';
+        }
+
+        echo '<div id="case-index-submit-container"><button id="case-index-submit">Verzenden</button></div>';
     }
 
     public function getSubData($fieldKey, $unique = false) {
@@ -95,10 +194,12 @@ class PublishedSubmissionController extends PublishedSubmission {
         }
 
         if ($unique) {
-            return array_unique($returnArr);
+            if (is_array($returnArr)) {
+                return array_reverse(array_unique($returnArr));
+            }
         }
 
-        return $returnArr;
+        return array_reverse($returnArr);
     }
     
     private function createClassString($arr) {

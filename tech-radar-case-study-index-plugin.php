@@ -46,7 +46,8 @@ class TechRadarCaseStudyIndexPlugin {
     public function register() {
         add_action('admin_menu', [$this, 'addAdminPages']);
         add_shortcode('qt-table', [$this, 'getTable']);
-        $this->enqueue();
+        add_action('admin_enqueue_scripts', [$this, 'adminEnqueue']);
+        add_action('wp_enqueue_scripts', [$this, 'publicEnqueue']);
     }
 
     public function addAdminPages() {
@@ -61,15 +62,21 @@ class TechRadarCaseStudyIndexPlugin {
         require_once(plugin_dir_path(__FILE__) . 'public/views/published-submission-view.php');
     }
 
-    public function enqueue() {
-        wp_enqueue_script("jquery.min", plugins_url("/assets/shared/js/jquery.min.js", __FILE__));
-        wp_enqueue_style("datatables.min", plugins_url("/assets/admin/css/datatables.min.css", __FILE__));
-        wp_enqueue_style("custom.datatable", plugins_url("/assets/admin/css/custom.datatable.css", __FILE__));
-        wp_enqueue_script("datatables.min", plugins_url("/assets/admin/js/datatables.min.js", __FILE__));
-        wp_enqueue_script("custom.datatable", plugins_url("/assets/admin/js/custom.datatable.js", __FILE__));
-        wp_enqueue_script("isotope", plugins_url("/assets/public/js/isotope.js", __FILE__));
-        wp_enqueue_style("published.submission.view", plugins_url("/assets/public/css/published.submission.view.css", __FILE__));
-        wp_enqueue_script("published.submission.view", plugins_url("/assets/public/js/published.submission.view.js", __FILE__));
+    public function adminEnqueue() {
+        wp_enqueue_script('jquery.min', plugins_url('/assets/shared/js/jquery.min.js', __FILE__));
+        wp_enqueue_style('datatables.min', plugins_url('/assets/admin/css/datatables.min.css', __FILE__));
+        wp_enqueue_style('custom.datatable', plugins_url('/assets/admin/css/custom.datatable.css', __FILE__));
+        wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
+        wp_enqueue_script('custom.datatable', plugins_url('/assets/admin/js/custom.datatable.js', __FILE__));
+        wp_enqueue_style('published.submission.view', plugins_url('/assets/public/css/published.submission.view.css', __FILE__));
+        wp_enqueue_script('published.submission.view', plugins_url('/assets/public/js/published.submission.view.js', __FILE__));
+        wp_localize_script('published.submission.view','case_index_ajax_obj', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('case_index_ajax_nonce')));
+    }
+
+    public function publicEnqueue() {
+        wp_enqueue_style('published.submission.view', plugins_url('/assets/public/css/published.submission.view.css', __FILE__));
+        wp_enqueue_script('published.submission.view', plugins_url('/assets/public/js/published.submission.view.js', __FILE__));
+        wp_localize_script('published.submission.view','case_index_ajax_obj', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('case_index_ajax_nonce')));
     }
 }
 

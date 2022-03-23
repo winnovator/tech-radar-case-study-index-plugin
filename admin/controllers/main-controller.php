@@ -51,7 +51,7 @@ class MainController extends Main {
             array_push($parentArr, $childArr);
         }
 
-        return $parentArr;
+        return array_reverse($parentArr);
     }
 
     public function renderFormData() {

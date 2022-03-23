@@ -13,4 +13,3 @@
     }
 
     add_action('admin_post_publish_data', [new MainRouter,'postCheckBoxValues']);
-?>
