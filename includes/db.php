@@ -1,7 +1,6 @@
 <?php
 
 class DB {
-    
     private $db;
 
     public function __construct() {
@@ -9,7 +8,11 @@ class DB {
         $this->db = $wpdb;
     }
 
-    public function conn() {
+    public function open() {
         return $this->db;
+    }
+
+    public function __destruct() {
+        $this->db->close();
     }
 }
