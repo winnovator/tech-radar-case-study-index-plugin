@@ -1,8 +1,7 @@
 var currentPageCount = 1;
 
 jQuery(document).ready(function() {
-    //Functions need to be initiated when the ajax request is succesful
-    jQuery.when(getData(case_index_ajax_obj.url, 'get_case_index_data', case_index_ajax_obj.nonce)).done(function(data) {
+    jQuery.when(getData(public_csi_ajax_obj.url, 'get_csi_data', public_csi_ajax_obj.nonce)).done(function(data) {
         let jsonObj = JSON.parse(data);
         let filteredData = filter(getAllCheckedInput(), jsonObj);
         let totalPageCount = divideArr(filteredData).length;
@@ -11,35 +10,35 @@ jQuery(document).ready(function() {
         renderOutput(currentPage);
 
         if (totalPageCount > 0) {
-            jQuery('#current-page').text(currentPageCount + ' - ' + totalPageCount);
-            jQuery('#previous-page').show();
-            jQuery('#next-page').show();
+            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+            jQuery('#csi-previous-page').show();
+            jQuery('#csi-next-page').show();
         }
         else {
-            jQuery('#current-page').text('No data');
-            jQuery('#previous-page').hide();
-            jQuery('#next-page').hide();
+            jQuery('#csi-current-page').text('No pages.');
+            jQuery('#csi-previous-page').hide();
+            jQuery('#csi-next-page').hide();
         }
 
-        jQuery('#previous-page').click(function() {
+        jQuery('#csi-previous-page').click(function() {
             prevPage();
             let filteredData = filter(getAllCheckedInput(), jsonObj);
             let totalPageCount = divideArr(filteredData).length;
             let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
             renderOutput(currentPage);
-            jQuery('#current-page').text(currentPageCount + ' - ' + totalPageCount);
+            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
         });
 
-        jQuery('#next-page').click(function() {
+        jQuery('#csi-next-page').click(function() {
             let filteredData = filter(getAllCheckedInput(), jsonObj);
             let totalPageCount = divideArr(filteredData).length;
             nextPage(totalPageCount);
             let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
             renderOutput(currentPage);
-            jQuery('#current-page').text(currentPageCount + ' - ' + totalPageCount);
+            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
         });
     
-        jQuery('#case-index-submit').click(function() {
+        jQuery('#csi-submit').click(function() {
             currentPageCount = 1;
             let filteredData = filter(getAllCheckedInput(), jsonObj);
             let totalPageCount = divideArr(filteredData).length;
@@ -47,14 +46,14 @@ jQuery(document).ready(function() {
             renderOutput(currentPage);
 
             if (totalPageCount > 0) {
-                jQuery('#current-page').text(currentPageCount + ' - ' + totalPageCount);
-                jQuery('#previous-page').show();
-                jQuery('#next-page').show();
+                jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+                jQuery('#csi-previous-page').show();
+                jQuery('#csi-next-page').show();
             }
             else {
-                jQuery('#current-page').text('No data');
-                jQuery('#previous-page').hide();
-                jQuery('#next-page').hide();
+                jQuery('#csi-current-page').text('No pages.');
+                jQuery('#csi-previous-page').hide();
+                jQuery('#csi-next-page').hide();
             }
         });
     });
@@ -75,7 +74,7 @@ function filter(needle, arr) {
 
     if (needle.length > 0) {
         haystack.forEach((element, index) => {
-            if (needle.every(i => element.includes(i))) {
+            if (needle.some(i => element.includes(i))) {
                 resultsArr.push(arr[index]);
             }
         });
@@ -106,7 +105,7 @@ function getHaystack(arr) {
 function getData(url, action, nonce) {
     let dataObj = {
         action: action,
-        security_nonce: nonce
+        public_csi_security_nonce: nonce
     };
 
     return jQuery.get(url, dataObj);
@@ -155,7 +154,7 @@ function renderOutput(arr) {
 
     if (arr !== null && arr.length > 0) {
         arr.forEach(element => {
-            htmlString += '<div class="element-container element-item">';
+            htmlString += '<div class="csi-element-container csi-element-item">';
             htmlString += '<h1><a href="http://' + element.case_study_url + '">' + element.project_name + ' - ' + element.tp + '</a></h1>';
             htmlString += '<p>' + element.minor +'</p>';
             htmlString += '<p>' + element.project_stage +'</p>';

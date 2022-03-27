@@ -15,6 +15,7 @@ if (!defined('ABSPATH')) {
 class TechRadarCaseStudyIndexPlugin {
 
     private $db;
+    private $publicCsiViewObj;
     
     public function __construct() {
         require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
@@ -32,9 +33,9 @@ class TechRadarCaseStudyIndexPlugin {
     }
 
     public function getPublicCsi() {
-        include_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/public/views/csi-public-view.php');
-        $publishedSubViewObj = new PublishedSubmissionView();
-        return $publishedSubViewObj->getPublicCsi();
+        include_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/public/views/pubic-csi-view.php');
+        $this->publicCsiViewObj = new PublicCaseStudyIndexView();
+        return $this->publicCsiViewObj->getPublicCsi();
     }
 
     public function register() {
@@ -45,35 +46,37 @@ class TechRadarCaseStudyIndexPlugin {
     }
 
     public function addCsiAdminPages() {
-        add_menu_page('Case Study Index', 'Case Study Index', 'manage_options', 'csi-main', [$this, 'addCsiMainView'], 'dashicons-editor-table', 110);
-        add_menu_page('QT Table test', 'QT Table test', 'manage_options', 'qt-table-main-test', [$this, 'publishedSubmissionView'], 'dashicons-editor-table', 120);
-    }
-    public function addCsiMainView() {
-        require_once(plugin_dir_path(__FILE__) . 'admin/views/csi-admin-view.php');
+        add_menu_page('Case Study Index', 'Case Study Index', 'manage_options', 'admin-csi', [$this, 'adminCsiView'], 'dashicons-editor-table', 110);
+        add_menu_page('QT Table test', 'QT Table test', 'manage_options', 'qt-table-main-test', [$this, 'publicCsiView'], 'dashicons-editor-table', 120);
     }
 
-    public function publishedSubmissionView() {
-        require_once(plugin_dir_path(__FILE__) . 'public/views/csi-public-view.php');
+    public function adminCsiView() {
+        require_once(plugin_dir_path(__FILE__) . 'admin/views/admin-csi-view.php');
+    }
+
+    public function publicCsiView() {
+        require_once(plugin_dir_path(__FILE__) . 'public/views/public-csi-view.php');
     }
 
     public function csiAdminEnqueue() {
         wp_enqueue_script('jquery.min', plugins_url('/assets/shared/js/jquery.min.js', __FILE__));
         wp_enqueue_style('datatables.min', plugins_url('/assets/admin/css/datatables.min.css', __FILE__));
-        wp_enqueue_style('custom.datatable', plugins_url('/assets/admin/css/custom.datatable.css', __FILE__));
+        wp_enqueue_style('admin.csi.view', plugins_url('/assets/admin/css/admin.csi.view.css', __FILE__));
         wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
-        wp_enqueue_script('custom.datatable', plugins_url('/assets/admin/js/custom.datatable.js', __FILE__));
-        wp_enqueue_style('published.submission.view', plugins_url('/assets/public/css/published.submission.view.css', __FILE__));
-        wp_enqueue_script('published.submission.view', plugins_url('/assets/public/js/published.submission.view.js', __FILE__));
-        wp_localize_script('published.submission.view','csi_ajax_obj', array('csi_url' => admin_url('admin-ajax.php'), 'csi_nonce' => wp_create_nonce('csi_ajax_nonce')));
+        wp_enqueue_script('admin.csi.view', plugins_url('/assets/admin/js/admin.csi.view.js', __FILE__));
+
+        wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
+        wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
+        wp_localize_script('public.csi.view','public_csi_ajax_obj', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('public_csi_ajax_nonce')));
     }
 
     public function csiPublicEnqueue() {
-        wp_enqueue_style('published.submission.view', plugins_url('/assets/public/css/published.submission.view.css', __FILE__));
-        wp_enqueue_script('published.submission.view', plugins_url('/assets/public/js/published.submission.view.js', __FILE__));
-        wp_localize_script('published.submission.view','csi_ajax_obj', array('csi_url' => admin_url('admin-ajax.php'), 'csi_nonce' => wp_create_nonce('csi_ajax_nonce')));
+        wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
+        wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
+        wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('public_csi_ajax_nonce')));
     }
 }
 
-add_action( 'init', [new TechRadarCaseStudyIndexPlugin(), 'register'] );
-register_activation_hook(__FILE__, [$techRadarCaseStudyIndexPlugin, 'activate']);
-register_deactivation_hook(__FILE__, [$techRadarCaseStudyIndexPlugin, 'deactivate']);
+add_action('init', [new TechRadarCaseStudyIndexPlugin(), 'register']);
+register_activation_hook(__FILE__, [new TechRadarCaseStudyIndexPlugin(), 'activate']);
+register_deactivation_hook(__FILE__, [new TechRadarCaseStudyIndexPlugin(), 'deactivate']);

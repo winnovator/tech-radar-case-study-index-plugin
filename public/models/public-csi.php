@@ -1,55 +1,60 @@
 <?php
+if (!defined('ABSPATH')) {
+    wp_die();
+}
+
 require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
 
-class PublishedSubmission {
+class PublicCaseStudyIndex
+{
 
     private $dbObj;
     private $nfObj;
 
-    private function setNfObj() {
-        if (!function_exists('Ninja_Forms')) { return; };
+    public function __construct() {
+        if (!function_exists('Ninja_Forms')) { return; }
+        //Ninja_Forms() error a false positive. It works.
         $this->nfObj = Ninja_Forms();
+        $this->dbObj = new DB();
     }
 
-    private function setDbObj() {
-        $db = new DB();
-        $this->dbObj = $db->conn();
-    }
-
-    public function getSubsFromSubModelByFormID($formID) {
-        if (!function_exists('Ninja_Forms')) { return; };
-
+    public function getSubsByFormID($formID) {
         $arr = [];
-        $seqIDs = $this->getAllPublishedSubmissionByFormID($formID, true);
-
-        $this->setNfObj();
         $results = $this->nfObj->form($formID)->get_subs();
+        $seqIDs = $this->getAllPublishedSubsByFormID($formID, true);
+        $rowCountResults = count($results);
+        $rowCountSeqIDs = count($seqIDs);
 
-        foreach ($results as $result) {
-            if (in_array($result->get_extra_value('_seq_num'), $seqIDs)) {
-                array_push($arr, $result);
+        if ($rowCountResults > 0 && $results != NULL && $rowCountSeqIDs > 0 && $seqIDs != NULL) {
+            foreach ($results as $result) {
+                if (in_array($result->get_extra_value('_seq_num'), $seqIDs)) {
+                    array_push($arr, $result);
+                }
             }
         }
 
         return $arr;
     }
 
-    private function getAllPublishedSubmissionByFormID($formID, $plainArr = false) {
+    private function getAllPublishedSubsByFormID($formID, $plainArr = false) {
         $arr = [];
+        $dbConn = $this->dbObj->open();
+        $preparedStmt = $dbConn->prepare("SELECT seq_id FROM {$dbConn->prefix}csi_published WHERE form_id = %d", [(int)$formID]);
+        $results = $dbConn->get_results($preparedStmt);
+        $rowCount = count($results);
 
-        $this->setDbObj();
-        $preparedStmt = $this->dbObj->prepare("SELECT seq_id FROM {$this->dbObj->prefix}csi_published WHERE form_id = %d", [(int)$formID]);
-        $results = $this->dbObj->get_results($preparedStmt);
+        if ($rowCount > 0 && $results != NULL) {
+            if ($plainArr) {
+                foreach ($results as $result) {
+                    array_push($arr, $result->seq_id);
+                }
 
-        if ($plainArr) {
-            foreach ($results as $result) {
-                array_push($arr, $result->seq_id);
+                return $arr;
+            } else {
+                return $results;
             }
-    
-            return $arr;
         }
-        else {
-            return $results;
-        }
+
+        return $arr;
     }
 }
