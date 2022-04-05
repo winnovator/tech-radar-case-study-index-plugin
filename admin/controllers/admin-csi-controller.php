@@ -7,74 +7,57 @@ require_once(plugin_dir_path(__DIR__) . "models/admin-csi.php");
 
 class AdminCaseStudyIndexController extends AdminCaseStudyIndex {
     
-    protected $formID;
+    private $formID;
     private $nfSubData;
+    private $wpCsiData;
     protected $convertedSubDataArr;
 
     public function __construct() {
         parent::__construct();
-        $this->formID = 7;
-        $this->nfSubData = $this->getSubsByFormID($this->formID);
-        $this->convertedSubDataArr = $this->convertSubmissionArray($this->nfSubData);
+        $this->formID = CaseStudyIndexSettings::$formID;
+        $this->nfSubData = $this->getAllNfSubData();
+        $this->wpCsiData = $this->getAllWpCsiData();
+        $this->updateWpCsiTable($this->nfSubData);
+        $this->convertedSubDataArr = $this->convertSubmissionArray();
     }
-
-    private function convertSubmissionArray($arr) {
+    
+    public function convertSubmissionArray() {
         $parentArr = [];
-        $rowCount = count($arr);
+        $nfSubArr = $this->nfSubData;
+        $wpCsiArr = $this->wpCsiData;
+        $nfSubArrRowCount = count($nfSubArr);
+        $wpCsiArrRowCount = count($wpCsiArr);
+        $counter = 0;
+        
+        if ($nfSubArrRowCount > 0 && $nfSubArr != NULL && $wpCsiArrRowCount > 0 && $wpCsiArr != NULL) {
+            foreach ($wpCsiArr as $wpCsiElement)  {
+                $nfSubDataRow = $this->getSubBySubID($wpCsiElement->seq_num);
+                $url = get_admin_url() . 'admin.php?page=admin-csi-info&sub_id=' . $wpCsiElement->seq_num;
 
-        if ($rowCount > 0 && $arr != NULL) {
-            foreach ($arr as $element) {
-                $childArr = [
-                    'id' => $element->get_extra_value('_seq_num'),
-                    'project_name' => $element->get_field_value('project_name'),
-                    'minor' => $element->get_field_value('minor'),
-                    'project_stage' => $element->get_field_value('project_stage'),
-                    'porter' => $element->get_field_value('porter'),
-                    'sbi' => $element->get_field_value('sbi'),
-                    'tiv' => $element->get_field_value('tiv'),
-                    'tp' => $element->get_field_value('tp'),
-                    'meta_trends' => $element->get_field_value('meta_trends'),
-                    'company_sector' => $element->get_field_value('company_sector'),
-                    'case_study_url' => $element->get_field_value('case_study_url')
+                $childArrNfSubData = [
+                    'id' => $nfSubDataRow->get_extra_value('_seq_num'),
+                    'project_name' => $nfSubDataRow->get_field_value('project_name'),
+                    'sbi' => $nfSubDataRow->get_field_value('sbi'),
+                    'project_owner' => $nfSubDataRow->get_field_value('project_owner')
                 ];
-    
-                array_push($parentArr, $childArr);
+
+                $childArrwpPublishedArr = [
+                    'status' => $wpCsiArr[$counter]->new == 1 ? 'New' : 'Existing',
+                    'published' => $wpCsiArr[$counter]->published == 1 ? 'Yes' : 'No',
+                    'link' => '<a href="' . esc_url($url) . '"><span class="dashicons dashicons-admin-page"></span>'
+                ];
+                
+                array_push($parentArr, array_merge($childArrNfSubData, $childArrwpPublishedArr));
+                $counter++;
             }
-    
+
             return array_reverse($parentArr);
         }
-
+        
         return $parentArr;
     }
 
     public function getNonce($name) {
         return wp_create_nonce($name);
-    }
-
-    public function savePublishedSubmissions($formID, $seqIdArr) {
-        $allSeqIdArr = $this->getAllPublishedSubmissionByFormID($formID, true);
-        $rowCountallSeqIdArr = count($allSeqIdArr);
-
-        if ($rowCountallSeqIdArr > 0 && $allSeqIdArr != NULL) {
-            foreach ($seqIdArr as $seqIdVal) {
-                if ($this->checkForDuplicate($formID, $seqIdVal) > 0) {
-                    continue;
-                }
-    
-                $this->addSubmissionToPublished($formID, $seqIdVal);
-            }
-
-            foreach ($allSeqIdArr as $seqIdVal) {
-                if (in_array($seqIdVal, $seqIdArr)) {
-                    continue;
-                }
-                
-                $this->deleteSubmissionFromPublished($formID, $seqIdVal);
-            }
-        }
-
-        if ($rowCountallSeqIdArr == 0 && $allSeqIdArr != NULL) {
-            $this->deleteAllPublishedSubmissionByFormID($formID);
-        }
     }
 }

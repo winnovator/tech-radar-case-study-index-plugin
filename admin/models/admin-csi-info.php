@@ -6,33 +6,29 @@ if (!defined('ABSPATH')) {
 require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
 require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/csi-settings.php');
 
-class PublicCaseStudyIndex
-{
+class AdminCaseStudyIndexInfo {
 
-    private $dbObj;
     private $nfObj;
+    private $dbObj;
 
     public function __construct() {
         if (!function_exists('Ninja_Forms')) { return; }
-        //Ninja_Forms() error a false positive. It works.
+        
+        //Ninja_Forms() error is a false positive. It works.
         $this->nfObj = Ninja_Forms();
         $this->dbObj = new DB();
     }
 
-    public function getPublishedSubs() {
-        $arr = [];
-
+    public function getAllWpCsiData($subID) {
         $dbConn = $this->dbObj->open();
-        $preparedStmt = $dbConn->prepare("SELECT seq_num FROM {$dbConn->prefix}csi WHERE published = %d", [1]);
-        $results = $dbConn->get_results($preparedStmt);
 
-        foreach ($results as $result) {
-            array_push($arr, $this->getSubBySubID($result->seq_num));
+        $prepStmt = $dbConn->prepare("SELECT * FROM {$dbConn->prefix}csi WHERE seq_num = %d", [$subID]);
+        $results = $dbConn->get_results($prepStmt);
+
+        if ($results != NULL) {
+            return $results;
         }
-
-        return $arr;
     }
-    
 
     public function getSubBySubID($subID) {
         $nfSubArr = $this->nfObj->form(CaseStudyIndexSettings::$formID)->get_subs();
@@ -42,5 +38,15 @@ class PublicCaseStudyIndex
                 return $nfSubElement;
             }
         }
+    }
+
+    public function publishSub($subID) {
+        $dbConn = $this->dbObj->open();
+        $dbConn->update("{$dbConn->prefix}csi", ['published' => 1, 'new' => 0], ['seq_num' => $subID]);
+    }
+
+    public function depublishSub($subID) {
+        $dbConn = $this->dbObj->open();
+        $dbConn->update("{$dbConn->prefix}csi", ['published' => 0], ['seq_num' => $subID]);
     }
 }

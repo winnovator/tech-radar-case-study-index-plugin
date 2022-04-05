@@ -12,16 +12,14 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex
     protected $nfSubData;
     protected $convertedSubDataArr;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        $this->formID = 7;
-        $this->nfSubData = $this->getSubsByFormID($this->formID);
+        $this->formID = CaseStudyIndexSettings::$formID;
+        $this->nfSubData = $this->getPublishedSubs();
         $this->convertedSubDataArr = $this->convertSubArr($this->nfSubData);
     }
 
-    public function convertSubArr($arr)
-    {
+    public function convertSubArr($arr){
         $parentArr = [];
         $rowCount = count($arr);
 

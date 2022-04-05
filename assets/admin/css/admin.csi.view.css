@@ -10,8 +10,8 @@ select[name="nfFormTable_length"] {
 #submit-wrap {
     box-sizing: border-box;
     display: flex;
-    justify-content: flex-end;
-    margin-top: 1vh;
+    justify-content: flex-start;
+    margin-top: 2vh;
 }
 
 .paginate_button {
@@ -22,18 +22,11 @@ select[name="nfFormTable_length"] {
     border-radius: 3px !important;
 }
 
-#csi-success-message {
-    display: block;
-    box-sizing: border-box;
-    position: relative;
-    color: #004085 !important;
-    background-color: #cce5ff !important;
-    border-color: #b8daff !important;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    padding: .75rem 1.25rem;
-    margin-top: 1rem;
-    height: 5vh;
-    width: 75vw;
-    text-align: center;
+#nfFormTable > thead > tr > th,  #nfFormTable > tbody > tr > td {
+    text-align: left;
+}
+
+#csi-info-data-table > tbody > tr > th, #csi-info-data-table > tbody > tr > td {
+    text-align: left;
+    padding: 0.5rem;
 }

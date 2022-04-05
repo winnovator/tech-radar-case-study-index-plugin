@@ -5,20 +5,11 @@ if (!defined('ABSPATH')) {
 
 require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-controller.php");
 
-class AdminCaseStudyIndexRouter extends AdminCaseStudyIndexController
-{
-    public function postCheckBoxValues()
-    {
-        if (isset($_POST['form_id']) || isset($_POST['sub_seq_id_values'])) {
-            echo 'es';
-            if (check_admin_referer('admin_csi_nonce', 'admin_csi_nonce')) {
-                $formID = $_POST['form_id'];
-                $seqID = isset($_POST['sub_seq_id_values']) ? $_POST['sub_seq_id_values'] : [];
-                $this->savePublishedSubmissions($formID, $seqID);
-                wp_redirect(admin_url('admin.php?page=admin-csi&success=true'));
-            }
-        }
+class AdminCaseStudyIndexRouter extends AdminCaseStudyIndexController {
+    public function getAllSubData() {
+        echo wp_send_json($this->convertedSubDataArr);
+        wp_die();
     }
 }
 
-add_action('admin_post_publish_admin_csi_data', [new AdminCaseStudyIndexRouter, 'postCheckBoxValues']);
+add_action('wp_ajax_get_csi_datatables_subdata', [new AdminCaseStudyIndexRouter, 'getAllSubData']);
