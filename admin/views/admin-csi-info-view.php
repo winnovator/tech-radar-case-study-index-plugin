@@ -7,8 +7,14 @@ require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/in
 require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-info-controller.php");
 
 class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
+
+    public function __construct() {
+        if (empty($this->wpCsiData) || empty($this->nfSubData)) { echo "<script>location.href = '" . admin_url('admin.php?page=admin-csi') . "';</script>"; }
+    }
     
     public function renderCsiData() {
+        if (empty($this->wpCsiData) || empty($this->nfSubData)) { return; }
+
         $output = '';
 
         $output .= '<table id="csi-info-data-table">';
@@ -98,30 +104,27 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
     }
 
     public function renderSubmitButton() {
+        if (empty($this->wpCsiData) || empty($this->nfSubData)) { return; }
+
         $output = '';
 
         $output .= '<div id="submit-wrap">';
         
         if ($this->wpCsiData[0]->published == 1) {
-            $output .= '<button id="submit-button" class="button action" type="submit" name="button_action" value="depublish">Depublish</button>';
+            $output .= '<button class="submit-button button action" type="submit" name="button_action" value="depublish" onclick="return confirm(\'Are you sure you want to depublish this case study?\');">Depublish</button>';
         }
 
         if ($this->wpCsiData[0]->published == 0) {
-            $output .= '<button id="submit-button" class="button action" type="submit" name="button_action" value="publish">Publish</button>';
+            $output .= '<button class="submit-button button action" type="submit" name="button_action" value="publish" onclick="return confirm(\'Are you sure you want to publish this case study?\');">Publish</button>';
+        }
+
+        if ($this->wpCsiData[0]->new == 1) {
+            $output .= '<button class="submit-button button action" type="submit" name="button_action" value="deny" onclick="return confirm(\'Are you sure you want to deny this case study?\');">Deny</button>';
         }
         
         $output .= '</div>';
 
         echo $output;
-    }
-
-    public function getConfirmMessage() {
-        if ($this->wpCsiData[0]->published == 1) {
-            return 'return confirm(\'Are you sure you want to depublish this case study?\');';
-        }
-        else {
-            return ' return confirm(\'Are you sure you want to publish this case study?\');';
-        }
     }
 }
 
@@ -131,7 +134,7 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
 <div class="wrap">
     <h1>Info view</h1>
     <div id="table-wrap">
-        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" onsubmit="<?php echo $adminCsiInfoControllerObj->getConfirmMessage(); ?>">
+        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
             <input type="hidden" name="action" value="publish_admin_csi_data">
             <input type="hidden" name="admin_csi_nonce" value="<?php echo esc_attr($adminCsiInfoControllerObj->getNonce('admin_csi_nonce')); ?>">
             <input type="hidden" name="post_sub_id" value="<?php echo isset($_GET['sub_id']) ? esc_attr($_GET['sub_id']) : ''; ?>">

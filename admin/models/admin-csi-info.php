@@ -25,9 +25,11 @@ class AdminCaseStudyIndexInfo {
         $prepStmt = $dbConn->prepare("SELECT * FROM {$dbConn->prefix}csi WHERE seq_num = %d", [$subID]);
         $results = $dbConn->get_results($prepStmt);
 
-        if ($results != NULL) {
+        if (!empty($results)) {
             return $results;
         }
+
+        return [];
     }
 
     public function getSubBySubID($subID) {
@@ -48,5 +50,12 @@ class AdminCaseStudyIndexInfo {
     public function depublishSub($subID) {
         $dbConn = $this->dbObj->open();
         $dbConn->update("{$dbConn->prefix}csi", ['published' => 0], ['seq_num' => $subID]);
+    }
+
+    public function denySub($subID) {
+        $dbConn = $this->dbObj->open();
+        $dbConn->delete("{$dbConn->prefix}csi", ['seq_num' => $subID]);
+        $subModel = $this->getSubBySubID($subID);
+        $subModel->delete();
     }
 }

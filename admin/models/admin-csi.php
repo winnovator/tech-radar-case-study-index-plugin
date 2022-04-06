@@ -38,9 +38,11 @@ class AdminCaseStudyIndex {
         $stmt = "SELECT * FROM {$dbConn->prefix}csi";
         $results = $dbConn->get_results($stmt);
 
-        if ($results != NULL) {
+        if (!empty($results)) {
             return $results;
-        }  
+        }
+
+        return [];
     }
 
     private function getAllWpCsiIds() {

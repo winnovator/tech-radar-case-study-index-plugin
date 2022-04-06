@@ -5,21 +5,23 @@ if (!defined('ABSPATH')) {
 
 require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-info-controller.php");
 
-class AdminCaseStudyIndexInfoRouter extends AdminCaseStudyIndexInfoController
-{
+class AdminCaseStudyIndexInfoRouter extends AdminCaseStudyIndexInfoController {
     public function postCsiDataSubmit() {
         if (isset($_POST['post_sub_id']) && isset($_POST['button_action'])) {
             if (check_admin_referer('admin_csi_nonce', 'admin_csi_nonce')) {
                 if ($_POST['button_action'] == 'publish') {
                     $this->publishSub($_POST['post_sub_id']);
                     wp_redirect(wp_get_referer());
-                    echo 'a';
                 }
 
                 if ($_POST['button_action'] == 'depublish') {
                     $this->depublishSub($_POST['post_sub_id']);
                     wp_redirect(wp_get_referer());
-                    echo 'b';
+                }
+
+                if ($_POST['button_action'] == 'deny') {
+                    $this->denySub($_POST['post_sub_id']);
+                    wp_redirect('admin.php?page=admin-csi');
                 }
             }
         }

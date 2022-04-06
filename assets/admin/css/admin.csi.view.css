@@ -30,3 +30,7 @@ select[name="nfFormTable_length"] {
     text-align: left;
     padding: 0.5rem;
 }
+
+.submit-button {
+    margin: 0.1vw !important;
+}

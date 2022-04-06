@@ -1,9 +1,9 @@
 .csi-grid-container {
     display: grid;
     grid-template-areas: 
-    'csi-content csi-side-panel'
+    'csi-side-panel csi-content'
     'csi-pagination csi-pagination';
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 1fr 4fr;
     grid-template-rows: auto;
     gap: 10px;
 }
