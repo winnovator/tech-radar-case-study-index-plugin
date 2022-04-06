@@ -9,6 +9,7 @@ require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-info-controller.p
 class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
 
     public function __construct() {
+        parent::__construct();
         if (empty($this->wpCsiData) || empty($this->nfSubData)) { echo "<script>location.href = '" . admin_url('admin.php?page=admin-csi') . "';</script>"; }
     }
     
@@ -118,9 +119,7 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
             $output .= '<button class="submit-button button action" type="submit" name="button_action" value="publish" onclick="return confirm(\'Are you sure you want to publish this case study?\');">Publish</button>';
         }
 
-        if ($this->wpCsiData[0]->new == 1) {
-            $output .= '<button class="submit-button button action" type="submit" name="button_action" value="deny" onclick="return confirm(\'Are you sure you want to deny this case study?\');">Deny</button>';
-        }
+        $output .= '<button class="submit-button button action" type="submit" name="button_action" value="delete" onclick="return confirm(\'Are you sure you want to delete this case study?\');">Delete</button>';
         
         $output .= '</div>';
 

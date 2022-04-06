@@ -7,8 +7,7 @@ require_once(plugin_dir_path(__DIR__) . "controllers/public-csi-controller.php")
 
 class PublicCaseStudyIndexRouter extends PublicCaseStudyIndexController
 {
-    public function getPublicCsiData()
-    {
+    public function getPublicCsiData() {
         if (isset($_GET['action']) && isset($_GET['public_csi_security_nonce'])) {
             if (check_ajax_referer('public_csi_ajax_nonce', 'public_csi_security_nonce')) {
                 echo json_encode($this->convertedSubDataArr);

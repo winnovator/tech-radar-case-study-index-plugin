@@ -10,21 +10,15 @@ class PublicCaseStudyIndexView extends PublicCaseStudyIndexController
     public function getPublicCsi()
     {
         $output = '';
-
-        $output .= '<div class="wrap">';
+        
         $output .= '<div class="csi-grid-container">';
         $output .= '<div id="csi-content" class="csi-content"></div>';
-        $output .= '<div id="csi-side-panel">';
-        $output .= $this->renderSidePanelData();
-        $output .= '</div>';
-        $output .= '<div id="csi-pagination">';
-        $output .= '<div id="csi-pagination-bttns">';
-        $output .= '<button id="csi-previous-page">Prev</button>';
+        $output .= '<div id="csi-side-panel">' . $this->renderSidePanelData() . '</div>';
+        $output .= '<div id="csi-pagination"><div id="csi-pagination-bttns">';
+        $output .= '<button id="csi-previous-page" class="button-4"><span class="dashicons dashicons-arrow-left"></span></button>';
         $output .= '<span id="csi-current-page"></span>';
-        $output .= '<button id="csi-next-page">Next</button>';
-        $output .= '</div>';
-        $output .= '</div>';
-        $output .= '</div>';
+        $output .= '<button id="csi-next-page" class="button-4"><span class="dashicons dashicons-arrow-right"></button>';
+        $output .= '</div></div>';
         $output .= '</div>';
 
         return $output;
@@ -45,11 +39,9 @@ class PublicCaseStudyIndexView extends PublicCaseStudyIndexController
         $rowCountAllSbiUniqueArr = count($allSbiUniqueArr);
         $rowCountAllMetaTrendsUniqueArr = count($allMetaTrendsUniqueArr);
 
-        if (
-            $rowCountAllMinorUniqueArr > 0 && $allMinorUniqueArr != NULL && $rowCountAllProjectStageUniqueArr > 0 && $allProjectStageUniqueArr != NULL &&
+        if ($rowCountAllMinorUniqueArr > 0 && $allMinorUniqueArr != NULL && $rowCountAllProjectStageUniqueArr > 0 && $allProjectStageUniqueArr != NULL &&
             $rowCountAllPorterUniqueArr > 0 && $allPorterUniqueArr != NULL && $rowCountAllSbiUniqueArr > 0 && $allSbiUniqueArr != NULL &&
-            $rowCountAllMetaTrendsUniqueArr > 0 && $allMetaTrendsUniqueArr != NULL
-        ) {
+            $rowCountAllMetaTrendsUniqueArr > 0 && $allMetaTrendsUniqueArr != NULL) {
 
             $output .= '<div>';
             $output .= '<h1>Windesheim Minor</h1>';
@@ -106,7 +98,7 @@ class PublicCaseStudyIndexView extends PublicCaseStudyIndexController
             $output .= '</ul>';
             $output .= '</div>';
 
-            $output .= '<div id="csi-submit-container"><button id="csi-submit">Verzenden</button></div>';
+            $output .= '<div id="csi-submit-container"><button id="csi-submit" class="button-4">Verzenden</button></div>';
         } else {
             $output .= '<div>No filter data available.</div>';
         }
@@ -114,7 +106,3 @@ class PublicCaseStudyIndexView extends PublicCaseStudyIndexController
         return $output;
     }  
 }
-
-$publicCsiControllerObj = new PublicCaseStudyIndexView();
-
-echo $publicCsiControllerObj->getPublicCsi();

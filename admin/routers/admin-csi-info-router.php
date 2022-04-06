@@ -19,7 +19,7 @@ class AdminCaseStudyIndexInfoRouter extends AdminCaseStudyIndexInfoController {
                     wp_redirect(wp_get_referer());
                 }
 
-                if ($_POST['button_action'] == 'deny') {
+                if ($_POST['button_action'] == 'delete') {
                     $this->denySub($_POST['post_sub_id']);
                     wp_redirect('admin.php?page=admin-csi');
                 }

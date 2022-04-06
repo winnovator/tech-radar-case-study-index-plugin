@@ -32,8 +32,8 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex
                     'project_stage' => $element->get_field_value('project_stage'),
                     'porter' => $element->get_field_value('porter'),
                     'sbi' => $element->get_field_value('sbi'),
-                    'tiv' => $element->get_field_value('tiv'),
-                    'tp' => $element->get_field_value('tp'),
+                    'tech_innovations' => $element->get_field_value('tech_innovations'),
+                    'tech_providers' => $element->get_field_value('tech_providers'),
                     'meta_trends' => $element->get_field_value('meta_trends'),
                     'company_sector' => $element->get_field_value('company_sector'),
                     'case_study_url' => $element->get_field_value('case_study_url')

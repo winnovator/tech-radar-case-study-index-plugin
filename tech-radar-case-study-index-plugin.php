@@ -33,7 +33,7 @@ class TechRadarCaseStudyIndexPlugin {
     }
 
     public function getPublicCsi() {
-        include_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/public/views/pubic-csi-view.php');
+        include_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/public/views/public-csi-view.php');
         $this->publicCsiViewObj = new PublicCaseStudyIndexView();
         return $this->publicCsiViewObj->getPublicCsi();
     }
@@ -45,7 +45,7 @@ class TechRadarCaseStudyIndexPlugin {
         }
 
         add_action('wp_enqueue_scripts', [$this, 'csiPublicEnqueue']);
-        add_shortcode('csi', [$this, 'getCsi']);
+        add_shortcode('csi', [$this, 'getPublicCsi']);
     }
 
     public function addCsiAdminPages() {
@@ -67,19 +67,21 @@ class TechRadarCaseStudyIndexPlugin {
     }
 
     public function csiAdminEnqueue() {
+        wp_enqueue_script('jquery');
         wp_enqueue_script('jquery.min', plugins_url('/assets/shared/js/jquery.min.js', __FILE__));
         wp_enqueue_style('datatables.min', plugins_url('/assets/admin/css/datatables.min.css', __FILE__));
         wp_enqueue_style('admin.csi.view', plugins_url('/assets/admin/css/admin.csi.view.css', __FILE__));
         wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
         wp_enqueue_script('admin.csi.view', plugins_url('/assets/admin/js/admin.csi.view.js', __FILE__));
         wp_localize_script('admin.csi.view','admin_csi_ajax_obj', array('url' => admin_url('admin-ajax.php')));
-
         wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
         wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
         wp_localize_script('public.csi.view','public_csi_ajax_obj', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('public_csi_ajax_nonce')));
     }
 
     public function csiPublicEnqueue() {
+        wp_enqueue_script('jquery');
+        wp_enqueue_style('dashicons');
         wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
         wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
         wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('public_csi_ajax_nonce')));

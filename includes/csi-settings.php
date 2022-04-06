@@ -4,5 +4,5 @@ if (!defined('ABSPATH')) {
 }
 
 class CaseStudyIndexSettings {
-    public static $formID = 2;
+    public static $formID = 7;
 }
