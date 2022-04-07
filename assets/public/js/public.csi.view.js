@@ -155,7 +155,7 @@ function renderOutput(arr) {
     if (arr !== null && arr.length > 0) {
         arr.forEach(element => {
             htmlString += '<div class="csi-element-container csi-element-item">';
-            htmlString += '<h1><a href="http://' + element.case_study_url + '">' + element.project_name + ' - ' + element.tech_providers + '</a></h1>';
+            htmlString += '<h1><a href="' + element.case_study_url + '" target="_blank">' + element.project_name + ' - ' + element.tech_providers + '</a></h1>';
             htmlString += '<p>' + element.minor +'</p>';
             htmlString += '<p>' + element.project_stage +'</p>';
             htmlString += '<p>' + element.porter.join(', ') +'</p>';

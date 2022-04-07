@@ -22,6 +22,7 @@ class AdminCaseStudyIndexController extends AdminCaseStudyIndex {
     }
     
     public function convertSubmissionArray() {
+
         $parentArr = [];
         $nfSubArr = $this->nfSubData;
         $wpCsiArr = $this->wpCsiData;
@@ -29,9 +30,12 @@ class AdminCaseStudyIndexController extends AdminCaseStudyIndex {
         $wpCsiArrRowCount = count($wpCsiArr);
         $counter = 0;
         
-        if ($nfSubArrRowCount > 0 && $nfSubArr != NULL && $wpCsiArrRowCount > 0 && $wpCsiArr != NULL) {
-            foreach ($wpCsiArr as $wpCsiElement)  {
+        if ($nfSubArrRowCount > 0 && !empty($nfSubArr) && $wpCsiArrRowCount > 0 && !empty($wpCsiArr)) {
+            foreach ($wpCsiArr as $wpCsiElement)  { 
                 $nfSubDataRow = $this->getSubBySubID($wpCsiElement->seq_num);
+
+                if (empty($nfSubDataRow)) { return; }
+
                 $url = get_admin_url() . 'admin.php?page=admin-csi-info&sub_id=' . $wpCsiElement->seq_num;
 
                 $childArrNfSubData = [

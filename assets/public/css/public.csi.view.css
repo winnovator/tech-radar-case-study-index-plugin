@@ -40,7 +40,7 @@
 #csi-content {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
 }
 
 .csi-element-container {
@@ -51,11 +51,11 @@
     padding: 10px;
 }
 
-.csi-element-item {
+/* .csi-element-item {
     position: relative !important;
     left: 0 !important;
     top: 0 !important;
-}
+} */
 
 #csi-previous-page, #csi-next-page {
     margin: 10px;
@@ -68,4 +68,8 @@ ul {
 
 input[type='checkbox'] {
   margin-right: 10px;
+}
+
+#csi-pagination, #csi-content {
+    padding: 20px;
 }
