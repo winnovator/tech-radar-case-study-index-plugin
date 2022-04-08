@@ -40,7 +40,7 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
                     'company_sector' => $element->get_field_value('company_sector'),
                     'case_study_url' => $element->get_field_value('case_study_url')
                 ];
-
+                
                 array_push($parentArr, $childArr);
             }
 
