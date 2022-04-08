@@ -36,7 +36,7 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
 
         $output .= '<tr>';
         $output .= '<th>Project Owner</th>';
-        $output .= '<td>' . $this->nfSubData->get_field_value('minor') . '</td>';
+        $output .= '<td>' . $this->nfSubData->get_field_value('project_owner') . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
@@ -112,14 +112,14 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
         $output .= '<div id="submit-wrap">';
         
         if ($this->wpCsiData[0]->published == 1) {
-            $output .= '<button class="submit-button button action" type="submit" name="button_action" value="depublish" onclick="return confirm(\'Are you sure you want to depublish this case study?\');">Depublish</button>';
+            $output .= '<button id="admin-csi-info-depublish-button" class="submit-button button action" type="button">Depublish</button>';
         }
 
         if ($this->wpCsiData[0]->published == 0) {
-            $output .= '<button class="submit-button button action" type="submit" name="button_action" value="publish" onclick="return confirm(\'Are you sure you want to publish this case study?\');">Publish</button>';
+            $output .= '<button id="admin-csi-info-publish-button" class="submit-button button action" type="button">Publish</button>';
         }
 
-        $output .= '<button class="submit-button button action" type="submit" name="button_action" value="delete" onclick="return confirm(\'Are you sure you want to delete this case study?\');">Delete</button>';
+        $output .= '<button id="admin-csi-info-delete-button" class="submit-button button action" type="button">Delete</button>';
         
         $output .= '</div>';
 
@@ -133,12 +133,7 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
 <div class="wrap">
     <h1>Info view</h1>
     <div id="table-wrap">
-        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
-            <input type="hidden" name="action" value="publish_admin_csi_data">
-            <input type="hidden" name="admin_csi_nonce" value="<?php echo esc_attr($adminCsiInfoControllerObj->getNonce('admin_csi_nonce')); ?>">
-            <input type="hidden" name="post_sub_id" value="<?php echo isset($_GET['sub_id']) ? esc_attr($_GET['sub_id']) : ''; ?>">
-            <?php $adminCsiInfoControllerObj->renderCsiData(); ?>
-            <?php $adminCsiInfoControllerObj->renderSubmitButton(); ?>
-        </form>
+        <?php $adminCsiInfoControllerObj->renderCsiData(); ?>
+        <?php $adminCsiInfoControllerObj->renderSubmitButton(); ?>
     </div>
 </div>

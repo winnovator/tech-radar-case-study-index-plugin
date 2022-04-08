@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    wp_die();
+}
 
 class DB {
     private $db;

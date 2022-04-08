@@ -7,25 +7,26 @@ require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-info-controller.p
 
 class AdminCaseStudyIndexInfoRouter extends AdminCaseStudyIndexInfoController {
     public function postCsiDataSubmit() {
-        if (isset($_POST['post_sub_id']) && isset($_POST['button_action'])) {
-            if (check_admin_referer('admin_csi_nonce', 'admin_csi_nonce')) {
+        if (isset($_POST['post_sub_id']) && isset($_POST['button_action']) && $_POST['redirect_url']) {
+            if (check_ajax_referer('wp_rest', 'admin_csi_info_security_nonce')) {
                 if ($_POST['button_action'] == 'publish') {
                     $this->publishSub($_POST['post_sub_id']);
-                    wp_redirect(wp_get_referer());
+                    wp_send_json('{ "action" : "reload" }');
+                    wp_die();
                 }
 
                 if ($_POST['button_action'] == 'depublish') {
                     $this->depublishSub($_POST['post_sub_id']);
-                    wp_redirect(wp_get_referer());
+                    wp_send_json('{ "action" : "reload" }');
+                    wp_die();
                 }
 
                 if ($_POST['button_action'] == 'delete') {
-                    $this->denySub($_POST['post_sub_id']);
-                    wp_redirect('admin.php?page=admin-csi');
+                    $this->deleteSub($_POST['post_sub_id']);
+                    wp_send_json('{ "action" : "redirect", "redirect_url" : "' . $_POST['redirect_url'] . '" }');
+                    wp_die();
                 }
             }
         }
     }
 }
-
-add_action('admin_post_publish_admin_csi_data', [new AdminCaseStudyIndexInfoRouter, 'postCsiDataSubmit']);

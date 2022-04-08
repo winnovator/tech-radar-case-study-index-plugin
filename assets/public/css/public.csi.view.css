@@ -40,7 +40,7 @@
 #csi-content {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .csi-element-container {
@@ -48,14 +48,8 @@
     border-radius: 8px;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.5);
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
 }
-
-/* .csi-element-item {
-    position: relative !important;
-    left: 0 !important;
-    top: 0 !important;
-} */
 
 #csi-previous-page, #csi-next-page {
     margin: 10px;
@@ -64,6 +58,7 @@
 
 ul {
   list-style-type: none;
+  padding: 0 !important;
 }
 
 input[type='checkbox'] {
@@ -72,4 +67,9 @@ input[type='checkbox'] {
 
 #csi-pagination, #csi-content {
     padding: 20px;
+}
+
+.csi-item-table, .csi-item-tr, .csi-item-th, .csi-item-td {
+    margin: 2px !important;
+    padding: 2px !important;
 }

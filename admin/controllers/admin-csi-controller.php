@@ -48,7 +48,7 @@ class AdminCaseStudyIndexController extends AdminCaseStudyIndex {
                 $childArrwpPublishedArr = [
                     'status' => $wpCsiArr[$counter]->new == 1 ? 'New' : 'Existing',
                     'published' => $wpCsiArr[$counter]->published == 1 ? 'Yes' : 'No',
-                    'link' => '<a href="' . esc_url($url) . '"><span class="dashicons dashicons-admin-page"></span>'
+                    'link' => '<a href="' . esc_url($url) . '" target="_blank"><span class="dashicons dashicons-admin-page"></span></a>'
                 ];
                 
                 array_push($parentArr, array_merge($childArrNfSubData, $childArrwpPublishedArr));
@@ -59,9 +59,5 @@ class AdminCaseStudyIndexController extends AdminCaseStudyIndex {
         }
         
         return $parentArr;
-    }
-
-    public function getNonce($name) {
-        return wp_create_nonce($name);
     }
 }

@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    wp_die();
+}
 
 class NF {
     public static function checkForNf() {

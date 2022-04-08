@@ -1,7 +1,12 @@
 jQuery(document).ready( function() {
     jQuery('#nfFormTable').DataTable( {
         ajax: {
-            url: admin_csi_ajax_obj.url + '?action=get_csi_datatables_subdata',
+            method: 'GET',
+            url: admin_csi_ajax_obj.url,
+            data: { admin_csi_security_nonce: admin_csi_ajax_obj.nonce },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-WP-Nonce', admin_csi_ajax_obj.nonce);
+            },
             dataSrc: ''
         },
         columns: [

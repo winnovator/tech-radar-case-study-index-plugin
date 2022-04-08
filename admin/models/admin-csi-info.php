@@ -52,7 +52,7 @@ class AdminCaseStudyIndexInfo {
         $dbConn->update("{$dbConn->prefix}csi", ['published' => 0], ['seq_num' => $subID]);
     }
 
-    public function denySub($subID) {
+    public function deleteSub($subID) {
         $dbConn = $this->dbObj->open();
         $dbConn->delete("{$dbConn->prefix}csi", ['seq_num' => $subID]);
         $subModel = $this->getSubBySubID($subID);

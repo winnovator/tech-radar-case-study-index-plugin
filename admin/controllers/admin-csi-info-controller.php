@@ -19,8 +19,4 @@ class AdminCaseStudyIndexInfoController extends AdminCaseStudyIndexInfo {
         $this->nfSubData = $this->getSubBySubID($this->subID);
         $this->wpCsiData = $this->getAllWpCsiData($this->subID);
     }
-
-    public function getNonce($name) {
-        return wp_create_nonce($name);
-    }
 }

@@ -5,8 +5,7 @@ if (!defined('ABSPATH')) {
 
 require(plugin_dir_path(__DIR__) . "models/public-csi.php");
 
-class PublicCaseStudyIndexController extends PublicCaseStudyIndex
-{
+class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
 
     private $formID;
     protected $nfSubData;
@@ -23,8 +22,11 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex
         $parentArr = [];
         $rowCount = count($arr);
 
-        if ($rowCount > 0 && $arr != NULL) {
+        if ($rowCount > 0 && !empty($arr)) {
             foreach ($arr as $element) {
+
+                if (empty($element)) { return; }
+
                 $childArr = [
                     'id' => $element->get_extra_value('_seq_num'),
                     'project_name' => $element->get_field_value('project_name'),
@@ -46,36 +48,5 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex
         }
 
         return $parentArr;
-    }
-
-    public function getNfSubData($fieldKey, $model, $unique = false)
-    {
-        $arr = [];
-        $fieldArr = [];
-        $returnArr = NULL;
-        $rowCount = count($model);
-
-        if ($rowCount > 0 && $model != NULL) {
-            foreach ($model as $element) {
-                if (is_array($element->get_field_value($fieldKey))) {
-                    foreach ($element->get_field_value($fieldKey) as $fieldArrElement) {
-                        array_push($fieldArr, $fieldArrElement);
-                    }
-
-                    $returnArr = $fieldArr;
-                } else {
-                    array_push($arr, $element->get_field_value($fieldKey));
-                    $returnArr = $arr;
-                }
-            }
-
-            if ($unique) {
-                if (is_array($returnArr)) {
-                    return array_reverse(array_unique($returnArr));
-                }
-            }
-        }
-
-        return $arr;
     }
 }

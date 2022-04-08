@@ -28,9 +28,20 @@ select[name="nfFormTable_length"] {
 
 #csi-info-data-table > tbody > tr > th, #csi-info-data-table > tbody > tr > td {
     text-align: left;
-    padding: 0.5rem;
+    background-color: #f7f7f9;
+    border-radius: 8px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.1);
+    padding: 10px;
+}
+
+#csi-info-data-table {
+    border-spacing: 4px;
+}
+
+#csi-info-data-table > tbody > tr > td {
+    word-break: break-all;
 }
 
 .submit-button {
-    margin: 0.1vw !important;
+    margin: 0.2vw !important;
 }
