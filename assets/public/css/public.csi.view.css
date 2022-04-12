@@ -1,4 +1,4 @@
-.csi-grid-container {
+#csi-grid-container {
     display: grid;
     grid-template-areas: 
     'csi-side-panel csi-content'
@@ -72,4 +72,28 @@ input[type='checkbox'] {
 .csi-item-table, .csi-item-tr, .csi-item-th, .csi-item-td {
     margin: 2px !important;
     padding: 2px !important;
+}
+
+#csi-filter-button-container {
+    display: none;
+}
+
+#csi-side-panel {
+    display: block;
+}
+
+@media screen and (max-width: 550px) {
+    #csi-grid-container {
+        grid-template-areas: 
+        'csi-side-panel'
+        'csi-content'
+        'csi-pagination';
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    #csi-filter-button-container {
+        display: flex;
+        justify-content: end;
+    }
 }

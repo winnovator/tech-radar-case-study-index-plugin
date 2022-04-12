@@ -1,29 +1,26 @@
+//Causes no conflict with $ symbol
+jQuery.noConflict();
+
+//Case study index functionalities
 var currentPageCount = 1;
 
 jQuery(document).ready(function() {
     jQuery.when(getData(public_csi_ajax_obj.url, public_csi_ajax_obj.nonce)).done(function(data) {
-        let jsonObj = data;
-        let filteredData = filter(getAllCheckedInput(), jsonObj);
-        let totalPageCount = divideArr(filteredData).length;
-        let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
+        removeStorage(sessionStorage, 'public-csi-default-data');
+        removeStorage(sessionStorage, 'public-csi-filtered-data');
+        saveStorage(sessionStorage, 'public-csi-default-data', data);
+        let jsonDefaultData = getStorage(sessionStorage, 'public-csi-default-data');
+        let totalPageCount = divideArr(jsonDefaultData).length;
+        let currentPage = getCurrentPage(jsonDefaultData, currentPageCount - 1);
 
-        renderSidePanel(jsonObj);
+        renderSidePanel(jsonDefaultData);
         renderOutput(currentPage);
-
-        if (totalPageCount > 0) {
-            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
-            jQuery('#csi-previous-page').show();
-            jQuery('#csi-next-page').show();
-        }
-        else {
-            jQuery('#csi-current-page').text('No pages.');
-            jQuery('#csi-previous-page').hide();
-            jQuery('#csi-next-page').hide();
-        }
+        setPaginationButtons(totalPageCount);
 
         jQuery('#csi-previous-page').click(function() {
             prevPage();
-            let filteredData = filter(getAllCheckedInput(), jsonObj);
+            let filteredData = getStorage(sessionStorage, 'public-csi-filtered-data') === null ? 
+            getStorage(sessionStorage, 'public-csi-default-data') : getStorage(sessionStorage, 'public-csi-filtered-data');
             let totalPageCount = divideArr(filteredData).length;
             let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
             renderOutput(currentPage);
@@ -31,7 +28,8 @@ jQuery(document).ready(function() {
         });
 
         jQuery('#csi-next-page').click(function() {
-            let filteredData = filter(getAllCheckedInput(), jsonObj);
+            let filteredData = getStorage(sessionStorage, 'public-csi-filtered-data') === null ? 
+            getStorage(sessionStorage, 'public-csi-default-data') : getStorage(sessionStorage, 'public-csi-filtered-data');
             let totalPageCount = divideArr(filteredData).length;
             nextPage(totalPageCount);
             let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
@@ -41,24 +39,30 @@ jQuery(document).ready(function() {
     
         jQuery('#csi-submit').click(function() {
             currentPageCount = 1;
-            let filteredData = filter(getAllCheckedInput(), jsonObj);
-            let totalPageCount = divideArr(filteredData).length;
-            let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
+            let filteredData = filter(getAllCheckedInput(), jsonDefaultData);
+            saveStorage(sessionStorage, 'public-csi-filtered-data', filteredData);
+            let jsonFilteredData = getStorage(sessionStorage, 'public-csi-filtered-data');
+            let totalPageCount = divideArr(jsonFilteredData).length;
+            let currentPage = getCurrentPage(jsonFilteredData, currentPageCount - 1);
             renderOutput(currentPage);
-
-            if (totalPageCount > 0) {
-                jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
-                jQuery('#csi-previous-page').show();
-                jQuery('#csi-next-page').show();
-            }
-            else {
-                jQuery('#csi-current-page').text('No pages.');
-                jQuery('#csi-previous-page').hide();
-                jQuery('#csi-next-page').hide();
-            }
+            setPaginationButtons(totalPageCount);
         });
+
+        //Mobile responsive functionalities referrences
+        initMobileResponsive();
     });
 });
+
+function getData(url, nonce) {
+    return jQuery.ajax({
+        method: "GET",
+        url: url,
+        data: { public_csi_security_nonce: nonce },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-WP-Nonce', nonce);
+        }
+    });
+}
 
 function getAllCheckedInput() {
     let searchArr = [];
@@ -104,17 +108,6 @@ function getHaystack(arr) {
     return resultArr;
 }
 
-function getData(url, nonce) {
-    return jQuery.ajax({
-        method: "GET",
-        url: url,
-        data: { public_csi_security_nonce: nonce },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('X-WP-Nonce', nonce);
-        }
-    });
-}
-
 function prevPage() {
     if (currentPageCount > 1) {
         currentPageCount--;
@@ -128,7 +121,7 @@ function nextPage(maxPageCount) {
 }
 
 function divideArr(arr) {
-    let casesPerPage = 5;
+    let casesPerPage = 10;
     let resultArr = [];
 
     if (arr !== null && arr.length > 0) {
@@ -187,8 +180,10 @@ function renderOutput(arr) {
 
     if (arr !== null && arr.length > 0) {
         arr.forEach(element => {
+            let csiUrl = element.case_study_url.includes('http://') ? element.case_study_url : 'http://' + element.case_study_url;
+            
             htmlString += '<div class="csi-element-container csi-element-item">';
-            htmlString += '<h1><a href="' + element.case_study_url + '" target="_blank">' + element.project_name + ' - ' + element.tech_providers + '</a></h1>';
+            htmlString += '<h1><a href="' + csiUrl + '" target="_blank">' + element.project_name + ' - ' + element.tech_providers + '</a></h1>';
             htmlString += '<table class="csi-item-table">';
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + element.minor +'</td></tr>';
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Project Stage: </th><td class="csi-item-td">' + element.project_stage +'</td></tr>';
@@ -206,6 +201,19 @@ function renderOutput(arr) {
     }
 
     contentSelector.html(htmlString);
+}
+
+function setPaginationButtons(totalPageCount) {
+    if (totalPageCount > 0) {
+        jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+        jQuery('#csi-previous-page').show();
+        jQuery('#csi-next-page').show();
+    }
+    else {
+        jQuery('#csi-current-page').text('No pages.');
+        jQuery('#csi-previous-page').hide();
+        jQuery('#csi-next-page').hide();
+    }
 }
 
 function renderSidePanel(arr) {
@@ -274,7 +282,7 @@ function renderSidePanel(arr) {
         htmlString += '</ul>';
         htmlString += '</div>';
 
-        htmlString += '<div id="csi-submit-container"><button id="csi-submit" class="button-4">Verzenden</button></div>';
+        htmlString += '<div id="csi-submit-container"><button id="csi-submit">Verzenden</button></div>';
     }
     else {
         htmlString += '<div class="element-container element-item">';
@@ -283,4 +291,74 @@ function renderSidePanel(arr) {
     }
 
     contentSelector.html(htmlString);
+}
+
+//JSON storage funcionalities
+function saveStorage(type, name, value) {
+    let jsonString = JSON.stringify(value);
+    type.setItem(name, jsonString);
+}
+
+function getStorage(type, name) {
+    let jsonString = type.getItem(name);
+    return JSON.parse(jsonString);
+}
+
+function removeStorage(type, name) {
+    type.removeItem(name);
+}
+
+//Mobile responsive functionalities
+function initMobileResponsive() {
+    let content = jQuery('#csi-content');
+    let sidePanel = jQuery('#csi-side-panel');
+    let pagination = jQuery('#csi-pagination');
+    let filterButton = jQuery('#csi-filter-button');
+    let submitButton = jQuery('#csi-submit');
+
+    //Init state
+    screenRules(sidePanel, content, pagination, filterButton);
+
+    filterButton.click(function() {
+        if (filterButton.data('csi-filter-toggle') == 'true') {
+            filterButton.data('csi-filter-toggle', 'false');
+            sidePanel.show();
+            content.hide();
+            pagination.hide();
+        }
+        else {
+            filterButton.data('csi-filter-toggle', 'true');
+            sidePanel.hide();
+            content.show();
+            pagination.show();
+        }
+    });
+
+    submitButton.click(function() {
+        if (screen.width <= 550) {
+            filterButton.data('csi-filter-toggle', 'true');
+            sidePanel.hide();
+            content.show();
+            pagination.show();
+        }
+    });
+
+    //On change state
+    jQuery(window).resize(function() {
+        screenRules(sidePanel, content, pagination, filterButton);
+    });
+}
+
+function screenRules(sidePanel, content, pagination, filterButton) {
+    if (screen.width > 550) {
+        sidePanel.show();
+        content.show();
+        pagination.show();
+    }
+    else {
+        filterButton.data('csi-filter-toggle', 'true');
+        sidePanel.hide();
+        content.show();
+        pagination.show();
+    }
 }

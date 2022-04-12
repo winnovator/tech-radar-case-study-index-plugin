@@ -8,8 +8,8 @@ require_once(plugin_dir_path(__DIR__) . "controllers/public-csi-controller.php")
 class PublicCaseStudyIndexView extends PublicCaseStudyIndexController {
     public function getPublicCsi() {
         $output = '';
-        
-        $output .= '<div class="csi-grid-container">';
+        $output .= '<div id="csi-filter-button-container"><button id="csi-filter-button" type="button">Filter</button></div>';
+        $output .= '<div id="csi-grid-container">';
         $output .= '<div id="csi-content" class="csi-content"></div>';
         $output .= '<div id="csi-side-panel"></div>';
         $output .= '<div id="csi-pagination"><div id="csi-pagination-bttns">';
