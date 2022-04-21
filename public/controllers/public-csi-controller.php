@@ -18,7 +18,7 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
         $this->convertedSubDataArr = $this->convertSubArr($this->nfSubData);
     }
 
-    public function convertSubArr($arr){
+    public function convertSubArr($arr) {
         $parentArr = [];
         $rowCount = count($arr);
 
@@ -40,7 +40,7 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
                     'company_sector' => $element->get_field_value('company_sector'),
                     'case_study_url' => $element->get_field_value('case_study_url')
                 ];
-                
+
                 array_push($parentArr, $childArr);
             }
 
@@ -48,5 +48,28 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
         }
 
         return $parentArr;
+    }
+
+    public function getSingleSub($subID) {
+        $subArr = $this->getSubBySubID($subID);
+        $arr = [];
+
+        if (empty($subArr)) { return; }
+        
+        $arr = [
+            'id' => $subArr->get_extra_value('_seq_num'),
+            'project_name' => $subArr->get_field_value('project_name'),
+            'minor' => $subArr->get_field_value('minor'),
+            'project_stage' => $subArr->get_field_value('project_stage'),
+            'porter' => $subArr->get_field_value('porter'),
+            'sbi' => $subArr->get_field_value('sbi'),
+            'tech_innovations' => $subArr->get_field_value('tech_innovations'),
+            'tech_providers' => $subArr->get_field_value('tech_providers'),
+            'meta_trends' => $subArr->get_field_value('meta_trends'),
+            'company_sector' => $subArr->get_field_value('company_sector'),
+            'case_study_url' => $subArr->get_field_value('case_study_url')
+            ];
+
+        return $arr;
     }
 }

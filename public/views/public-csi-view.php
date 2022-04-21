@@ -11,6 +11,7 @@ class PublicCaseStudyIndexView extends PublicCaseStudyIndexController {
         $output .= '<div id="csi-filter-button-container"><button id="csi-filter-button" type="button">Filter</button></div>';
         $output .= '<div id="csi-grid-container">';
         $output .= '<div id="csi-content" class="csi-content"></div>';
+        $output .= '<div id="csi-public-info-modal-container"></div>';
         $output .= '<div id="csi-side-panel"></div>';
         $output .= '<div id="csi-pagination"><div id="csi-pagination-bttns">';
         $output .= '<button id="csi-previous-page"><span class="dashicons dashicons-arrow-left"></span></button>';
