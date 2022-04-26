@@ -1,0 +1,3913 @@
+[
+  { 
+    "section": "A",
+    "description": "Landbouw, bosbouw en visserij",
+    "codes":
+    [
+      {
+        "code": "0111",
+        "description": "Teelt van granen"
+      },
+      {
+        "code": "01131",
+        "description": "Teelt van groenten in de volle grond"
+      },
+      {
+        "code": "01132",
+        "description": "Teelt van groenten onder glas"
+      },
+      {
+        "code": "01133",
+        "description": "Teelt van paddenstoelen"
+      },
+      {
+        "code": "01134",
+        "description": "Teelt van aardappels en overige wortel- en knolgewassen"
+      },
+      {
+        "code": "0116",
+        "description": "Teelt van vezelgewassen"
+      },
+      {
+        "code": "01191",
+        "description": "Teelt van snijbloemen en snijheesters in de volle grond"
+      },
+      {
+        "code": "01192",
+        "description": "Teelt van snijbloemen en snijheesters onder glas"
+      },
+      {
+        "code": "01193",
+        "description": "Teelt van voedergewassen"
+      },
+      {
+        "code": "01199",
+        "description": "Teelt van overige eenjarige gewassen (rest)"
+      },
+      {
+        "code": "0121",
+        "description": "Druiventeelt"
+      },
+      {
+        "code": "01241",
+        "description": "Teelt van appels en peren"
+      },
+      {
+        "code": "01242",
+        "description": "Teelt van steenvruchten"
+      },
+      {
+        "code": "01251",
+        "description": "Teelt van aardbeien in de volle grond"
+      },
+      {
+        "code": "01252",
+        "description": "Teelt van aardbeien onder glas"
+      },
+      {
+        "code": "01253",
+        "description": "Teelt van houtig klein fruit in de volle grond (incl. overige boomvruchten en noten)"
+      },
+      {
+        "code": "01254",
+        "description": "Teelt van houtig klein fruit onder glas"
+      },
+      {
+        "code": "0127",
+        "description": "Teelt van gewassen bestemd voor de vervaardiging van dranken"
+      },
+      {
+        "code": "0128",
+        "description": "Teelt van specerijgewassen"
+      },
+      {
+        "code": "0129",
+        "description": "Teelt van overige meerjarige gewassen"
+      },
+      {
+        "code": "01301",
+        "description": "Teelt van bloembollen"
+      },
+      {
+        "code": "01302",
+        "description": "Teelt van perkplanten in de volle grond"
+      },
+      {
+        "code": "01303",
+        "description": "Teelt van perkplanten onder glas"
+      },
+      {
+        "code": "01304",
+        "description": "Teelt van potplanten onder glas"
+      },
+      {
+        "code": "01305",
+        "description": "Teelt van boomkwekerijgewassen in de volle grond"
+      },
+      {
+        "code": "01309",
+        "description": "Teelt van overige sierplanten in de volle grond"
+      },
+      {
+        "code": "01411",
+        "description": "Houden van melkvee"
+      },
+      {
+        "code": "01412",
+        "description": "Opfokken van jongvee voor de melkveehouderij"
+      },
+      {
+        "code": "01421",
+        "description": "Houden van vleeskalveren"
+      },
+      {
+        "code": "01422",
+        "description": "Overige vleesveehouderij en zoogkoeienbedrijven"
+      },
+      {
+        "code": "0143",
+        "description": "Fokken en houden van paarden en ezels"
+      },
+      {
+        "code": "01451",
+        "description": "Fokken en houden van schapen"
+      },
+      {
+        "code": "01452",
+        "description": "Fokken en houden van geiten"
+      },
+      {
+        "code": "01461",
+        "description": "Fokvarkens- vermeerderingsbedrijven"
+      },
+      {
+        "code": "01462",
+        "description": "Vleesvarkensbedrijven"
+      },
+      {
+        "code": "01463",
+        "description": "Gesloten en deels gesloten varkensbedrijven"
+      },
+      {
+        "code": "01471",
+        "description": "Opfokken en/of houden van leghennen"
+      },
+      {
+        "code": "01472",
+        "description": "Opfokken en/of houden van vleeskuikens"
+      },
+      {
+        "code": "01473",
+        "description": "Opfokken en/of houden van ouderdieren van leghennen en vleeskuikens"
+      },
+      {
+        "code": "01479",
+        "description": "Opfokken en/of houden van overig pluimvee"
+      },
+      {
+        "code": "01491",
+        "description": "Fokken en houden van edelpelsdieren"
+      },
+      {
+        "code": "01499",
+        "description": "Fokken en houden van overige dieren"
+      },
+      {
+        "code": "0150",
+        "description": "Akker- en/of tuinbouw in combinatie met het fokken en houden van dieren"
+      },
+      {
+        "code": "0161",
+        "description": "Dienstverlening voor de akker- en/of tuinbouw"
+      },
+      {
+        "code": "0162",
+        "description": "Dienstverlening voor het fokken en houden van dieren"
+      },
+      {
+        "code": "0163",
+        "description": "Behandeling van gewassen na de oogst"
+      },
+      {
+        "code": "0164",
+        "description": "Behandeling van zaden voor vermeerdering"
+      },
+      {
+        "code": "0170",
+        "description": "Jacht"
+      },
+      {
+        "code": "0210",
+        "description": "Bosbouw"
+      },
+      {
+        "code": "0220",
+        "description": "Exploitatie van bossen"
+      },
+      {
+        "code": "0240",
+        "description": "Dienstverlening voor de bosbouw"
+      },
+      {
+        "code": "0311",
+        "description": "Zee- en kustvisserij"
+      },
+      {
+        "code": "0312",
+        "description": "Binnenvisserij"
+      },
+      {
+        "code": "0321",
+        "description": "Kweken van zeevis en -schaaldieren"
+      },
+      {
+        "code": "0322",
+        "description": "Kweken van zoetwatervis en -schaaldieren"
+      }
+    ]
+  },
+  { 
+    "section": "B",
+    "description": "Winning van delfstoffen",
+    "codes":
+    [
+      {
+        "code": "0610",
+        "description": "Winning van aardolie"
+      },
+      {
+        "code": "0620",
+        "description": "Winning van aardgas"
+      },
+      {
+        "code": "0812",
+        "description": "Winning van zand"
+      },
+      {
+        "code": "0892",
+        "description": "Winning van turf"
+      },
+      {
+        "code": "0893",
+        "description": "Winning van zout"
+      },
+      {
+        "code": "0899",
+        "description": "Winning van overige delfstoffen (rest)"
+      },
+      {
+        "code": "0910",
+        "description": "Dienstverlening voor de winning van aardolie en aardgas"
+      },
+      {
+        "code": "0990",
+        "description": "Dienstverlening voor de winning van delfstoffen (geen olie en gas)"
+      }
+    ]
+  },
+  { 
+    "section": "C",
+    "description": "Industrie",
+    "codes":
+    [
+      {
+        "code": "1011",
+        "description": "Slachterijen (geen pluimvee-)"
+      },
+      {
+        "code": "1012",
+        "description": "Pluimveeslachterijen"
+      },
+      {
+        "code": "1013",
+        "description": "Vleesverwerking (niet tot maaltijden)"
+      },
+      {
+        "code": "1020",
+        "description": "Visverwerking"
+      },
+      {
+        "code": "1031",
+        "description": "Vervaardiging van aardappelproducten"
+      },
+      {
+        "code": "1032",
+        "description": "Vervaardiging van fruit- en groentesap"
+      },
+      {
+        "code": "1039",
+        "description": "Verwerking van groente en fruit (niet tot sap en maaltijden)"
+      },
+      {
+        "code": "1041",
+        "description": "Vervaardiging van plantaardige en dierlijke oli�n en vetten (geen margarine en andere spijsvetten)"
+      },
+      {
+        "code": "1042",
+        "description": "Vervaardiging van margarine en overige spijsvetten"
+      },
+      {
+        "code": "1051",
+        "description": "Vervaardiging van zuivelproducten (geen consumptie-ijs)"
+      },
+      {
+        "code": "1052",
+        "description": "Vervaardiging van consumptie-ijs"
+      },
+      {
+        "code": "1061",
+        "description": "Vervaardiging van meel (geen zetmeel)"
+      },
+      {
+        "code": "1062",
+        "description": "Vervaardiging van zetmeel en zetmeelproducten"
+      },
+      {
+        "code": "1071",
+        "description": "Vervaardiging van brood en vers banketbakkerswerk"
+      },
+      {
+        "code": "1072",
+        "description": "Vervaardiging van beschuit en koekjes en ander houdbaar banketbakkerswerk"
+      },
+      {
+        "code": "1073",
+        "description": "Vervaardiging van deegwaren"
+      },
+      {
+        "code": "1081",
+        "description": "Vervaardiging van suiker"
+      },
+      {
+        "code": "10821",
+        "description": "Verwerking van cacao"
+      },
+      {
+        "code": "10822",
+        "description": "Vervaardiging van chocolade en suikerwerk"
+      },
+      {
+        "code": "1083",
+        "description": "Verwerking van koffie en thee"
+      },
+      {
+        "code": "1084",
+        "description": "Vervaardiging van specerijen"
+      },
+      {
+        "code": "1085",
+        "description": "Vervaardiging van kant-en-klaarmaaltijden en snacks"
+      },
+      {
+        "code": "1086",
+        "description": "Vervaardiging van gehomogeniseerde voedingspreparaten en dieetvoeding"
+      },
+      {
+        "code": "1089",
+        "description": "Vervaardiging van overige voedingsmiddelen (rest)"
+      },
+      {
+        "code": "1091",
+        "description": "Vervaardiging van veevoeders"
+      },
+      {
+        "code": "1092",
+        "description": "Vervaardiging van voeders voor huisdieren"
+      },
+      {
+        "code": "1101",
+        "description": "Vervaardiging van sterk alcoholische dranken door distilleren"
+      },
+      {
+        "code": "1102",
+        "description": "Vervaardiging van wijn uit druiven"
+      },
+      {
+        "code": "1103",
+        "description": "Vervaardiging van cider en van overige vruchtenwijnen"
+      },
+      {
+        "code": "1104",
+        "description": "Vervaardiging van overige niet-gedistilleerde gegiste dranken"
+      },
+      {
+        "code": "1105",
+        "description": "Vervaardiging van bier"
+      },
+      {
+        "code": "1106",
+        "description": "Mouterijen"
+      },
+      {
+        "code": "1107",
+        "description": "Vervaardiging van frisdranken"
+      },
+      {
+        "code": "1200",
+        "description": "Vervaardiging van tabaksproducten"
+      },
+      {
+        "code": "1310",
+        "description": "Bewerken en spinnen van textielvezels"
+      },
+      {
+        "code": "1320",
+        "description": "Weven van textiel"
+      },
+      {
+        "code": "1330",
+        "description": "Textielveredeling"
+      },
+      {
+        "code": "1391",
+        "description": "Vervaardiging van gebreide en gehaakte stoffen"
+      },
+      {
+        "code": "1392",
+        "description": "Vervaardiging van geconfectioneerde artikelen van textiel (geen kleding)"
+      },
+      {
+        "code": "1393",
+        "description": "Vervaardiging van vloerkleden en tapijt"
+      },
+      {
+        "code": "1394",
+        "description": "Vervaardiging van koord"
+      },
+      {
+        "code": "1395",
+        "description": "Vervaardiging van gebonden textielvlies en artikelen daarvan (geen kleding)"
+      },
+      {
+        "code": "1396",
+        "description": "Vervaardiging van technisch en industrieel textiel"
+      },
+      {
+        "code": "1399",
+        "description": "Vervaardiging van overige textielproducten (rest)"
+      },
+      {
+        "code": "1411",
+        "description": "Vervaardiging van kleding van leer"
+      },
+      {
+        "code": "1412",
+        "description": "Vervaardiging van werkkleding"
+      },
+      {
+        "code": "1413",
+        "description": "Vervaardiging van overige bovenkleding"
+      },
+      {
+        "code": "1414",
+        "description": "Vervaardiging van onderkleding"
+      },
+      {
+        "code": "1419",
+        "description": "Vervaardiging van baby- en sportkleding en kledingaccessoires"
+      },
+      {
+        "code": "1420",
+        "description": "Vervaardiging van artikelen van bont"
+      },
+      {
+        "code": "1431",
+        "description": "Vervaardiging van gebreide en gehaakte kousen en sokken"
+      },
+      {
+        "code": "1439",
+        "description": "Vervaardiging van gebreide en gehaakte kleding (geen kousen en sokken)"
+      },
+      {
+        "code": "1511",
+        "description": "Looien en bewerken van leer"
+      },
+      {
+        "code": "1512",
+        "description": "Vervaardiging van koffers"
+      },
+      {
+        "code": "1520",
+        "description": "Vervaardiging van schoenen"
+      },
+      {
+        "code": "16101",
+        "description": "Zagen en schaven en overige primaire houtbewerking"
+      },
+      {
+        "code": "16102",
+        "description": "Verduurzamen van hout"
+      },
+      {
+        "code": "1621",
+        "description": "Vervaardiging van fineer en plaatmateriaal op basis van hout"
+      },
+      {
+        "code": "1622",
+        "description": "Vervaardiging van panelen voor parketvloeren"
+      },
+      {
+        "code": "16231",
+        "description": "Vervaardiging van deuren"
+      },
+      {
+        "code": "16239",
+        "description": "Vervaardiging van overig timmerwerk voor de bouw (geen deuren"
+      },
+      {
+        "code": "1624",
+        "description": "Vervaardiging van houten emballage"
+      },
+      {
+        "code": "1629",
+        "description": "Vervaardiging van overige artikelen van hout en van artikelen van kurk"
+      },
+      {
+        "code": "1711",
+        "description": "Vervaardiging van papierpulp"
+      },
+      {
+        "code": "17121",
+        "description": "Vervaardiging van grafisch papier en karton"
+      },
+      {
+        "code": "17122",
+        "description": "Vervaardiging van papier en karton voor verpakking"
+      },
+      {
+        "code": "17129",
+        "description": "Vervaardiging van papier en karton (geen grafisch en niet voor verpakking)"
+      },
+      {
+        "code": "17211",
+        "description": "Vervaardiging van verpakkingsmiddelen van papier en karton"
+      },
+      {
+        "code": "17212",
+        "description": "Vervaardiging van golfpapier en -karton"
+      },
+      {
+        "code": "1722",
+        "description": "Vervaardiging van huishoudelijke en sanitaire papierwaren"
+      },
+      {
+        "code": "1723",
+        "description": "Vervaardiging van kantoorbenodigdheden van papier"
+      },
+      {
+        "code": "1724",
+        "description": "Vervaardiging van behangselpapier"
+      },
+      {
+        "code": "1729",
+        "description": "Vervaardiging van overige papier- en kartonwaren"
+      },
+      {
+        "code": "1811",
+        "description": "Drukkerijen van dagbladen"
+      },
+      {
+        "code": "18121",
+        "description": "Drukkerijen van boeken e.d."
+      },
+      {
+        "code": "18122",
+        "description": "Drukkerijen van tijdschriften"
+      },
+      {
+        "code": "18123",
+        "description": "Drukkerijen van reclame"
+      },
+      {
+        "code": "18124",
+        "description": "Drukkerijen van verpakkingen"
+      },
+      {
+        "code": "18125",
+        "description": "Drukkerijen van formulieren"
+      },
+      {
+        "code": "18129",
+        "description": "Overige drukkerijen (rest)"
+      },
+      {
+        "code": "1813",
+        "description": "Prepress- en premedia-activiteiten"
+      },
+      {
+        "code": "1814",
+        "description": "Grafische afwerking en overige activiteiten verwant aan de drukkerij"
+      },
+      {
+        "code": "1820",
+        "description": "Reproductie van opgenomen media"
+      },
+      {
+        "code": "1910",
+        "description": "Vervaardiging van cokesovenproducten"
+      },
+      {
+        "code": "19201",
+        "description": "Aardolieraffinage"
+      },
+      {
+        "code": "19202",
+        "description": "Aardolieverwerking (geen -raffinage)"
+      },
+      {
+        "code": "2011",
+        "description": "Vervaardiging van industri�le gassen"
+      },
+      {
+        "code": "2012",
+        "description": "Vervaardiging van kleur- en verfstoffen"
+      },
+      {
+        "code": "2013",
+        "description": "Vervaardiging van overige anorganische basischemicali�n"
+      },
+      {
+        "code": "20141",
+        "description": "Vervaardiging van petrochemische producten"
+      },
+      {
+        "code": "20149",
+        "description": "Vervaardiging van overige organische basischemicali�n (geen petrochemische producten)"
+      },
+      {
+        "code": "2015",
+        "description": "Vervaardiging van kunstmeststoffen en stikstofverbindingen"
+      },
+      {
+        "code": "2016",
+        "description": "Vervaardiging van kunststof in primaire vorm"
+      },
+      {
+        "code": "2017",
+        "description": "Vervaardiging van synthetische rubber in primaire vorm"
+      },
+      {
+        "code": "2020",
+        "description": "Vervaardiging van verdelgingsmiddelen en overige landbouwchemicali�n"
+      },
+      {
+        "code": "2030",
+        "description": "Vervaardiging van verf"
+      },
+      {
+        "code": "2041",
+        "description": "Vervaardiging van zeep"
+      },
+      {
+        "code": "2042",
+        "description": "Vervaardiging van parfums en cosmetica"
+      },
+      {
+        "code": "2051",
+        "description": "Vervaardiging van kruit en springstoffen en van lucifers"
+      },
+      {
+        "code": "2052",
+        "description": "Vervaardiging van lijm en bereide kleefmiddelen"
+      },
+      {
+        "code": "2053",
+        "description": "Vervaardiging van etherische oli�n"
+      },
+      {
+        "code": "2059",
+        "description": "Vervaardiging van overige chemische producten (rest)"
+      },
+      {
+        "code": "2060",
+        "description": "Vervaardiging van synthetische en kunstmatige vezels"
+      },
+      {
+        "code": "2110",
+        "description": "Vervaardiging van farmaceutische grondstoffen"
+      },
+      {
+        "code": "2120",
+        "description": "Vervaardiging van farmaceutische producten (geen grondstoffen)"
+      },
+      {
+        "code": "2211",
+        "description": "Vervaardiging van rubberbanden en loopvlakvernieuwing"
+      },
+      {
+        "code": "2219",
+        "description": "Vervaardiging van producten van rubber (geen banden)"
+      },
+      {
+        "code": "2221",
+        "description": "Vervaardiging van platen"
+      },
+      {
+        "code": "2222",
+        "description": "Vervaardiging van verpakkingsmiddelen van kunststof"
+      },
+      {
+        "code": "2223",
+        "description": "Vervaardiging van kunststofproducten voor de bouw"
+      },
+      {
+        "code": "2229",
+        "description": "Vervaardiging van overige producten van kunststof"
+      },
+      {
+        "code": "2311",
+        "description": "Vervaardiging van vlakglas"
+      },
+      {
+        "code": "2312",
+        "description": "Vormen en bewerken van vlakglas"
+      },
+      {
+        "code": "2313",
+        "description": "Vervaardiging van holglas"
+      },
+      {
+        "code": "2314",
+        "description": "Vervaardiging van glasvezels"
+      },
+      {
+        "code": "2319",
+        "description": "Vervaardiging en bewerking van overig glas"
+      },
+      {
+        "code": "2320",
+        "description": "Vervaardiging van vuurvaste keramische producten"
+      },
+      {
+        "code": "2331",
+        "description": "Vervaardiging van keramische tegels en plavuizen"
+      },
+      {
+        "code": "2332",
+        "description": "Vervaardiging van keramische producten voor de bouw (geen tegels en plavuizen)"
+      },
+      {
+        "code": "2341",
+        "description": "Vervaardiging van huishoudelijk en sieraardewerk"
+      },
+      {
+        "code": "2342",
+        "description": "Vervaardiging van sanitair aardewerk"
+      },
+      {
+        "code": "2343",
+        "description": "Vervaardiging van isolatoren en isolatiemateriaal van keramische stoffen"
+      },
+      {
+        "code": "2344",
+        "description": "Vervaardiging van overig technisch aardewerk"
+      },
+      {
+        "code": "2349",
+        "description": "Vervaardiging van overige keramische producten (rest)"
+      },
+      {
+        "code": "2351",
+        "description": "Vervaardiging van cement"
+      },
+      {
+        "code": "2352",
+        "description": "Vervaardiging van kalk en gips"
+      },
+      {
+        "code": "23611",
+        "description": "Vervaardiging van producten van beton voor de bouw"
+      },
+      {
+        "code": "23612",
+        "description": "Vervaardiging van kalkzandsteen"
+      },
+      {
+        "code": "2362",
+        "description": "Vervaardiging van producten van gips voor de bouw"
+      },
+      {
+        "code": "2363",
+        "description": "Vervaardiging van stortklare beton"
+      },
+      {
+        "code": "2364",
+        "description": "Vervaardiging van mortel in droge vorm"
+      },
+      {
+        "code": "2365",
+        "description": "Vervaardiging van producten van vezelcement"
+      },
+      {
+        "code": "2369",
+        "description": "Vervaardiging van overige producten van beton"
+      },
+      {
+        "code": "2370",
+        "description": "Natuursteenbewerking"
+      },
+      {
+        "code": "2391",
+        "description": "Vervaardiging van schuur-"
+      },
+      {
+        "code": "2399",
+        "description": "Vervaardiging van overige niet-metaalhoudende minerale producten (geen schuur-"
+      },
+      {
+        "code": "2410",
+        "description": "Vervaardiging van ijzer en staal en van ferrolegeringen"
+      },
+      {
+        "code": "2420",
+        "description": "Vervaardiging van stalen buizen"
+      },
+      {
+        "code": "2431",
+        "description": "Koudtrekken van staven"
+      },
+      {
+        "code": "2432",
+        "description": "Koudwalsen van bandstaal"
+      },
+      {
+        "code": "2433",
+        "description": "Koudvervormen en koudfelsen"
+      },
+      {
+        "code": "2434",
+        "description": "Koudtrekken van draad"
+      },
+      {
+        "code": "2441",
+        "description": "Vervaardiging van edelmetalen"
+      },
+      {
+        "code": "2442",
+        "description": "Vervaardiging van aluminium"
+      },
+      {
+        "code": "2443",
+        "description": "Vervaardiging van lood"
+      },
+      {
+        "code": "2444",
+        "description": "Vervaardiging van koper"
+      },
+      {
+        "code": "2445",
+        "description": "Vervaardiging van overige non-ferrometalen"
+      },
+      {
+        "code": "2446",
+        "description": "Smelten en raffineren van uranium"
+      },
+      {
+        "code": "2451",
+        "description": "Gieten van ijzer"
+      },
+      {
+        "code": "2452",
+        "description": "Gieten van staal"
+      },
+      {
+        "code": "2453",
+        "description": "Gieten van lichte metalen"
+      },
+      {
+        "code": "2454",
+        "description": "Gieten van overige non-ferrometalen"
+      },
+      {
+        "code": "2511",
+        "description": "Vervaardiging van metalen constructiewerken en delen daarvan"
+      },
+      {
+        "code": "2512",
+        "description": "Vervaardiging van metalen deuren"
+      },
+      {
+        "code": "2521",
+        "description": "Vervaardiging van ketels en radiatoren voor centrale verwarming"
+      },
+      {
+        "code": "2529",
+        "description": "Vervaardiging van metalen tanks en reservoirs"
+      },
+      {
+        "code": "2530",
+        "description": "Vervaardiging van stoomketels (geen ketels voor centrale verwarming)"
+      },
+      {
+        "code": "2540",
+        "description": "Vervaardiging van wapens en munitie"
+      },
+      {
+        "code": "2550",
+        "description": "Smeden"
+      },
+      {
+        "code": "2561",
+        "description": "Oppervlaktebehandeling en bekleding van metaal"
+      },
+      {
+        "code": "2562",
+        "description": "Algemene metaalbewerking"
+      },
+      {
+        "code": "2571",
+        "description": "Vervaardiging van scharen"
+      },
+      {
+        "code": "2572",
+        "description": "Vervaardiging van hang- en sluitwerk"
+      },
+      {
+        "code": "2573",
+        "description": "Vervaardiging van gereedschap"
+      },
+      {
+        "code": "2591",
+        "description": "Vervaardiging van stalen vaten e.d."
+      },
+      {
+        "code": "2592",
+        "description": "Vervaardiging van verpakkingsmiddelen van licht metaal"
+      },
+      {
+        "code": "2593",
+        "description": "Vervaardiging van artikelen van draad en van kettingen en veren"
+      },
+      {
+        "code": "2594",
+        "description": "Vervaardiging van bouten"
+      },
+      {
+        "code": "2599",
+        "description": "Vervaardiging van overige producten van metaal (rest)"
+      },
+      {
+        "code": "2611",
+        "description": "Vervaardiging van elektronische componenten"
+      },
+      {
+        "code": "2612",
+        "description": "Vervaardiging van elektronische printplaten"
+      },
+      {
+        "code": "2620",
+        "description": "Vervaardiging van computers en randapparatuur"
+      },
+      {
+        "code": "2630",
+        "description": "Vervaardiging van communicatieapparatuur"
+      },
+      {
+        "code": "2640",
+        "description": "Vervaardiging van consumentenelektronica"
+      },
+      {
+        "code": "2651",
+        "description": "Vervaardiging van meet-"
+      },
+      {
+        "code": "2652",
+        "description": "Vervaardiging van uurwerken"
+      },
+      {
+        "code": "2660",
+        "description": "Vervaardiging van bestralingsapparatuur en van elektromedische en elektrotherapeutische apparatuur"
+      },
+      {
+        "code": "2670",
+        "description": "Vervaardiging van optische instrumenten en apparatuur"
+      },
+      {
+        "code": "2680",
+        "description": "Vervaardiging van informatiedragers"
+      },
+      {
+        "code": "2711",
+        "description": "Vervaardiging van elektromotoren"
+      },
+      {
+        "code": "2712",
+        "description": "Vervaardiging van schakel- en verdeelinrichtingen"
+      },
+      {
+        "code": "2720",
+        "description": "Vervaardiging van batterijen en accumulatoren"
+      },
+      {
+        "code": "2731",
+        "description": "Vervaardiging van kabels van optische vezels"
+      },
+      {
+        "code": "2732",
+        "description": "Vervaardiging van overige elektrische en elektronische kabel"
+      },
+      {
+        "code": "2733",
+        "description": "Vervaardiging van schakelaars"
+      },
+      {
+        "code": "2740",
+        "description": "Vervaardiging van elektrische lampen en verlichtingsapparaten"
+      },
+      {
+        "code": "2751",
+        "description": "Vervaardiging van elektrische huishoudapparaten"
+      },
+      {
+        "code": "2752",
+        "description": "Vervaardiging van niet-elektrische huishoudapparaten"
+      },
+      {
+        "code": "2790",
+        "description": "Vervaardiging van overige elektrische apparatuur"
+      },
+      {
+        "code": "2811",
+        "description": "Vervaardiging van motoren en turbines (niet voor vliegtuigen"
+      },
+      {
+        "code": "2812",
+        "description": "Vervaardiging van hydraulische apparatuur"
+      },
+      {
+        "code": "2813",
+        "description": "Vervaardiging van niet-hydraulische pompen en compressoren"
+      },
+      {
+        "code": "2814",
+        "description": "Vervaardiging van appendages"
+      },
+      {
+        "code": "2815",
+        "description": "Vervaardiging van tandwielen"
+      },
+      {
+        "code": "2821",
+        "description": "Vervaardiging van industri�le ovens en branders"
+      },
+      {
+        "code": "2822",
+        "description": "Vervaardiging van hijs-"
+      },
+      {
+        "code": "2823",
+        "description": "Vervaardiging van kantoormachines en -apparatuur (geen computers en randapparatuur)"
+      },
+      {
+        "code": "2824",
+        "description": "Vervaardiging van pneumatisch en elektrisch handgereedschap"
+      },
+      {
+        "code": "2825",
+        "description": "Vervaardiging van machines en apparaten voor industri�le koeltechniek en klimaatregeling"
+      },
+      {
+        "code": "2829",
+        "description": "Vervaardiging van overige machines en apparaten voor algemeen gebruik (rest)"
+      },
+      {
+        "code": "2830",
+        "description": "Vervaardiging van machines en werktuigen voor de land- en bosbouw"
+      },
+      {
+        "code": "2841",
+        "description": "Vervaardiging van gereedschapswerktuigen voor metaalbewerking"
+      },
+      {
+        "code": "2849",
+        "description": "Vervaardiging van gereedschapswerktuigen niet voor metaalbewerking"
+      },
+      {
+        "code": "2891",
+        "description": "Vervaardiging van machines voor de metallurgie"
+      },
+      {
+        "code": "2892",
+        "description": "Vervaardiging van machines voor de bouw en winning van delfstoffen"
+      },
+      {
+        "code": "2893",
+        "description": "Vervaardiging van machines voor de productie van voedings- en genotmiddelen"
+      },
+      {
+        "code": "2894",
+        "description": "Vervaardiging van machines voor de productie van textiel"
+      },
+      {
+        "code": "2895",
+        "description": "Vervaardiging van machines voor de productie van papier en karton"
+      },
+      {
+        "code": "2896",
+        "description": "Vervaardiging van machines voor de kunststof- en rubberindustrie"
+      },
+      {
+        "code": "2899",
+        "description": "Vervaardiging van overige machines"
+      },
+      {
+        "code": "2910",
+        "description": "Vervaardiging van auto's"
+      },
+      {
+        "code": "29201",
+        "description": "Carrosseriebouw"
+      },
+      {
+        "code": "29202",
+        "description": "Vervaardiging van aanhangwagens en opleggers"
+      },
+      {
+        "code": "2931",
+        "description": "Vervaardiging van elektrische en elektronische onderdelen en toebehoren voor auto's"
+      },
+      {
+        "code": "2932",
+        "description": "Vervaardiging van niet-elektrische en -elektronische onderdelen en toebehoren voor auto's"
+      },
+      {
+        "code": "3011",
+        "description": "Bouw van schepen en drijvend materieel (geen sport- en recreatievaartuigen)"
+      },
+      {
+        "code": "3012",
+        "description": "Bouw van sport- en recreatievaartuigen"
+      },
+      {
+        "code": "3020",
+        "description": "Vervaardiging van rollend spoor- en tramwegmaterieel"
+      },
+      {
+        "code": "3030",
+        "description": "Vervaardiging van vliegtuigen en onderdelen daarvoor"
+      },
+      {
+        "code": "3040",
+        "description": "Vervaardiging van militaire gevechtsvoertuigen"
+      },
+      {
+        "code": "3091",
+        "description": "Vervaardiging van motor- en bromfietsen"
+      },
+      {
+        "code": "3092",
+        "description": "Vervaardiging van fietsen en invalidenwagens"
+      },
+      {
+        "code": "3099",
+        "description": "Vervaardiging van overige transportmiddelen (rest)"
+      },
+      {
+        "code": "31011",
+        "description": "Interieurbouw"
+      },
+      {
+        "code": "31012",
+        "description": "Vervaardiging van bedrijfsmeubels"
+      },
+      {
+        "code": "3102",
+        "description": "Vervaardiging van keukenmeubels"
+      },
+      {
+        "code": "3103",
+        "description": "Vervaardiging van matrassen"
+      },
+      {
+        "code": "3109",
+        "description": "Vervaardiging van overige meubels"
+      },
+      {
+        "code": "3211",
+        "description": "Slaan van munten en medailles"
+      },
+      {
+        "code": "3212",
+        "description": "Bewerken van edelstenen en vervaardiging van sieraden e.d. (geen imitatie)"
+      },
+      {
+        "code": "3213",
+        "description": "Vervaardiging van imitatiesieraden"
+      },
+      {
+        "code": "3220",
+        "description": "Vervaardiging van muziekinstrumenten"
+      },
+      {
+        "code": "3230",
+        "description": "Vervaardiging van sportartikelen"
+      },
+      {
+        "code": "3240",
+        "description": "Vervaardiging van speelgoed en spellen"
+      },
+      {
+        "code": "32501",
+        "description": "Tandtechnische bedrijven"
+      },
+      {
+        "code": "32502",
+        "description": "Vervaardiging van medische instrumenten en hulpmiddelen (geen tandtechniek)"
+      },
+      {
+        "code": "3291",
+        "description": "Vervaardiging van borstelwaren"
+      },
+      {
+        "code": "32991",
+        "description": "Sociale werkvoorziening"
+      },
+      {
+        "code": "32999",
+        "description": "Vervaardiging van overige goederen (rest)"
+      },
+      {
+        "code": "3311",
+        "description": "Reparatie van producten van metaal"
+      },
+      {
+        "code": "33121",
+        "description": "Reparatie en onderhoud van machines voor algemeen gebruik en machine-onderdelen (geen gereedschap)"
+      },
+      {
+        "code": "33122",
+        "description": "Reparatie en onderhoud van pneumatisch en elektrisch gereedschap en gereedschapswerktuigen"
+      },
+      {
+        "code": "33123",
+        "description": "Reparatie en onderhoud van machines voor een specifieke bedrijfstak"
+      },
+      {
+        "code": "3313",
+        "description": "Reparatie van elektronische en optische apparatuur"
+      },
+      {
+        "code": "3314",
+        "description": "Reparatie van elektrische apparatuur"
+      },
+      {
+        "code": "3315",
+        "description": "Reparatie en onderhoud van schepen"
+      },
+      {
+        "code": "3316",
+        "description": "Reparatie en onderhoud van vliegtuigen"
+      },
+      {
+        "code": "3317",
+        "description": "Reparatie en onderhoud van overige transportmiddelen"
+      },
+      {
+        "code": "3319",
+        "description": "Reparatie van overige apparatuur"
+      },
+      {
+        "code": "3321",
+        "description": "Installatie van ketels en tanks"
+      },
+      {
+        "code": "33221",
+        "description": "Installatie van machines voor algemeen gebruik (geen gereedschap)"
+      },
+      {
+        "code": "33222",
+        "description": "Installatie van pneumatisch en elektrisch gereedschap en gereedschapswerktuigen"
+      },
+      {
+        "code": "33223",
+        "description": "Installatie van machines voor een specifieke bedrijfstak"
+      },
+      {
+        "code": "3323",
+        "description": "Installatie van elektronische en optische apparatuur"
+      },
+      {
+        "code": "3324",
+        "description": "Installatie van elektrische apparatuur"
+      },
+      {
+        "code": "3329",
+        "description": "Installatie van overige toebehoren"
+      }
+    ]
+  },
+  {
+    "section": "D",
+    "description": "Productie en distributie van en handel in elektriciteit, aardgas, stoom en gekoelde lucht",
+    "codes":
+    [
+      {
+        "code": "35111",
+        "description": "Productie van elektriciteit door thermische"
+      },
+      {
+        "code": "35112",
+        "description": "Productie van elektriciteit door windenergie"
+      },
+      {
+        "code": "35113",
+        "description": "Productie van elektriciteit door zonnecellen"
+      },
+      {
+        "code": "3512",
+        "description": "Beheer en exploitatie van transportnetten voor elektriciteit"
+      },
+      {
+        "code": "3513",
+        "description": "Distributie van elektriciteit en gasvormige brandstoffen via leidingen"
+      },
+      {
+        "code": "3514",
+        "description": "Handel in elektriciteit en in gas via leidingen"
+      },
+      {
+        "code": "3520",
+        "description": "Productie van biogas"
+      },
+      {
+        "code": "3530",
+        "description": "Productie en distributie van stoom en gekoelde lucht"
+      }
+    ]
+  },
+  {
+    "section": "E",
+    "description": "Winning en distributie van water; afval- en afvalwaterbeheer en sanering",
+    "codes":
+    [
+      {
+        "code": "3600",
+        "description": "Winning en distributie van water"
+      },
+      {
+        "code": "3700",
+        "description": "Afvalwaterinzameling en -behandeling"
+      },
+      {
+        "code": "3811",
+        "description": "Inzameling van onschadelijk afval"
+      },
+      {
+        "code": "3812",
+        "description": "Inzameling van schadelijk afval"
+      },
+      {
+        "code": "3821",
+        "description": "Behandeling van onschadelijk afval"
+      },
+      {
+        "code": "3822",
+        "description": "Behandeling van schadelijk afval"
+      },
+      {
+        "code": "3831",
+        "description": "Sloop van schepen"
+      },
+      {
+        "code": "3832",
+        "description": "Gesorteerd materiaal voorbereiden tot recycling"
+      },
+      {
+        "code": "3900",
+        "description": "Sanering en overig afvalbeheer"
+      }
+    ]
+  },
+  {
+    "section": "F",
+    "description": "Bouwnijverheid",
+    "codes":
+    [
+      {
+        "code": "4110",
+        "description": "Projectontwikkeling"
+      },
+      {
+        "code": "4120",
+        "description": "Algemene burgerlijke en utiliteitsbouw"
+      },
+      {
+        "code": "42111",
+        "description": "Wegenbouw"
+      },
+      {
+        "code": "42112",
+        "description": "Stratenmaken"
+      },
+      {
+        "code": "4212",
+        "description": "Bouw van boven- en ondergrondse spoorwegen"
+      },
+      {
+        "code": "4213",
+        "description": "Bouw van kunstwerken"
+      },
+      {
+        "code": "4221",
+        "description": "Leggen van rioleringen"
+      },
+      {
+        "code": "4222",
+        "description": "Leggen van elektriciteits- en telecommunicatiekabels"
+      },
+      {
+        "code": "4291",
+        "description": "Natte waterbouw"
+      },
+      {
+        "code": "4299",
+        "description": "Bouw van overige civieltechnische werken (rest)"
+      },
+      {
+        "code": "4311",
+        "description": "Slopen van bouwwerken"
+      },
+      {
+        "code": "4312",
+        "description": "Grondverzet"
+      },
+      {
+        "code": "4313",
+        "description": "Proefboren"
+      },
+      {
+        "code": "4321",
+        "description": "Elektrotechnische bouwinstallatie"
+      },
+      {
+        "code": "43221",
+        "description": "Loodgieters- en fitterswerk"
+      },
+      {
+        "code": "43222",
+        "description": "Installatie van verwarmings- en luchtbehandelingsapparatuur"
+      },
+      {
+        "code": "4329",
+        "description": "Overige bouwinstallatie"
+      },
+      {
+        "code": "4331",
+        "description": "Stukadoren"
+      },
+      {
+        "code": "4332",
+        "description": "Bouwtimmeren"
+      },
+      {
+        "code": "4333",
+        "description": "Afwerking van vloeren en wanden"
+      },
+      {
+        "code": "4334",
+        "description": "Schilderen en glaszetten"
+      },
+      {
+        "code": "4339",
+        "description": "Overige afwerking van gebouwen"
+      },
+      {
+        "code": "4391",
+        "description": "Dakdekken en bouwen van dakconstructies"
+      },
+      {
+        "code": "43991",
+        "description": "Heien en andere funderingswerkzaamheden"
+      },
+      {
+        "code": "43992",
+        "description": "Vlechten van betonstaal"
+      },
+      {
+        "code": "43993",
+        "description": "Metselen en voegen"
+      },
+      {
+        "code": "43999",
+        "description": "Overige gespecialiseerde werkzaamheden in de bouw (rest)"
+      }
+    ]
+  },
+  {
+    "section": "G",
+    "description": "Groot- en detailhandel; reparatie van auto's",
+    "codes":
+    [
+      {
+        "code": "45111",
+        "description": "Import van nieuwe personenauto's en lichte bedrijfsauto's"
+      },
+      {
+        "code": "45112",
+        "description": "Handel in en reparatie van personenauto's en lichte bedrijfsauto's (geen import van nieuwe)"
+      },
+      {
+        "code": "45191",
+        "description": "Import van nieuwe bedrijfsauto's"
+      },
+      {
+        "code": "45192",
+        "description": "Handel in en reparatie van zwaardere bedrijfsauto's (geen import van nieuwe)"
+      },
+      {
+        "code": "45193",
+        "description": "Handel in en reparatie van aanhangwagens en opleggers (geen caravans)"
+      },
+      {
+        "code": "45194",
+        "description": "Handel in en reparatie van caravans"
+      },
+      {
+        "code": "45201",
+        "description": "Auto-onderdelenservicebedrijven"
+      },
+      {
+        "code": "45202",
+        "description": "Bandenservicebedrijven"
+      },
+      {
+        "code": "45203",
+        "description": "Reparatie van specifieke auto-onderdelen"
+      },
+      {
+        "code": "45204",
+        "description": "Carrosserieherstel"
+      },
+      {
+        "code": "45205",
+        "description": "Overige gespecialiseerde reparatie en slepen van auto's"
+      },
+      {
+        "code": "45311",
+        "description": "Groothandel en handelsbemiddeling in auto-onderdelen en -accessoires (geen banden)"
+      },
+      {
+        "code": "45312",
+        "description": "Groothandel en handelsbemiddeling in banden"
+      },
+      {
+        "code": "4532",
+        "description": "Detailhandel in auto-onderdelen en -accessoires"
+      },
+      {
+        "code": "45401",
+        "description": "Groothandel en handelsbemiddeling in motorfietsen en onderdelen daarvan"
+      },
+      {
+        "code": "45402",
+        "description": "Detailhandel in en reparatie van motorfietsen en onderdelen daarvan"
+      },
+      {
+        "code": "4611",
+        "description": "Handelsbemiddeling in landbouwproducten"
+      },
+      {
+        "code": "4612",
+        "description": "Handelsbemiddeling in brandstoffen"
+      },
+      {
+        "code": "4613",
+        "description": "Handelsbemiddeling in hout"
+      },
+      {
+        "code": "4614",
+        "description": "Handelsbemiddeling in machines"
+      },
+      {
+        "code": "4615",
+        "description": "Handelsbemiddeling in meubels"
+      },
+      {
+        "code": "4616",
+        "description": "Handelsbemiddeling in textiel"
+      },
+      {
+        "code": "4617",
+        "description": "Handelsbemiddeling in voedings- en genotmiddelen"
+      },
+      {
+        "code": "4618",
+        "description": "Handelsbemiddeling gespecialiseerd in overige goederen"
+      },
+      {
+        "code": "4619",
+        "description": "Niet-gespecialiseerde handelsbemiddeling"
+      },
+      {
+        "code": "46211",
+        "description": "Groothandel in granen"
+      },
+      {
+        "code": "46212",
+        "description": "Groothandel in zaden"
+      },
+      {
+        "code": "46213",
+        "description": "Groothandel in hooi"
+      },
+      {
+        "code": "46214",
+        "description": "Groothandel in meng- en krachtvoeder"
+      },
+      {
+        "code": "46215",
+        "description": "Groothandel in veevoeder (geen ruw-"
+      },
+      {
+        "code": "46216",
+        "description": "Groothandel in ruwe plantaardige en dierlijke oli�n en vetten en oliehoudende grondstoffen"
+      },
+      {
+        "code": "46217",
+        "description": "Groothandel in ruwe tabak"
+      },
+      {
+        "code": "46218",
+        "description": "Groothandel in akkerbouwproducten en veevoeder algemeen assortiment"
+      },
+      {
+        "code": "46219",
+        "description": "Groothandel in overige akkerbouwproducten"
+      },
+      {
+        "code": "4622",
+        "description": "Groothandel in bloemen en planten"
+      },
+      {
+        "code": "46231",
+        "description": "Groothandel in levend vee"
+      },
+      {
+        "code": "46232",
+        "description": "Groothandel in huisdieren"
+      },
+      {
+        "code": "46241",
+        "description": "Groothandel in huiden en vellen"
+      },
+      {
+        "code": "46242",
+        "description": "Groothandel in leer en halffabrikaten van leer"
+      },
+      {
+        "code": "46311",
+        "description": "Groothandel in groenten en fruit"
+      },
+      {
+        "code": "46312",
+        "description": "Groothandel in consumptie-aardappelen"
+      },
+      {
+        "code": "4632",
+        "description": "Groothandel in vlees en vleeswaren en in wild en gevogelte (niet levend)"
+      },
+      {
+        "code": "46331",
+        "description": "Groothandel in zuivelproducten en spijsoli�n en -vetten"
+      },
+      {
+        "code": "46332",
+        "description": "Groothandel in eieren"
+      },
+      {
+        "code": "4634",
+        "description": "Groothandel in dranken (geen zuivel)"
+      },
+      {
+        "code": "4635",
+        "description": "Groothandel in tabaksproducten en rokersbenodigdheden"
+      },
+      {
+        "code": "4636",
+        "description": "Groothandel in suiker"
+      },
+      {
+        "code": "4637",
+        "description": "Groothandel in koffie"
+      },
+      {
+        "code": "46381",
+        "description": "Groothandel in snacks"
+      },
+      {
+        "code": "46382",
+        "description": "Groothandel in vis"
+      },
+      {
+        "code": "46383",
+        "description": "Gespecialiseerde groothandel in overige voedings- en genotmiddelen (rest)"
+      },
+      {
+        "code": "46384",
+        "description": "Groothandel in bakkerijgrondstoffen"
+      },
+      {
+        "code": "46389",
+        "description": "Gespecialiseerde groothandel in overige grondstoffen en halffabrikaten voor de voedingsmiddelenindustrie (rest)"
+      },
+      {
+        "code": "4639",
+        "description": "Groothandel in voedings- en genotmiddelen algemeen assortiment"
+      },
+      {
+        "code": "46411",
+        "description": "Groothandel in kledingstoffen en fournituren"
+      },
+      {
+        "code": "46412",
+        "description": "Groothandel in huishoudtextiel en beddengoed"
+      },
+      {
+        "code": "46421",
+        "description": "Groothandel in bovenkleding"
+      },
+      {
+        "code": "46422",
+        "description": "Groothandel in werkkleding"
+      },
+      {
+        "code": "46423",
+        "description": "Groothandel in onderkleding"
+      },
+      {
+        "code": "46424",
+        "description": "Groothandel in schoenen"
+      },
+      {
+        "code": "46425",
+        "description": "Groothandel in mode-artikelen"
+      },
+      {
+        "code": "46429",
+        "description": "Groothandel in textielwaren algemeen assortiment"
+      },
+      {
+        "code": "46431",
+        "description": "Groothandel in witgoed"
+      },
+      {
+        "code": "46432",
+        "description": "Groothandel in elektrische huishoudelijke apparatuur (geen witgoed"
+      },
+      {
+        "code": "46433",
+        "description": "Groothandel in audio- en video-apparatuur"
+      },
+      {
+        "code": "46434",
+        "description": "Groothandel in fotografische artikelen"
+      },
+      {
+        "code": "46435",
+        "description": "Groothandel in beeld- en geluidsdragers"
+      },
+      {
+        "code": "46436",
+        "description": "Groothandel in optische artikelen"
+      },
+      {
+        "code": "46441",
+        "description": "Groothandel in glas"
+      },
+      {
+        "code": "46442",
+        "description": "Groothandel in was-"
+      },
+      {
+        "code": "4645",
+        "description": "Groothandel in parfums en cosmetica"
+      },
+      {
+        "code": "46461",
+        "description": "Groothandel in farmaceutische producten"
+      },
+      {
+        "code": "46462",
+        "description": "Groothandel in medische en tandheelkundige instrumenten"
+      },
+      {
+        "code": "46471",
+        "description": "Groothandel in huismeubilair"
+      },
+      {
+        "code": "46472",
+        "description": "Groothandel in woningtextiel en vloerbedekking"
+      },
+      {
+        "code": "46473",
+        "description": "Groothandel in verlichtingsartikelen"
+      },
+      {
+        "code": "4648",
+        "description": "Groothandel in juweliersartikelen en uurwerken"
+      },
+      {
+        "code": "46491",
+        "description": "Groothandel in fietsen en bromfietsen"
+      },
+      {
+        "code": "46492",
+        "description": "Groothandel in watersportartikelen"
+      },
+      {
+        "code": "46493",
+        "description": "Groothandel in kampeerartikelen (geen caravans)"
+      },
+      {
+        "code": "46494",
+        "description": "Groothandel in speelgoed"
+      },
+      {
+        "code": "46495",
+        "description": "Groothandel in muziekinstrumenten"
+      },
+      {
+        "code": "46496",
+        "description": "Groothandel in sportartikelen (geen watersport)"
+      },
+      {
+        "code": "46497",
+        "description": "Groothandel in papier- en kartonwaren (geen verpakkingsmateriaal)"
+      },
+      {
+        "code": "46498",
+        "description": "Groothandel in boeken"
+      },
+      {
+        "code": "46499",
+        "description": "Groothandel in overige consumentenartikelen (non-food) (rest)"
+      },
+      {
+        "code": "4651",
+        "description": "Groothandel in computers"
+      },
+      {
+        "code": "4652",
+        "description": "Groothandel in elektronische en telecommunicatieapparatuur en bijbehorende onderdelen"
+      },
+      {
+        "code": "4661",
+        "description": "Groothandel in landbouwmachines"
+      },
+      {
+        "code": "4662",
+        "description": "Groothandel in gereedschapswerktuigen"
+      },
+      {
+        "code": "4663",
+        "description": "Groothandel in machines voor de bouw"
+      },
+      {
+        "code": "4664",
+        "description": "Groothandel in machines voor de textielindustrie en in naai- en breimachines"
+      },
+      {
+        "code": "4665",
+        "description": "Groothandel in bedrijfsmeubels"
+      },
+      {
+        "code": "4666",
+        "description": "Groothandel in kantoormachines (geen computers)"
+      },
+      {
+        "code": "46681",
+        "description": "Groothandel in machines voor de grafische industrie"
+      },
+      {
+        "code": "46682",
+        "description": "Groothandel in machines voor de voedings- en genotmiddelenindustrie"
+      },
+      {
+        "code": "46691",
+        "description": "Groothandel in intern transportmaterieel"
+      },
+      {
+        "code": "46692",
+        "description": "Groothandel in machines en apparaten voor de warmte-"
+      },
+      {
+        "code": "46693",
+        "description": "Groothandel in verbrandingsmotoren"
+      },
+      {
+        "code": "46694",
+        "description": "Groothandel in appendages"
+      },
+      {
+        "code": "46695",
+        "description": "Groothandel in meet- en regelapparaten"
+      },
+      {
+        "code": "46696",
+        "description": "Groothandel in emballage"
+      },
+      {
+        "code": "46697",
+        "description": "Groothandel in scheepsbenodigdheden en visserij-artikelen"
+      },
+      {
+        "code": "46699",
+        "description": "Groothandel in overige machines"
+      },
+      {
+        "code": "46711",
+        "description": "Groothandel in vaste brandstoffen"
+      },
+      {
+        "code": "46712",
+        "description": "Groothandel in vloeibare en gasvormige brandstoffen"
+      },
+      {
+        "code": "46713",
+        "description": "Groothandel in minerale olieproducten (geen brandstoffen)"
+      },
+      {
+        "code": "46721",
+        "description": "Groothandel in metaalertsen"
+      },
+      {
+        "code": "46722",
+        "description": "Groothandel in ferrometalen en -halffabrikaten"
+      },
+      {
+        "code": "46723",
+        "description": "Groothandel in non-ferrometalen en -halffabrikaten"
+      },
+      {
+        "code": "46731",
+        "description": "Groothandel in hout en plaatmateriaal"
+      },
+      {
+        "code": "46732",
+        "description": "Groothandel in verf en verfwaren"
+      },
+      {
+        "code": "46733",
+        "description": "Groothandel in behang"
+      },
+      {
+        "code": "46734",
+        "description": "Groothandel in vlakglas"
+      },
+      {
+        "code": "46735",
+        "description": "Groothandel in zand en grind"
+      },
+      {
+        "code": "46736",
+        "description": "Groothandel in tegels en plavuizen"
+      },
+      {
+        "code": "46737",
+        "description": "Groothandel in sanitaire artikelen en sanitair installatiemateriaal"
+      },
+      {
+        "code": "46738",
+        "description": "Groothandel gespecialiseerd in overige bouwmaterialen"
+      },
+      {
+        "code": "46739",
+        "description": "Groothandel in bouwmaterialen algemeen assortiment"
+      },
+      {
+        "code": "46741",
+        "description": "Groothandel in ijzer- en metaalwaren"
+      },
+      {
+        "code": "46742",
+        "description": "Groothandel in verwarmingsapparaten"
+      },
+      {
+        "code": "46751",
+        "description": "Groothandel in chemische grondstoffen en chemicali�n voor industri�le toepassing"
+      },
+      {
+        "code": "46752",
+        "description": "Groothandel in bestrijdingsmiddelen en kunstmeststoffen"
+      },
+      {
+        "code": "46761",
+        "description": "Groothandel in textielgrondstoffen en -halffabrikaten"
+      },
+      {
+        "code": "46762",
+        "description": "Groothandel in papier en karton"
+      },
+      {
+        "code": "46769",
+        "description": "Groothandel in overige intermediaire producten (rest)"
+      },
+      {
+        "code": "46771",
+        "description": "Groothandel in autosloopmateriaal"
+      },
+      {
+        "code": "46772",
+        "description": "Groothandel in ijzer- en staalschroot en oude non-ferrometalen"
+      },
+      {
+        "code": "46779",
+        "description": "Groothandel in overige oude materialen en afvalstoffen"
+      },
+      {
+        "code": "46901",
+        "description": "Niet-gespecialiseerde groothandel in consumentenartikelen"
+      },
+      {
+        "code": "46902",
+        "description": "Niet-gespecialiseerde groothandel in niet-consumentenartikelen"
+      },
+      {
+        "code": "4711",
+        "description": "Supermarkten en dergelijke winkels met een algemeen assortiment voedings- en genotmiddelen"
+      },
+      {
+        "code": "47191",
+        "description": "Warenhuizen"
+      },
+      {
+        "code": "47192",
+        "description": "Winkels met een algemeen assortiment non-food (geen warenhuizen)"
+      },
+      {
+        "code": "4721",
+        "description": "Winkels in aardappelen"
+      },
+      {
+        "code": "47221",
+        "description": "Winkels in vlees en vleeswaren"
+      },
+      {
+        "code": "47222",
+        "description": "Winkels in wild en gevogelte"
+      },
+      {
+        "code": "4723",
+        "description": "Winkels in vis"
+      },
+      {
+        "code": "47241",
+        "description": "Winkels in brood en banket"
+      },
+      {
+        "code": "47242",
+        "description": "Winkels in chocolade en suikerwerk"
+      },
+      {
+        "code": "4725",
+        "description": "Winkels in dranken"
+      },
+      {
+        "code": "4726",
+        "description": "Winkels in tabaksproducten"
+      },
+      {
+        "code": "47291",
+        "description": "Winkels in kaas"
+      },
+      {
+        "code": "47292",
+        "description": "Winkels in natuurvoeding en reformartikelen"
+      },
+      {
+        "code": "47293",
+        "description": "Winkels in buitenlandse voedingsmiddelen"
+      },
+      {
+        "code": "47299",
+        "description": "Gespecialiseerde winkels in overige voedings- en genotmiddelen (rest)"
+      },
+      {
+        "code": "4730",
+        "description": "Benzinestations"
+      },
+      {
+        "code": "4741",
+        "description": "Winkels in computers"
+      },
+      {
+        "code": "4742",
+        "description": "Winkels in telecommunicatieapparatuur"
+      },
+      {
+        "code": "47431",
+        "description": "Winkels in audio- en videoapparatuur"
+      },
+      {
+        "code": "47432",
+        "description": "Winkels in een algemeen assortiment van wit- en bruingoed"
+      },
+      {
+        "code": "47511",
+        "description": "Winkels in kledingsstoffen"
+      },
+      {
+        "code": "47512",
+        "description": "Winkels in huishoudtextiel"
+      },
+      {
+        "code": "47513",
+        "description": "Winkels in breiwol"
+      },
+      {
+        "code": "47521",
+        "description": "Winkels in ijzerwaren en gereedschappen"
+      },
+      {
+        "code": "47522",
+        "description": "Winkels in verf"
+      },
+      {
+        "code": "47523",
+        "description": "Winkels in houten bouw- en tuinmaterialen"
+      },
+      {
+        "code": "47524",
+        "description": "Winkels in tegels"
+      },
+      {
+        "code": "47525",
+        "description": "Winkels in keukens"
+      },
+      {
+        "code": "47526",
+        "description": "Winkels in parket-"
+      },
+      {
+        "code": "47527",
+        "description": "Winkels gespecialiseerd in overige doe-het-zelfartikelen"
+      },
+      {
+        "code": "47528",
+        "description": "Bouwmarkten en andere winkels in bouwmaterialen algemeen assortiment"
+      },
+      {
+        "code": "4753",
+        "description": "Winkels in vloerbedekking en gordijnen"
+      },
+      {
+        "code": "47541",
+        "description": "Winkels in witgoed"
+      },
+      {
+        "code": "47542",
+        "description": "Winkels in naai- en breimachines"
+      },
+      {
+        "code": "47543",
+        "description": "Winkels in overige elektrische huishoudelijke apparatuur"
+      },
+      {
+        "code": "47544",
+        "description": "Winkels in onderdelen voor elektrische huishoudelijke apparatuur"
+      },
+      {
+        "code": "47591",
+        "description": "Winkels in meubels"
+      },
+      {
+        "code": "47592",
+        "description": "Winkels in verlichtingsartikelen"
+      },
+      {
+        "code": "47593",
+        "description": "Winkels in artikelen voor woninginrichting algemeen assortiment"
+      },
+      {
+        "code": "47594",
+        "description": "Winkels in muziekinstrumenten"
+      },
+      {
+        "code": "47595",
+        "description": "Winkels in glas-"
+      },
+      {
+        "code": "47596",
+        "description": "Winkels gespecialiseerd in overige huishoudelijke artikelen (rest)"
+      },
+      {
+        "code": "47597",
+        "description": "Winkels in huishoudelijke artikelen algemeen assortiment"
+      },
+      {
+        "code": "4761",
+        "description": "Winkels in boeken"
+      },
+      {
+        "code": "4762",
+        "description": "Winkels in kranten"
+      },
+      {
+        "code": "4763",
+        "description": "Winkels in audio- en video-opnamen"
+      },
+      {
+        "code": "47641",
+        "description": "Winkels in fietsen en bromfietsen"
+      },
+      {
+        "code": "47642",
+        "description": "Winkels in watersportartikelen"
+      },
+      {
+        "code": "47643",
+        "description": "Winkels in sportartikelen (geen watersport)"
+      },
+      {
+        "code": "47644",
+        "description": "Winkels in kampeerartikelen (geen caravans)"
+      },
+      {
+        "code": "4765",
+        "description": "Winkels in speelgoed"
+      },
+      {
+        "code": "47711",
+        "description": "Winkels in herenkleding"
+      },
+      {
+        "code": "47712",
+        "description": "Winkels in dameskleding"
+      },
+      {
+        "code": "47713",
+        "description": "Winkels in bovenkleding en mode-artikelen (algemeen assortiment)"
+      },
+      {
+        "code": "47714",
+        "description": "Winkels in baby- en kinderkleding"
+      },
+      {
+        "code": "47715",
+        "description": "Winkels in babyartikelen algemeen assortiment"
+      },
+      {
+        "code": "47716",
+        "description": "Winkels in onderkleding"
+      },
+      {
+        "code": "47717",
+        "description": "Winkels in mode-artikelen"
+      },
+      {
+        "code": "47718",
+        "description": "Textielsupermarkten"
+      },
+      {
+        "code": "47721",
+        "description": "Winkels in schoenen"
+      },
+      {
+        "code": "47722",
+        "description": "Winkels in lederwaren en reisartikelen"
+      },
+      {
+        "code": "4773",
+        "description": "Apotheken"
+      },
+      {
+        "code": "47741",
+        "description": "Winkels in drogisterij-artikelen"
+      },
+      {
+        "code": "47742",
+        "description": "Winkels in medische en orthopedische artikelen"
+      },
+      {
+        "code": "4775",
+        "description": "Winkels in parfums en cosmetica"
+      },
+      {
+        "code": "47761",
+        "description": "Winkels in bloemen en planten"
+      },
+      {
+        "code": "47762",
+        "description": "Tuincentra"
+      },
+      {
+        "code": "47763",
+        "description": "Winkels in dieren"
+      },
+      {
+        "code": "4777",
+        "description": "Winkels in juweliersartikelen en uurwerken"
+      },
+      {
+        "code": "47781",
+        "description": "Winkels in fotografische artikelen"
+      },
+      {
+        "code": "47782",
+        "description": "Winkels in optische artikelen"
+      },
+      {
+        "code": "47783",
+        "description": "Winkels in schilderijen"
+      },
+      {
+        "code": "47789",
+        "description": "Winkels gespecialiseerd in overige artikelen (rest)"
+      },
+      {
+        "code": "47791",
+        "description": "Winkels in antiek"
+      },
+      {
+        "code": "47792",
+        "description": "Winkels in tweedehands kleding"
+      },
+      {
+        "code": "47793",
+        "description": "Winkels in tweedehands goederen (geen kleding)"
+      },
+      {
+        "code": "47811",
+        "description": "Markthandel in aardappelen"
+      },
+      {
+        "code": "47819",
+        "description": "Markthandel in overige voedings- en genotmiddelen"
+      },
+      {
+        "code": "4782",
+        "description": "Markthandel in textiel"
+      },
+      {
+        "code": "47891",
+        "description": "Markthandel in bloemen"
+      },
+      {
+        "code": "47892",
+        "description": "Markthandel in tweedehands goederen"
+      },
+      {
+        "code": "47899",
+        "description": "Markthandel in overige goederen"
+      },
+      {
+        "code": "4791",
+        "description": "Detailhandel via postorder en internet"
+      },
+      {
+        "code": "47911",
+        "description": "Detailhandel via postorder en internet voedingsmiddelen en drogisterijwaren"
+      },
+      {
+        "code": "47912",
+        "description": "Detailhandel via postorder en internet in consumentenelektronica"
+      },
+      {
+        "code": "47913",
+        "description": "Detailhandel via postorder en internet in boeken"
+      },
+      {
+        "code": "47914",
+        "description": "Detailhandel via postorder en internet in kleding en mode-artikelen"
+      },
+      {
+        "code": "47915",
+        "description": "Detailhandel via postorder en internet in huis- en tuinartikelen"
+      },
+      {
+        "code": "47916",
+        "description": "Detailhandel via postorder en internet in vrijetijdsartikelen"
+      },
+      {
+        "code": "47918",
+        "description": "Gespecialiseerde detailhandel via postorder en internet in overige non-food"
+      },
+      {
+        "code": "47919",
+        "description": "Detailhandel via postorder en internet in een algemeenassortiment non-food"
+      },
+      {
+        "code": "47991",
+        "description": "Colportage"
+      },
+      {
+        "code": "47992",
+        "description": "Straathandel"
+      },
+      {
+        "code": "47999",
+        "description": "Detailhandel via overige distributievormen"
+      }
+    ]
+  },
+  {
+    "section": "H",
+    "description": "Vervoer en opslag",
+    "codes":
+    [
+      {
+        "code": "4910",
+        "description": "Personenvervoer per spoor (geen tram of metro)"
+      },
+      {
+        "code": "4920",
+        "description": "Goederenvervoer per spoor"
+      },
+      {
+        "code": "4931",
+        "description": "Openbaar vervoer binnen steden"
+      },
+      {
+        "code": "4932",
+        "description": "Vervoer per taxi"
+      },
+      {
+        "code": "49391",
+        "description": "Ongeregeld personenvervoer over de weg"
+      },
+      {
+        "code": "49392",
+        "description": "Openbaar interlokaal personenvervoer over de weg"
+      },
+      {
+        "code": "49393",
+        "description": "Geregeld besloten personenvervoer over de weg"
+      },
+      {
+        "code": "4941",
+        "description": "Goederenvervoer over de weg (geen verhuizingen)"
+      },
+      {
+        "code": "4942",
+        "description": "Verhuisvervoer"
+      },
+      {
+        "code": "4950",
+        "description": "Transport via pijpleidingen"
+      },
+      {
+        "code": "5010",
+        "description": "Zee- en kustvaart (passagiersvaart en veerdiensten)"
+      },
+      {
+        "code": "50201",
+        "description": "Zee- en kustvaart (vracht- en tankvaart"
+      },
+      {
+        "code": "50202",
+        "description": "Zee- en kustsleepvaart"
+      },
+      {
+        "code": "5030",
+        "description": "Binnenvaart (passagiersvaart en veerdiensten)"
+      },
+      {
+        "code": "50401",
+        "description": "Binnenvaart (vrachtvaart)"
+      },
+      {
+        "code": "50402",
+        "description": "Binnenvaart (tankvaart)"
+      },
+      {
+        "code": "50403",
+        "description": "Binnenvaart (sleep- en duwvaart)"
+      },
+      {
+        "code": "5110",
+        "description": "Personenvervoer door de lucht"
+      },
+      {
+        "code": "5121",
+        "description": "Goederenvervoer door de lucht"
+      },
+      {
+        "code": "52101",
+        "description": "Opslag in tanks"
+      },
+      {
+        "code": "52102",
+        "description": "Opslag in koelhuizen e.d."
+      },
+      {
+        "code": "52109",
+        "description": "Opslag in distributiecentra en overige opslag (niet in tanks"
+      },
+      {
+        "code": "5221",
+        "description": "Dienstverlening voor vervoer over land"
+      },
+      {
+        "code": "5222",
+        "description": "Dienstverlening voor vervoer over water"
+      },
+      {
+        "code": "5223",
+        "description": "Dienstverlening voor de luchtvaart"
+      },
+      {
+        "code": "52241",
+        "description": "Laad-"
+      },
+      {
+        "code": "52242",
+        "description": "Laad-"
+      },
+      {
+        "code": "52291",
+        "description": "Expediteurs"
+      },
+      {
+        "code": "52292",
+        "description": "Weging en meting"
+      },
+      {
+        "code": "5310",
+        "description": "Nationale post met universele dienstverplichting"
+      },
+      {
+        "code": "53201",
+        "description": "Post zonder universele dienstverplichting"
+      },
+      {
+        "code": "53202",
+        "description": "Koeriers"
+      }
+    ]
+  },
+  {
+    "section": "I",
+    "description": "Logies-, maaltijd- en drankverstrekking",
+    "codes":
+    [
+      {
+        "code": "55101",
+        "description": "Hotel-restaurants"
+      },
+      {
+        "code": "55102",
+        "description": "Hotels (geen hotel-restaurants)"
+      },
+      {
+        "code": "55201",
+        "description": "Verhuur van vakantiehuisjes en appartementen"
+      },
+      {
+        "code": "55202",
+        "description": "Jeugdherbergen en vakantiekampen"
+      },
+      {
+        "code": "5530",
+        "description": "Kampeerterreinen"
+      },
+      {
+        "code": "5590",
+        "description": "Overige logiesverstrekking"
+      },
+      {
+        "code": "56101",
+        "description": "Restaurants"
+      },
+      {
+        "code": "56102",
+        "description": "Fastfoodrestaurants"
+      },
+      {
+        "code": "5621",
+        "description": "Eventcatering"
+      },
+      {
+        "code": "5629",
+        "description": "Kantines en contractcatering"
+      },
+      {
+        "code": "5630",
+        "description": "Caf�s"
+      }
+    ]
+  },
+  {
+    "section": "J",
+    "description": "Informatie en communicatie",
+    "codes":
+    [
+      {
+        "code": "5811",
+        "description": "Uitgeverijen van boeken"
+      },
+      {
+        "code": "5812",
+        "description": "Databanken"
+      },
+      {
+        "code": "5813",
+        "description": "Uitgeverijen van kranten"
+      },
+      {
+        "code": "5814",
+        "description": "Uitgeverijen van tijdschriften"
+      },
+      {
+        "code": "5819",
+        "description": "Overige uitgeverijen (niet van software)"
+      },
+      {
+        "code": "5821",
+        "description": "Uitgeverijen van computerspellen"
+      },
+      {
+        "code": "5829",
+        "description": "Overige uitgeverijen van software"
+      },
+      {
+        "code": "59111",
+        "description": "Productie van films (geen televisiefilms)"
+      },
+      {
+        "code": "59112",
+        "description": "Productie van televisieprogramma's"
+      },
+      {
+        "code": "5912",
+        "description": "Facilitaire activiteiten voor film- en televisieproductie"
+      },
+      {
+        "code": "5913",
+        "description": "Distributie van films en televisieproducties"
+      },
+      {
+        "code": "5914",
+        "description": "Bioscopen"
+      },
+      {
+        "code": "5920",
+        "description": "Maken en uitgeven van geluidsopnamen"
+      },
+      {
+        "code": "6010",
+        "description": "Radio-omroepen"
+      },
+      {
+        "code": "6020",
+        "description": "Televisie-omroepen"
+      },
+      {
+        "code": "6110",
+        "description": "Draadgebonden telecommunicatie"
+      },
+      {
+        "code": "6120",
+        "description": "Draadloze telecommunicatie"
+      },
+      {
+        "code": "6130",
+        "description": "Telecommunicatie via satelliet"
+      },
+      {
+        "code": "6190",
+        "description": "Overige telecommunicatie"
+      },
+      {
+        "code": "6201",
+        "description": "Ontwikkelen"
+      },
+      {
+        "code": "6202",
+        "description": "Advisering en ondersteuning op het gebied van informatietechnologie"
+      },
+      {
+        "code": "6203",
+        "description": "Beheer van computerfaciliteiten"
+      },
+      {
+        "code": "6209",
+        "description": "Overige dienstverlenende activiteiten op het gebied van informatietechnologie"
+      },
+      {
+        "code": "6311",
+        "description": "Gegevensverwerking"
+      },
+      {
+        "code": "6312",
+        "description": "Webportals"
+      },
+      {
+        "code": "6321",
+        "description": "Persagentschappen"
+      },
+      {
+        "code": "6329",
+        "description": "Overige dienstverlenende activiteiten op het gebied van informatie (rest)"
+      },
+      {
+        "code": "6391",
+        "description": "Persagentschappen"
+      },
+      {
+        "code": "6399",
+        "description": "Overige dienstverlenende activiteiten op het gebied van informatie (rest)"
+      }
+    ]
+  },
+  {
+    "section": "K",
+    "description": "Financiële instellingen",
+    "codes":
+    [
+      {
+        "code": "6411",
+        "description": "Centrale banken"
+      },
+      {
+        "code": "64191",
+        "description": "Co�peratief georganiseerde banken"
+      },
+      {
+        "code": "64192",
+        "description": "Effectenkredietinstellingen"
+      },
+      {
+        "code": "64193",
+        "description": "Spaarbanken"
+      },
+      {
+        "code": "64194",
+        "description": "Algemene banken"
+      },
+      {
+        "code": "6420",
+        "description": "Financi�le holdings"
+      },
+      {
+        "code": "64301",
+        "description": "Beleggingsinstellingen in financi�le activa"
+      },
+      {
+        "code": "64302",
+        "description": "Beleggingsinstellingen in vaste activa"
+      },
+      {
+        "code": "64303",
+        "description": "Beleggingsinstellingen met beperkte toetreding"
+      },
+      {
+        "code": "6491",
+        "description": "Financi�le lease"
+      },
+      {
+        "code": "64921",
+        "description": "Hypotheekbanken en bouwfondsen"
+      },
+      {
+        "code": "64922",
+        "description": "Volkskredietbanken en commerci�le financieringsmaatschappijen"
+      },
+      {
+        "code": "64923",
+        "description": "Participatiemaatschappijen"
+      },
+      {
+        "code": "64924",
+        "description": "Wisselmakelaars en overige kredietverstrekking"
+      },
+      {
+        "code": "6499",
+        "description": "Overige financi�le intermediatie"
+      },
+      {
+        "code": "65111",
+        "description": "Levensverzekeringen (geen herverzekering)"
+      },
+      {
+        "code": "65112",
+        "description": "Naturaverzekeringen"
+      },
+      {
+        "code": "65113",
+        "description": "Spaarkassen"
+      },
+      {
+        "code": "6512",
+        "description": "Schadeverzekeringen (geen herverzekering)"
+      },
+      {
+        "code": "65121",
+        "description": "Schadeverzekeringen - exclusief  zorgverzekeringen"
+      },
+      {
+        "code": "65122",
+        "description": "Zorgverzekeringen"
+      },
+      {
+        "code": "6520",
+        "description": "Herverzekering"
+      },
+      {
+        "code": "65301",
+        "description": "Bedrijfspensioenfondsen"
+      },
+      {
+        "code": "65302",
+        "description": "Ondernemingspensioenfondsen en -spaarfondsen"
+      },
+      {
+        "code": "65303",
+        "description": "Beroepspensioenfondsen"
+      },
+      {
+        "code": "65309",
+        "description": "Overige pensioenfondsen"
+      },
+      {
+        "code": "6611",
+        "description": "Beheer van financi�le markten"
+      },
+      {
+        "code": "6612",
+        "description": "Commissionairs en makelaars in effecten"
+      },
+      {
+        "code": "66191",
+        "description": "Administratiekantoren voor aandelen en obligaties"
+      },
+      {
+        "code": "66192",
+        "description": "Marketmakers"
+      },
+      {
+        "code": "66193",
+        "description": "Hypotheek- en kredietbemiddeling"
+      },
+      {
+        "code": "6621",
+        "description": "Risicoanalisten en schadetaxateurs"
+      },
+      {
+        "code": "6622",
+        "description": "Assurantietussenpersonen"
+      },
+      {
+        "code": "66291",
+        "description": "Verzekeringsbeurzen"
+      },
+      {
+        "code": "66292",
+        "description": "Actuari�le en pensioenadviesbureaus"
+      },
+      {
+        "code": "66293",
+        "description": "Waarborgfondsen"
+      },
+      {
+        "code": "66299",
+        "description": "Overige dienstverlening op het gebied van verzekeringen en pensioenfondsen (rest)"
+      },
+      {
+        "code": "6630",
+        "description": "Vermogensbeheer"
+      }
+    ]
+  },
+  {
+    "section": "L",
+    "description": "Verhuur van en handel in onroerend goed",
+    "codes":
+    [
+      {
+        "code": "6810",
+        "description": "Handel in eigen onroerend goed"
+      },
+      {
+        "code": "68201",
+        "description": "Woningbouwverenigingen en -stichtingen"
+      },
+      {
+        "code": "68202",
+        "description": "Gemeentelijke woningbedrijven"
+      },
+      {
+        "code": "68203",
+        "description": "Verhuur van overige woonruimte"
+      },
+      {
+        "code": "68204",
+        "description": "Verhuur van onroerend goed (niet van woonruimte)"
+      },
+      {
+        "code": "6831",
+        "description": "Bemiddeling bij handel"
+      },
+      {
+        "code": "6832",
+        "description": "Beheer van onroerend goed"
+      }
+    ]
+  },
+  {
+    "section": "M",
+    "description": "Advisering, onderzoek en overige specialistische zakelijke dienstverlening",
+    "codes":
+    [
+      {
+        "code": "69101",
+        "description": "Advocatenkantoren"
+      },
+      {
+        "code": "69102",
+        "description": "Rechtskundige adviesbureaus"
+      },
+      {
+        "code": "69103",
+        "description": "Notariskantoren"
+      },
+      {
+        "code": "69104",
+        "description": "Deurwaarderskantoren"
+      },
+      {
+        "code": "69105",
+        "description": "Octrooibureaus"
+      },
+      {
+        "code": "69201",
+        "description": "Registeraccountants"
+      },
+      {
+        "code": "69202",
+        "description": "Accountants-administratieconsulenten"
+      },
+      {
+        "code": "69203",
+        "description": "Boekhoudkantoren"
+      },
+      {
+        "code": "69204",
+        "description": "Belastingconsulenten"
+      },
+      {
+        "code": "69209",
+        "description": "Overige administratiekantoren"
+      },
+      {
+        "code": "70101",
+        "description": "Concerndiensten binnen eigen concern"
+      },
+      {
+        "code": "70102",
+        "description": "Holdings (geen financi�le)"
+      },
+      {
+        "code": "7021",
+        "description": "Public relationsbureaus"
+      },
+      {
+        "code": "70221",
+        "description": "Organisatie-adviesbureaus"
+      },
+      {
+        "code": "70222",
+        "description": "Advisering op het gebied van management en bedrijfsvoering (geen public relations en organisatie- adviesbureaus)"
+      },
+      {
+        "code": "7111",
+        "description": "Architecten"
+      },
+      {
+        "code": "71111",
+        "description": "Architecten (geen interieurarchitecten)"
+      },
+      {
+        "code": "71112",
+        "description": "Interieurarchitecten"
+      },
+      {
+        "code": "7112",
+        "description": "Ingenieurs en overig technisch ontwerp en advies"
+      },
+      {
+        "code": "71201",
+        "description": "Keuring en controle van agrarische producten en voedingsmiddelen"
+      },
+      {
+        "code": "71202",
+        "description": "Keuring en controle van machines"
+      },
+      {
+        "code": "71203",
+        "description": "Overige keuring en controle"
+      },
+      {
+        "code": "72111",
+        "description": "Biotechnologisch speur- en ontwikkelingswerk op het gebied van agrarische producten en processen"
+      },
+      {
+        "code": "72112",
+        "description": "Biotechnologisch speur- en ontwikkelingswerk op het gebied van medische producten en farmaceutische processen en van voeding"
+      },
+      {
+        "code": "72113",
+        "description": "Biotechnologisch speur- en ontwikkelingswerk voor overige toepassingen"
+      },
+      {
+        "code": "72191",
+        "description": "Speur- en ontwikkelingswerk op het gebied van landbouw en visserij (niet biotechnologisch)"
+      },
+      {
+        "code": "72192",
+        "description": "Technisch speur- en ontwikkelingswerk"
+      },
+      {
+        "code": "72193",
+        "description": "Speur- en ontwikkelingswerk op het gebied van gezondheid en voeding (niet biotechnologisch)"
+      },
+      {
+        "code": "72199",
+        "description": "Overig natuurwetenschappelijk speur- en ontwikkelingswerk (niet biotechnologisch)"
+      },
+      {
+        "code": "7220",
+        "description": "Speur- en ontwikkelingswerk op het gebied van de maatschappij- en geesteswetenschappen"
+      },
+      {
+        "code": "7311",
+        "description": "Reclamebureaus"
+      },
+      {
+        "code": "7312",
+        "description": "Handel in advertentieruimte en -tijd"
+      },
+      {
+        "code": "7320",
+        "description": "Markt- en opinieonderzoekbureaus"
+      },
+      {
+        "code": "7410",
+        "description": "Industrieel ontwerp en vormgeving"
+      },
+      {
+        "code": "74101",
+        "description": "Communicatie- en grafisch ontwerp"
+      },
+      {
+        "code": "74102",
+        "description": "Industrieel en productontwerp"
+      },
+      {
+        "code": "74103",
+        "description": "Interieur- en ruimtelijk ontwerp"
+      },
+      {
+        "code": "74201",
+        "description": "Fotografie"
+      },
+      {
+        "code": "74202",
+        "description": "Ontwikkelwinkels"
+      },
+      {
+        "code": "74203",
+        "description": "Ontwikkelcentrales"
+      },
+      {
+        "code": "7430",
+        "description": "Vertalers en tolken"
+      },
+      {
+        "code": "7490",
+        "description": "Overige specialistische zakelijke dienstverlening"
+      },
+      {
+        "code": "7500",
+        "description": "Veterinaire dienstverlening"
+      }
+    ]
+  },
+  {
+    "section": "N",
+    "description": "Verhuur van roerende goederen en overige zakelijke dienstverlening",
+    "codes":
+    [
+      {
+        "code": "77111",
+        "description": "Verhuur van personenauto's en lichte bedrijfsauto's (geen operational lease)"
+      },
+      {
+        "code": "77112",
+        "description": "Operational lease van personenauto's en lichte bedrijfsauto's"
+      },
+      {
+        "code": "7712",
+        "description": "Verhuur en lease van vrachtwagens"
+      },
+      {
+        "code": "7721",
+        "description": "Verhuur van sport- en recreatieartikelen"
+      },
+      {
+        "code": "7722",
+        "description": "Videotheken"
+      },
+      {
+        "code": "77291",
+        "description": "Verhuur van leesportefeuilles"
+      },
+      {
+        "code": "77292",
+        "description": "Verhuur van kleding en huishoudelijke artikelen"
+      },
+      {
+        "code": "77299",
+        "description": "Verhuur van overige consumentenartikelen (rest)"
+      },
+      {
+        "code": "7731",
+        "description": "Verhuur en lease van landbouwmachines en -werktuigen"
+      },
+      {
+        "code": "7732",
+        "description": "Verhuur en lease van machines en installaties voor de bouw"
+      },
+      {
+        "code": "7733",
+        "description": "Verhuur en lease van computers en kantoorapparatuur"
+      },
+      {
+        "code": "7734",
+        "description": "Verhuur en lease van schepen"
+      },
+      {
+        "code": "7735",
+        "description": "Verhuur en lease van vliegtuigen"
+      },
+      {
+        "code": "77391",
+        "description": "Verhuur van automaten"
+      },
+      {
+        "code": "77399",
+        "description": "Verhuur en lease van overige machines en werktuigen en van overige goederen (geen automaten)"
+      },
+      {
+        "code": "7740",
+        "description": "Lease van niet-financi�le immateri�le activa"
+      },
+      {
+        "code": "7810",
+        "description": "Arbeidsbemiddeling"
+      },
+      {
+        "code": "78201",
+        "description": "Uitzendbureaus"
+      },
+      {
+        "code": "78202",
+        "description": "Uitleenbureaus"
+      },
+      {
+        "code": "78203",
+        "description": "Banenpools (werkgelegenheidsprojecten)"
+      },
+      {
+        "code": "7830",
+        "description": "Payrolling (personeelsbeheer)"
+      },
+      {
+        "code": "7911",
+        "description": "Reisbemiddeling"
+      },
+      {
+        "code": "7912",
+        "description": "Reisorganisatie"
+      },
+      {
+        "code": "7990",
+        "description": "Informatieverstrekking op het gebied van toerisme en reserveringsbureaus"
+      },
+      {
+        "code": "8010",
+        "description": "Particuliere beveiliging"
+      },
+      {
+        "code": "8020",
+        "description": "Beveiliging via beveiligingssystemen"
+      },
+      {
+        "code": "8030",
+        "description": "Opsporing"
+      },
+      {
+        "code": "8110",
+        "description": "Facility management"
+      },
+      {
+        "code": "8121",
+        "description": "Interieurreiniging van gebouwen"
+      },
+      {
+        "code": "8122",
+        "description": "Gespecialiseerde reiniging van gebouwen en industri�le reiniging"
+      },
+      {
+        "code": "81221",
+        "description": "Glazenwassen"
+      },
+      {
+        "code": "81222",
+        "description": "Schoorsteenvegen"
+      },
+      {
+        "code": "81229",
+        "description": "Overige gespecialiseerde reiniging van gebouwen en industri�le reiniging"
+      },
+      {
+        "code": "8129",
+        "description": "Overige reiniging"
+      },
+      {
+        "code": "8130",
+        "description": "Landschapsverzorging"
+      },
+      {
+        "code": "8211",
+        "description": "Brede administratieve dienstverlening"
+      },
+      {
+        "code": "8219",
+        "description": "Secretari�le dienstverlening"
+      },
+      {
+        "code": "8220",
+        "description": "Callcenters"
+      },
+      {
+        "code": "8230",
+        "description": "Organiseren van congressen en beurzen"
+      },
+      {
+        "code": "8291",
+        "description": "Kredietinformatie- en incassobureaus"
+      },
+      {
+        "code": "8292",
+        "description": "Pakken"
+      },
+      {
+        "code": "82991",
+        "description": "Veilingen van landbouw-"
+      },
+      {
+        "code": "82992",
+        "description": "Veilingen van huisraad"
+      },
+      {
+        "code": "82999",
+        "description": "Overige zakelijke dienstverlening (rest)"
+      }
+    ]
+  },
+  {
+    "section": "O",
+    "description": "Openbaar bestuur, overheidsdiensten en verplichte sociale verzekeringen",
+    "codes":
+    [
+      {
+        "code": "8411",
+        "description": "Algemeen overheidsbestuur"
+      },
+      {
+        "code": "8412",
+        "description": "Openbaar bestuur op het gebied van gezondheidszorg"
+      },
+      {
+        "code": "8413",
+        "description": "Openbaar bestuur op het gebied van het bedrijfsleven"
+      },
+      {
+        "code": "8421",
+        "description": "Buitenlandse zaken"
+      },
+      {
+        "code": "8422",
+        "description": "Defensie"
+      },
+      {
+        "code": "84231",
+        "description": "Rechtspraak"
+      },
+      {
+        "code": "84232",
+        "description": "Ministerie van Justitie en gevangeniswezen"
+      },
+      {
+        "code": "8424",
+        "description": "Politie"
+      },
+      {
+        "code": "8425",
+        "description": "Brandweer"
+      },
+      {
+        "code": "8430",
+        "description": "Verplichte sociale verzekeringen"
+      }
+    ]
+  },
+  {
+    "section": "P",
+    "description": "Onderwijs",
+    "codes":
+    [
+      {
+        "code": "85201",
+        "description": "Basisonderwijs voor leerplichtigen"
+      },
+      {
+        "code": "85202",
+        "description": "Speciaal basisonderwijs"
+      },
+      {
+        "code": "85203",
+        "description": "Speciaal onderwijs in expertisecentra"
+      },
+      {
+        "code": "85311",
+        "description": "Havo en vwo"
+      },
+      {
+        "code": "85312",
+        "description": "Voorbereidend middelbaar beroepsonderwijs"
+      },
+      {
+        "code": "85313",
+        "description": "Praktijkonderwijs"
+      },
+      {
+        "code": "85314",
+        "description": "Brede scholengemeenschappen voor voortgezet onderwijs"
+      },
+      {
+        "code": "85321",
+        "description": "Middelbaar beroepsonderwijs"
+      },
+      {
+        "code": "85322",
+        "description": "Educatie"
+      },
+      {
+        "code": "85323",
+        "description": "Middelbaar beroepsonderwijs en educatie (gecombineerd)"
+      },
+      {
+        "code": "8541",
+        "description": "Niet-universitair hoger onderwijs"
+      },
+      {
+        "code": "8542",
+        "description": "Universitair hoger onderwijs"
+      },
+      {
+        "code": "85511",
+        "description": "Zeil- en surfscholen"
+      },
+      {
+        "code": "85519",
+        "description": "Overig sport- en recreatieonderwijs"
+      },
+      {
+        "code": "85521",
+        "description": "Dansscholen"
+      },
+      {
+        "code": "85522",
+        "description": "Kunstzinnige vorming van amateurs (geen dansscholen)"
+      },
+      {
+        "code": "8553",
+        "description": "Auto- en motorrijscholen"
+      },
+      {
+        "code": "85591",
+        "description": "Afstandsonderwijs"
+      },
+      {
+        "code": "85592",
+        "description": "Bedrijfsopleiding en -training"
+      },
+      {
+        "code": "85599",
+        "description": "Studiebegeleiding"
+      },
+      {
+        "code": "8560",
+        "description": "Dienstverlening voor het onderwijs"
+      }
+    ]
+  },
+  {
+    "section": "Q",
+    "description": "Gezondheids- en welzijnszorg",
+    "codes":
+    [
+      {
+        "code": "86101",
+        "description": "Universitair medische centra"
+      },
+      {
+        "code": "86102",
+        "description": "Algemene ziekenhuizen"
+      },
+      {
+        "code": "86103",
+        "description": "Categorale ziekenhuizen"
+      },
+      {
+        "code": "86104",
+        "description": "Geestelijke gezondheids- en verslavingszorg met overnachting"
+      },
+      {
+        "code": "8621",
+        "description": "Praktijken van huisartsen"
+      },
+      {
+        "code": "86221",
+        "description": "Praktijken van medisch specialisten en medische dagbehandelcentra (geen tandheelkunde of psychiatrie)"
+      },
+      {
+        "code": "86222",
+        "description": "Praktijken van psychiaters en dagbehandelcentra voor geestelijke gezondheids- en verslavingszorg"
+      },
+      {
+        "code": "86231",
+        "description": "Praktijken van tandartsen"
+      },
+      {
+        "code": "86232",
+        "description": "Praktijken van tandheelkundig specialisten"
+      },
+      {
+        "code": "86911",
+        "description": "Praktijken van verloskundigen"
+      },
+      {
+        "code": "86912",
+        "description": "Praktijken van fysiotherapeuten"
+      },
+      {
+        "code": "86913",
+        "description": "Praktijken van psychotherapeuten"
+      },
+      {
+        "code": "86919",
+        "description": "Overige paramedische praktijken (geen fysiotherapie en psychologie) en alternatieve genezers"
+      },
+      {
+        "code": "86921",
+        "description": "Gezondheidscentra"
+      },
+      {
+        "code": "86922",
+        "description": "Arbobegeleiding en re�ntegratie"
+      },
+      {
+        "code": "86923",
+        "description": "Preventieve gezondheidszorg (geen arbobegeleiding)"
+      },
+      {
+        "code": "86924",
+        "description": "Medische laboratoria"
+      },
+      {
+        "code": "86925",
+        "description": "Ambulancediensten en centrale posten"
+      },
+      {
+        "code": "86929",
+        "description": "Samenwerkingsorganen op het gebied van gezondheidszorg en overige gezondheidszorgondersteunende diensten"
+      },
+      {
+        "code": "8710",
+        "description": "Verpleeghuizen"
+      },
+      {
+        "code": "8720",
+        "description": "Huizen en dagverblijven voor verstandelijk gehandicapten en psychiatrische cli�nten"
+      },
+      {
+        "code": "87301",
+        "description": "Huizen en dagverblijven voor niet-verstandelijk gehandicapten"
+      },
+      {
+        "code": "87302",
+        "description": "Verzorgingshuizen"
+      },
+      {
+        "code": "87901",
+        "description": "Jeugdzorg met overnachting en dagverblijven voor jeugdzorg"
+      },
+      {
+        "code": "87902",
+        "description": "Maatschappelijk opvang met overnachting"
+      },
+      {
+        "code": "88101",
+        "description": "Thuiszorg"
+      },
+      {
+        "code": "88102",
+        "description": "Welzijnswerk voor ouderen"
+      },
+      {
+        "code": "88103",
+        "description": "Ondersteuning en begeleiding van gehandicapten"
+      },
+      {
+        "code": "8891",
+        "description": "Kinderopvang en peuterspeelzaalwerk"
+      },
+      {
+        "code": "88991",
+        "description": "Ambulante jeugdzorg"
+      },
+      {
+        "code": "88992",
+        "description": "Maatschappelijk werk"
+      },
+      {
+        "code": "88993",
+        "description": "Lokaal welzijnswerk"
+      },
+      {
+        "code": "88999",
+        "description": "Overig maatschappelijk advies"
+      }
+    ]
+  },
+  {
+    "section": "R",
+    "description": "Cultuur, sport en recreatie",
+    "codes":
+    [
+      {
+        "code": "90011",
+        "description": "Beoefening van podiumkunst"
+      },
+      {
+        "code": "90012",
+        "description": "Producenten van podiumkunst"
+      },
+      {
+        "code": "90013",
+        "description": "Circus en vari�t�"
+      },
+      {
+        "code": "9002",
+        "description": "Dienstverlening voor uitvoerende kunst"
+      },
+      {
+        "code": "9003",
+        "description": "Schrijven en overige scheppende kunst"
+      },
+      {
+        "code": "90041",
+        "description": "Theaters en schouwburgen"
+      },
+      {
+        "code": "90042",
+        "description": "Evenementenhallen"
+      },
+      {
+        "code": "91011",
+        "description": "Openbare bibliotheken"
+      },
+      {
+        "code": "91012",
+        "description": "Kunstuitleencentra"
+      },
+      {
+        "code": "91019",
+        "description": "Overige culturele uitleencentra en openbare archieven"
+      },
+      {
+        "code": "91021",
+        "description": "Musea"
+      },
+      {
+        "code": "91022",
+        "description": "Kunstgalerie�n en -expositieruimten"
+      },
+      {
+        "code": "9103",
+        "description": "Monumentenzorg"
+      },
+      {
+        "code": "91041",
+        "description": "Dieren- en plantentuinen"
+      },
+      {
+        "code": "91042",
+        "description": "Natuurbehoud"
+      },
+      {
+        "code": "92001",
+        "description": "Loterijen en kansspelen (geen amusementsautomaten)"
+      },
+      {
+        "code": "92009",
+        "description": "Exploitatie van amusements- en speelautomaten"
+      },
+      {
+        "code": "93111",
+        "description": "Zwembaden"
+      },
+      {
+        "code": "93112",
+        "description": "Sporthallen"
+      },
+      {
+        "code": "93113",
+        "description": "Sportvelden"
+      },
+      {
+        "code": "93119",
+        "description": "Overige sportaccommodaties"
+      },
+      {
+        "code": "93121",
+        "description": "Veldvoetbal"
+      },
+      {
+        "code": "93122",
+        "description": "Veldsport in teamverband (geen voetbal)"
+      },
+      {
+        "code": "93123",
+        "description": "Atletiek"
+      },
+      {
+        "code": "93124",
+        "description": "Tennis"
+      },
+      {
+        "code": "93125",
+        "description": "Paardensport en maneges"
+      },
+      {
+        "code": "93126",
+        "description": "Wielersport"
+      },
+      {
+        "code": "93127",
+        "description": "Auto- en motorsport"
+      },
+      {
+        "code": "93128",
+        "description": "Wintersport"
+      },
+      {
+        "code": "93129",
+        "description": "Overige buitensport"
+      },
+      {
+        "code": "9313",
+        "description": "Fitnesscentra"
+      },
+      {
+        "code": "93141",
+        "description": "Individuele zaalsport"
+      },
+      {
+        "code": "93142",
+        "description": "Zaalsport in teamverband"
+      },
+      {
+        "code": "93143",
+        "description": "Kracht- en vechtsport"
+      },
+      {
+        "code": "93144",
+        "description": "Bowlen"
+      },
+      {
+        "code": "93145",
+        "description": "Denksport"
+      },
+      {
+        "code": "93146",
+        "description": "Sportscholen"
+      },
+      {
+        "code": "93149",
+        "description": "Overige binnensport en omnisport"
+      },
+      {
+        "code": "93151",
+        "description": "Zwem- en onderwatersport"
+      },
+      {
+        "code": "93152",
+        "description": "Roei-"
+      },
+      {
+        "code": "93191",
+        "description": "Beroepssportlieden"
+      },
+      {
+        "code": "93192",
+        "description": "Hengelsport"
+      },
+      {
+        "code": "93193",
+        "description": "Verzorgen van vistochten"
+      },
+      {
+        "code": "93194",
+        "description": "Supportersverenigingen (sport)"
+      },
+      {
+        "code": "93195",
+        "description": "Organiseren van sportevenementen"
+      },
+      {
+        "code": "93196",
+        "description": "Overkoepelende organen en samenwerkings- en adviesorganen op het gebied van sport"
+      },
+      {
+        "code": "93199",
+        "description": "Overige sportactiviteiten (rest)"
+      },
+      {
+        "code": "93211",
+        "description": "Pret- en themaparken"
+      },
+      {
+        "code": "93212",
+        "description": "Kermisattracties"
+      },
+      {
+        "code": "93291",
+        "description": "Jachthavens"
+      },
+      {
+        "code": "93299",
+        "description": "Overige recreatie (rest) (geen jachthavens)"
+      }
+    ]
+  },
+  {
+    "section": "S",
+    "description": "Overige dienstverlening",
+    "codes":
+    [
+      {
+        "code": "9411",
+        "description": "Bedrijfs- en werkgeversorganisaties"
+      },
+      {
+        "code": "9412",
+        "description": "Beroepsorganisaties"
+      },
+      {
+        "code": "9420",
+        "description": "Werknemersorganisaties"
+      },
+      {
+        "code": "94911",
+        "description": "Religieuze organisaties"
+      },
+      {
+        "code": "94919",
+        "description": "Overige levensbeschouwelijke organisaties"
+      },
+      {
+        "code": "9492",
+        "description": "Politieke organisaties"
+      },
+      {
+        "code": "94991",
+        "description": "Gezelligheidsverenigingen"
+      },
+      {
+        "code": "94992",
+        "description": "Hobbyclubs"
+      },
+      {
+        "code": "94993",
+        "description": "Steunfondsen (niet op het gebied van welzijnszorg)"
+      },
+      {
+        "code": "94994",
+        "description": "Vriendenkringen op het gebied van cultuur"
+      },
+      {
+        "code": "94995",
+        "description": "Overkoepelende organen en samenwerkings- en adviesorganen (niet op het gebied van gezondheids- en welzijnszorg"
+      },
+      {
+        "code": "94996",
+        "description": "Overige ide�le organisaties (rest)"
+      },
+      {
+        "code": "94997",
+        "description": "Overige belangenbehartiging (rest)"
+      },
+      {
+        "code": "9511",
+        "description": "Reparatie van computers en randapparatuur"
+      },
+      {
+        "code": "9512",
+        "description": "Reparatie van communicatieapparatuur"
+      },
+      {
+        "code": "9521",
+        "description": "Reparatie van consumentenelektronica (geen computers)"
+      },
+      {
+        "code": "9522",
+        "description": "Reparatie van elektrische huishoudelijke apparaten"
+      },
+      {
+        "code": "9523",
+        "description": "Reparatie van schoenen en lederwaren"
+      },
+      {
+        "code": "9524",
+        "description": "Reparatie en stoffering van meubels"
+      },
+      {
+        "code": "9525",
+        "description": "Reparatie van uurwerken en juweliersartikelen"
+      },
+      {
+        "code": "9529",
+        "description": "Reparatie van overige consumentenartikelen"
+      },
+      {
+        "code": "96011",
+        "description": "Wasserijen en linnenverhuur"
+      },
+      {
+        "code": "96012",
+        "description": "Chemische wasserijen en ververijen"
+      },
+      {
+        "code": "96013",
+        "description": "Wassalons en -verzendinrichtingen"
+      },
+      {
+        "code": "96021",
+        "description": "Haarverzorging"
+      },
+      {
+        "code": "96022",
+        "description": "Schoonheidsverzorging"
+      },
+      {
+        "code": "96031",
+        "description": "Uitvaartverzorging"
+      },
+      {
+        "code": "96032",
+        "description": "Crematoria"
+      },
+      {
+        "code": "9604",
+        "description": "Sauna's"
+      },
+      {
+        "code": "9609",
+        "description": "Overige dienstverlening (rest)"
+      }
+    ]
+  },
+  {
+    "section": "T",
+    "description": "Huishoudens als werkgever; niet-gedifferentieerde productie van goederen en diensten door huishoudens voor eigen gebruik",
+    "codes":
+    [
+      {
+        "code": "9700",
+        "description": "Huishoudens als werkgever van huishoudelijk personeel"
+      },
+      {
+        "code": "9810",
+        "description": "Niet-gespecificeerde productie van goederen door particuliere huishoudens voor eigen gebruik"
+      },
+      {
+        "code": "9820",
+        "description": "Niet-gespecificeerde productie van diensten door particuliere huishoudens voor eigen gebruik"
+      }
+    ]
+  },
+  {
+    "section": "U",
+    "description": "Extraterritoriale organisaties en lichamen",
+    "codes":
+    [
+      {
+        "code": "9900",
+        "description": "Extraterritoriale organisaties en lichamen"
+      }
+    ]
+  }
+]
