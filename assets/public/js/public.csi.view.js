@@ -237,15 +237,15 @@ function renderOutput(arr) {
             htmlString += '<div class="csi-element-container csi-element-item">';
             htmlString += '<h1><a class="csi-public-info-modal-open" href="#/" data-sub-id="' + element.id + '">' + element.project_name + '</a></h1>';
             htmlString += '<table class="csi-item-table">';
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + (element.minor == '' ? 'Geen minor.' : element.minor) +'</td></tr>';
+            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + (element.minor == '' ? 'Geen minor.' : element.minor) + '</td></tr>';
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Project Stage: </th><td class="csi-item-td">' + element.project_stage +'</td></tr>';
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Michael Porter\'s Value Chain: </th><td class="csi-item-td">' + element.porter.join(', ') +'</td></tr>';
+            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Michael Porter\'s Value Chain: </th><td class="csi-item-td">' + element.porter.join(', ') + '</td></tr>';
 
             jQuery.when(getSbiDataPerNumber(element.sbi)).done(function(data) {
-                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">SBI-' + data.Code + ' - ' + data.Title +'</td></tr>';
+                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + data.Code + ' - ' + data.Title + '</td></tr>';
             });
 
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Meta Trends: </th><td class="csi-item-td">' + element.meta_trends.join(', ') +'</td></tr>';
+            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Meta Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
             htmlString += '</table>';
             htmlString += '</div>';
         });
@@ -355,7 +355,7 @@ function renderSbiTree() {
                 htmlString += '<ul class="csi-sbi-nested">';
 
                 data.forEach((element) => {
-                    htmlString += '<li class="csi-sbi-li"><label for="sbi"><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.Code + '"/> SBI-' + element.Code + ' - ' + element.Title + '</label>';
+                    htmlString += '<li class="csi-sbi-li"><label for="sbi"><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.Code + '"/>' + element.Code + ' - ' + element.Title + '</label>';
                 });
 
                 htmlString += '</ul>';
