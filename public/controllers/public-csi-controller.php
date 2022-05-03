@@ -7,18 +7,16 @@ require(plugin_dir_path(__DIR__) . "models/public-csi.php");
 
 class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
 
-    private $formID;
     protected $nfSubData;
     protected $convertedSubDataArr;
 
     public function __construct() {
         parent::__construct();
-        $this->formID = CaseStudyIndexSettings::$formID;
         $this->nfSubData = $this->getPublishedSubs();
         $this->convertedSubDataArr = $this->convertSubArr($this->nfSubData);
     }
 
-    public function convertSubArr($arr) {
+    private function convertSubArr($arr) {
         $parentArr = [];
         $rowCount = count($arr);
 
@@ -31,14 +29,10 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
                     'id' => $element->get_extra_value('_seq_num'),
                     'project_name' => $element->get_field_value('project_name'),
                     'minor' => $element->get_field_value('minor'),
-                    'project_stage' => $element->get_field_value('project_stage'),
                     'porter' => $element->get_field_value('porter'),
                     'sbi' => $element->get_field_value('sbi'),
-                    'tech_innovations' => $element->get_field_value('tech_innovations'),
-                    'tech_providers' => $element->get_field_value('tech_providers'),
                     'meta_trends' => $element->get_field_value('meta_trends'),
-                    'company_sector' => $element->get_field_value('company_sector'),
-                    'case_study_url' => $element->get_field_value('case_study_url')
+                    'case_study_url' => $element->get_field_value('case_study_url'),
                 ];
 
                 array_push($parentArr, $childArr);
@@ -50,7 +44,7 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
         return $parentArr;
     }
 
-    public function getSingleSub($subID) {
+    protected function getSingleSub($subID) {
         $subArr = $this->getSubBySubID($subID);
         $arr = [];
 
@@ -59,15 +53,21 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
         $arr = [
             'id' => $subArr->get_extra_value('_seq_num'),
             'project_name' => $subArr->get_field_value('project_name'),
+            'project_owner' => $subArr->get_field_value('project_owner'),
+            'project_owner_email' => $subArr->get_field_value('project_owner_email'),
             'minor' => $subArr->get_field_value('minor'),
-            'project_stage' => $subArr->get_field_value('project_stage'),
             'porter' => $subArr->get_field_value('porter'),
             'sbi' => $subArr->get_field_value('sbi'),
             'tech_innovations' => $subArr->get_field_value('tech_innovations'),
             'tech_providers' => $subArr->get_field_value('tech_providers'),
             'meta_trends' => $subArr->get_field_value('meta_trends'),
             'company_sector' => $subArr->get_field_value('company_sector'),
-            'case_study_url' => $subArr->get_field_value('case_study_url')
+            'project_context' => $subArr->get_field_value('project_context'),
+            'project_problem' => $subArr->get_field_value('project_problem'),
+            'project_goal' => $subArr->get_field_value('project_goal'),
+            'case_study_url' => $subArr->get_field_value('case_study_url'),
+            'case_study_movie_url' => $subArr->get_field_value('case_study_movie_url'),
+            'case_study_image_url' => $subArr->get_field_value('case_study_image_url')
             ];
 
         return $arr;

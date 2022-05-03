@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     wp_die();
 }
 
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/nf.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/nf.php');
 require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-controller.php");
 
 class AdminCaseStudyIndexView extends AdminCaseStudyIndexController {

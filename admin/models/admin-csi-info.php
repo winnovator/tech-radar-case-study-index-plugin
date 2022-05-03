@@ -3,8 +3,8 @@ if (!defined('ABSPATH')) {
     wp_die();
 }
 
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/csi-settings.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/db.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/csi-settings.php');
 
 class AdminCaseStudyIndexInfo {
 
@@ -19,7 +19,7 @@ class AdminCaseStudyIndexInfo {
         $this->dbObj = new DB();
     }
 
-    public function getAllWpCsiData($subID) {
+    protected function getAllWpCsiData($subID) {
         $dbConn = $this->dbObj->open();
 
         $prepStmt = $dbConn->prepare("SELECT * FROM {$dbConn->prefix}csi WHERE seq_num = %d", [$subID]);
@@ -32,7 +32,7 @@ class AdminCaseStudyIndexInfo {
         return [];
     }
 
-    public function getSubBySubID($subID) {
+    protected function getSubBySubID($subID) {
         $nfSubArr = $this->nfObj->form(CaseStudyIndexSettings::$formID)->get_subs();
 
         foreach ($nfSubArr as $nfSubElement) {
@@ -42,17 +42,17 @@ class AdminCaseStudyIndexInfo {
         }
     }
 
-    public function publishSub($subID) {
+    protected function publishSub($subID) {
         $dbConn = $this->dbObj->open();
         $dbConn->update("{$dbConn->prefix}csi", ['published' => 1, 'new' => 0], ['seq_num' => $subID]);
     }
 
-    public function depublishSub($subID) {
+    protected function depublishSub($subID) {
         $dbConn = $this->dbObj->open();
         $dbConn->update("{$dbConn->prefix}csi", ['published' => 0], ['seq_num' => $subID]);
     }
 
-    public function deleteSub($subID) {
+    protected function deleteSub($subID) {
         $dbConn = $this->dbObj->open();
         $dbConn->delete("{$dbConn->prefix}csi", ['seq_num' => $subID]);
         $subModel = $this->getSubBySubID($subID);

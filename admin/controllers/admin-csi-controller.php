@@ -7,22 +7,19 @@ require_once(plugin_dir_path(__DIR__) . "models/admin-csi.php");
 
 class AdminCaseStudyIndexController extends AdminCaseStudyIndex {
     
-    private $formID;
     private $nfSubData;
     private $wpCsiData;
     protected $convertedSubDataArr;
 
     public function __construct() {
         parent::__construct();
-        $this->formID = CaseStudyIndexSettings::$formID;
         $this->nfSubData = $this->getAllNfSubData();
         $this->wpCsiData = $this->getAllWpCsiData();
         $this->updateWpCsiTable($this->nfSubData);
         $this->convertedSubDataArr = $this->convertSubmissionArray();
     }
     
-    public function convertSubmissionArray() {
-
+    private function convertSubmissionArray() {
         $parentArr = [];
         $nfSubArr = $this->nfSubData;
         $wpCsiArr = $this->wpCsiData;

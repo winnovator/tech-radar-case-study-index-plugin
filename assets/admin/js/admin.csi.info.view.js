@@ -22,7 +22,14 @@ function postAdminCsiInfo(actionName) {
     jQuery.ajax({
         method: "POST",
         url: admin_csi_info_ajax_obj.url,
-        data: { admin_csi_info_security_nonce: admin_csi_info_ajax_obj.nonce, button_action: actionName, post_sub_id: getUrlParam('sub_id'), redirect_url: admin_csi_info_ajax_obj.redirect_url },
+        data: { 
+            admin_csi_info_security_nonce: admin_csi_info_ajax_obj.nonce, 
+            button_action: actionName, 
+            post_sub_id: getUrlParam('sub_id'), 
+            redirect_url: admin_csi_info_ajax_obj.redirect_url,
+            admin_csi_email: jQuery('#admin-csi-email').data('admin-csi-email'),
+            admin_csi_status: jQuery('#admin-csi-status').data('admin-csi-status')
+        },
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-WP-Nonce', admin_csi_info_ajax_obj.nonce);
         }

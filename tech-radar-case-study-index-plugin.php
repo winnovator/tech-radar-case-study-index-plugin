@@ -18,7 +18,7 @@ class TechRadarCaseStudyIndexPlugin {
     private $publicCsiViewObj;
     
     public function __construct() {
-        require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
+        require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/db.php');
         $this->db = new DB();
     }
 
@@ -33,7 +33,7 @@ class TechRadarCaseStudyIndexPlugin {
     }
 
     public function getPublicCsi() {
-        include_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/public/views/public-csi-view.php');
+        include_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/public/views/public-csi-view.php');
         $this->publicCsiViewObj = new PublicCaseStudyIndexView();
         return $this->publicCsiViewObj->getPublicCsi();
     }
@@ -69,27 +69,44 @@ class TechRadarCaseStudyIndexPlugin {
 
     public function csiAdminEnqueue() {
         wp_enqueue_script('jquery');
-        wp_enqueue_script('jquery.min', plugins_url('/assets/shared/js/jquery.min.js', __FILE__));
-        wp_enqueue_style('datatables.min', plugins_url('/assets/admin/css/datatables.min.css', __FILE__));
-        wp_enqueue_style('admin.csi.view', plugins_url('/assets/admin/css/admin.csi.view.css', __FILE__));
-        wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
-        wp_enqueue_script('admin.csi.view', plugins_url('/assets/admin/js/admin.csi.view.js', __FILE__));
-        wp_localize_script('admin.csi.view','admin_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
-        wp_enqueue_script('admin.csi.info.view', plugins_url('/assets/admin/js/admin.csi.info.view.js', __FILE__));
-        wp_localize_script('admin.csi.info.view','admin_csi_info_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/info")), 'nonce' => wp_create_nonce('wp_rest'), "redirect_url" => esc_url_raw(admin_url('admin.php?page=admin-csi'))));
-        wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
-        wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
-        wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/public-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
+
+        if (isset($_GET['page'])) {
+            if ($_GET['page'] == 'admin-csi' || $_GET['page'] = 'admin-csi-info') {
+                wp_enqueue_style('datatables.min', plugins_url('/assets/admin/css/datatables.min.css', __FILE__));
+                wp_enqueue_style('admin.csi.view', plugins_url('/assets/admin/css/admin.csi.view.css', __FILE__));
+                wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
+                wp_enqueue_script('admin.csi.view', plugins_url('/assets/admin/js/admin.csi.view.js', __FILE__));
+                wp_localize_script('admin.csi.view', 'admin_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
+                wp_enqueue_script('admin.csi.info.view', plugins_url('/assets/admin/js/admin.csi.info.view.js', __FILE__));
+                wp_localize_script('admin.csi.info.view', 'admin_csi_info_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/info")), 'nonce' => wp_create_nonce('wp_rest'), "redirect_url" => esc_url_raw(admin_url('admin.php?page=admin-csi'))));
+            }
+        }
+
+        if  (is_page('case-study-index')) {
+            wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
+            wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/public-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_info_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_sections_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/sections")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_per_section_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/section/")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_all_sbi_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/all")), 'nonce' => wp_create_nonce('wp_rest')));
+        }
     }
 
     public function csiPublicEnqueue() {
         wp_enqueue_script('jquery');
         wp_enqueue_style('dashicons');
-        wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
-        wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
-        wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/public-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
-        wp_localize_script('public.csi.view', 'public_csi_ajax_info_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/public-csi/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
-    }
+
+        if  (is_page('case-study-index')) {
+            wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
+            wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_info_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_sections_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/sections")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_per_section_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/section/")), 'nonce' => wp_create_nonce('wp_rest')));
+            wp_localize_script('public.csi.view', 'public_csi_ajax_all_sbi_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/all")), 'nonce' => wp_create_nonce('wp_rest')));
+        }
+     }
 
     public function registerCsiRestEndpoints() {
         require_once(plugin_dir_path(__FILE__) . 'admin/routers/admin-csi-router.php');
@@ -121,6 +138,24 @@ class TechRadarCaseStudyIndexPlugin {
         register_rest_route('csi-plugin/v1', '/public-csi/sub/(?P<id>\d+)', array(
             'methods' => 'GET',
             'callback' => [new PublicCaseStudyIndexRouter(), 'getSinglePublicCsiData'],
+            'permission_callback' => '__return_true'
+        ));
+
+        register_rest_route('csi-plugin/v1', '/public-csi/sbi/sections', array(
+            'methods' => 'GET',
+            'callback' => [new PublicCaseStudyIndexRouter(), 'getSbiSectionsData'],
+            'permission_callback' => '__return_true'
+        ));
+
+        register_rest_route('csi-plugin/v1', '/public-csi/sbi/section/(?P<id>[A-Z]+)', array(
+            'methods' => 'GET',
+            'callback' => [new PublicCaseStudyIndexRouter(), 'getSbiDataPerSection'],
+            'permission_callback' => '__return_true'
+        ));
+
+        register_rest_route('csi-plugin/v1', '/public-csi/sbi/all', array(
+            'methods' => 'GET',
+            'callback' => [new PublicCaseStudyIndexRouter(), 'getAllSbiData'],
             'permission_callback' => '__return_true'
         ));
     }

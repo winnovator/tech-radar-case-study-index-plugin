@@ -3,8 +3,8 @@ if (!defined('ABSPATH')) {
     wp_die();
 }
 
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/csi-settings.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/db.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/csi-settings.php');
 
 class AdminCaseStudyIndex {
 
@@ -18,11 +18,11 @@ class AdminCaseStudyIndex {
         $this->dbObj = new DB();
     }
 
-    public function getAllNfSubData() {
+    protected function getAllNfSubData() {
         return $this->nfObj->form(CaseStudyIndexSettings::$formID)->get_subs();
     }
 
-    public function getSubBySubID($subID) {
+    protected function getSubBySubID($subID) {
         $nfSubArr = $this->nfObj->form(CaseStudyIndexSettings::$formID)->get_subs();
 
         foreach ($nfSubArr as $nfSubElement) {
@@ -32,7 +32,7 @@ class AdminCaseStudyIndex {
         }
     }
 
-    public function getAllWpCsiData() {
+    protected function getAllWpCsiData() {
         $dbConn = $this->dbObj->open();
 
         $stmt = "SELECT * FROM {$dbConn->prefix}csi";
@@ -74,7 +74,7 @@ class AdminCaseStudyIndex {
         return $arr;
     }
 
-    public function updateWpCsiTable() {
+    protected function updateWpCsiTable() {
         $dbConn = $this->dbObj->open();
         $allWpCsiIdArr = $this->getAllWpCsiIds();
         $allNfSubIdArr = $this->getAllNfSubIds();

@@ -3,8 +3,8 @@ if (!defined('ABSPATH')) {
     wp_die();
 }
 
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/db.php');
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/csi-settings.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/db.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/csi-settings.php');
 
 class PublicCaseStudyIndex
 {
@@ -19,7 +19,7 @@ class PublicCaseStudyIndex
         $this->dbObj = new DB();
     }
 
-    public function getPublishedSubs() {
+    protected function getPublishedSubs() {
         $arr = [];
 
         $dbConn = $this->dbObj->open();
@@ -32,9 +32,8 @@ class PublicCaseStudyIndex
 
         return $arr;
     }
-    
 
-    public function getSubBySubID($subID) {
+    protected function getSubBySubID($subID) {
         $nfSubArr = $this->nfObj->form(CaseStudyIndexSettings::$formID)->get_subs();
 
         foreach ($nfSubArr as $nfSubElement) {
@@ -42,5 +41,19 @@ class PublicCaseStudyIndex
                 return $nfSubElement;
             }
         }
+    }
+
+    protected function getAllSbiCodes() {
+        $dataArr = [];
+        $letterArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U'];
+        
+        foreach ($letterArr as $letter) {
+            if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $letter . '.json')) {
+                $url = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $letter . '.json'));
+                array_push($dataArr, $url);
+            }
+        }
+
+        return array_merge(...$dataArr);
     }
 }

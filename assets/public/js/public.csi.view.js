@@ -4,108 +4,123 @@ jQuery.noConflict();
 //Case study index functionalities
 var currentPageCount = 1;
 
-jQuery(document).ready(function() {
-    jQuery.when(getCsiData(public_csi_ajax_obj.url, public_csi_ajax_obj.nonce)).done(function(data) {
-        removeStorage(sessionStorage, 'public-csi-default-data');
-        removeStorage(sessionStorage, 'public-csi-filtered-data');
-        saveStorage(sessionStorage, 'public-csi-default-data', data);
-        let jsonDefaultData = getStorage(sessionStorage, 'public-csi-default-data');
-        let totalPageCount = divideArr(jsonDefaultData).length;
-        let currentPage = getCurrentPage(jsonDefaultData, currentPageCount - 1);
-
-        renderSidePanel(jsonDefaultData);
-        renderOutput(currentPage);
-        setPaginationButtons(totalPageCount);
-
-        jQuery('#csi-previous-page').click(function() {
-            prevPage();
-            let filteredData = getStorage(sessionStorage, 'public-csi-filtered-data') === null ? 
-            getStorage(sessionStorage, 'public-csi-default-data') : getStorage(sessionStorage, 'public-csi-filtered-data');
-            let totalPageCount = divideArr(filteredData).length;
-            let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
-            renderOutput(currentPage);
-            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
-        });
-
-        jQuery('#csi-next-page').click(function() {
-            let filteredData = getStorage(sessionStorage, 'public-csi-filtered-data') === null ? 
-            getStorage(sessionStorage, 'public-csi-default-data') : getStorage(sessionStorage, 'public-csi-filtered-data');
-            let totalPageCount = divideArr(filteredData).length;
-            nextPage(totalPageCount);
-            let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
-            renderOutput(currentPage);
-            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
-        });
-    
-        jQuery('#csi-submit').click(function() {
-            currentPageCount = 1;
-            let filteredData = filter(getAllCheckedInput(), jsonDefaultData);
-            saveStorage(sessionStorage, 'public-csi-filtered-data', filteredData);
-            let jsonFilteredData = getStorage(sessionStorage, 'public-csi-filtered-data');
-            let totalPageCount = divideArr(jsonFilteredData).length;
-            let currentPage = getCurrentPage(jsonFilteredData, currentPageCount - 1);
-            renderOutput(currentPage);
-            setPaginationButtons(totalPageCount);
-        });
-
-        //Mobile responsive functionalities referrences
-        initMobileResponsive();
-
-        //Render sbi tree view
-        renderSbiTree();
-
-        //Render csi info modal
-        renderInfoPage();
-    });
+jQuery(document).ready(function () {
+    loadCsi();  
 });
 
+async function loadCsi() {
+    let csiData = await getCsiData(public_csi_ajax_obj.url, public_csi_ajax_obj.nonce);
+    let sbiData = await getAllSbiData(public_csi_ajax_all_sbi_obj.url, public_csi_ajax_all_sbi_obj.nonce)
+
+    removeStorage(sessionStorage, 'public-csi-default-data');
+    removeStorage(sessionStorage, 'public-csi-filtered-data');
+    saveStorage(sessionStorage, 'public-csi-default-data', csiData);
+
+    removeStorage(sessionStorage, 'public-csi-sbi-list');
+    saveStorage(sessionStorage, 'public-csi-sbi-list', sbiData);
+
+    let jsonDefaultData = getStorage(sessionStorage, 'public-csi-default-data');
+    let totalPageCount = divideArr(jsonDefaultData).length;
+    let currentPage = getCurrentPage(jsonDefaultData, currentPageCount - 1);
+
+    renderSidePanel(jsonDefaultData);
+    renderSbiTree();
+    renderOutput(currentPage);
+    setPaginationButtons(totalPageCount);
+    initMobileResponsive();
+
+    jQuery('#csi-previous-page').click(function () {
+        prevPage();
+        let filteredData = getStorage(sessionStorage, 'public-csi-filtered-data') === null ?
+            getStorage(sessionStorage, 'public-csi-default-data') : getStorage(sessionStorage, 'public-csi-filtered-data');
+        let totalPageCount = divideArr(filteredData).length;
+        let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
+        renderOutput(currentPage);
+        setPaginationButtons(totalPageCount);
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    jQuery('#csi-next-page').click(function () {
+        let filteredData = getStorage(sessionStorage, 'public-csi-filtered-data') === null ?
+            getStorage(sessionStorage, 'public-csi-default-data') : getStorage(sessionStorage, 'public-csi-filtered-data');
+        let totalPageCount = divideArr(filteredData).length;
+        nextPage(totalPageCount);
+        let currentPage = getCurrentPage(filteredData, currentPageCount - 1);
+        renderOutput(currentPage);
+        setPaginationButtons(totalPageCount);
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    jQuery('#csi-submit').click(function () {
+        currentPageCount = 1;
+        let filteredData = filter(getAllCheckedInput(), jsonDefaultData);
+        saveStorage(sessionStorage, 'public-csi-filtered-data', filteredData);
+        let jsonFilteredData = getStorage(sessionStorage, 'public-csi-filtered-data');
+        let totalPageCount = divideArr(jsonFilteredData).length;
+        let currentPage = getCurrentPage(jsonFilteredData, currentPageCount - 1);
+        renderOutput(currentPage);
+        setPaginationButtons(totalPageCount);
+    });
+}
+
 //Start API call functions
-function getCsiData(url, nonce, async = true) {
+function getCsiData(url, nonce, bool = true) {
     return jQuery.ajax({
+        dataType: "json",
         method: "GET",
         url: url,
         data: { public_csi_security_nonce: nonce },
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-WP-Nonce', nonce);
         },
-        async: async
+        async: bool
     });
 }
 
-function getSbiSectionData() {
+function getSbiSectionData(url, nonce, bool = true) {
     return jQuery.ajax({
-        method: "GET",
-        url: "https://sbi.cbs.nl/CBS.TypeerModule.TypeerServiceWebAPI/api/SBIData/Sections"
+        dataType: "json",
+        method: 'GET',
+        url: url,
+        data: { public_csi_security_nonce: nonce },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-WP-Nonce', nonce);
+        },
+        async: bool
     });
 }
 
-function getSbiSectionData() {
+function getSbiDataPerSection(letter, url, nonce, bool = true) {
     return jQuery.ajax({
-        method: "GET",
-        url: "https://sbi.cbs.nl/CBS.TypeerModule.TypeerServiceWebAPI/api/SBIData/Sections"
+        dataType: "json",
+        method: 'GET',
+        url: url + letter,
+        data: { public_csi_security_nonce: nonce },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-WP-Nonce', nonce);
+        },
+        async: bool
     });
 }
 
-function getSbiDataPerSection(letter) {
+function getAllSbiData(url, nonce, bool = true) {
     return jQuery.ajax({
-        method: "GET",
-        url: "https://sbi.cbs.nl/CBS.TypeerModule.TypeerServiceWebAPI/api/SBIData/SectionChildrenTree/" + letter
-    });
-}
-
-function getSbiDataPerNumber(number) {
-    return jQuery.ajax({
-        method: "GET",
-        url: "https://sbi.cbs.nl/CBS.TypeerModule.TypeerServiceWebAPI/api/SBIData/SbiInfo/" + number,
-        async: false
+        dataType: "json",
+        method: 'GET',
+        url: url,
+        data: { public_csi_security_nonce: nonce },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-WP-Nonce', nonce);
+        },
+        async: bool
     });
 }
 
 //Filter functions
 function getAllCheckedInput() {
     let searchArr = [];
-    
-    jQuery('input:checked').each(function() {
+
+    jQuery('input:checked').each(function () {
         searchArr.push(jQuery(this).val());
     });
 
@@ -138,12 +153,25 @@ function getHaystack(arr) {
             mainArr = [element.minor, element.project_stage, element.sbi];
             porterArr = element.porter;
             metaArr = element.meta_trends;
-            
+
             resultArr.push(mainArr.concat(porterArr, metaArr));
         });
     }
 
     return resultArr;
+}
+
+function getSingleSbiCode(code) {
+    let allSbiData = getStorage(sessionStorage, 'public-csi-sbi-list');
+    let result;
+
+    allSbiData.forEach(element => {
+        if (code == element.Code) {
+            result = element;
+        }
+    });
+
+    return result;
 }
 
 //Pagination functions
@@ -167,7 +195,7 @@ function divideArr(arr) {
         for (let i = 0; i < arr.length; i += casesPerPage) {
             resultArr.push(arr.slice(i, i + casesPerPage));
         }
-        
+
         return resultArr;
     }
     else {
@@ -205,20 +233,43 @@ function convertToSingleTypeArr(arr, prop) {
 
 function setPaginationButtons(totalPageCount) {
     if (totalPageCount > 0) {
-        jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+        if (totalPageCount == 1) {
+            jQuery('#csi-previous-page').prop('disabled', true);
+            jQuery('#csi-next-page').prop('disabled', true);
+            jQuery('#csi-previous-page').show();
+            jQuery('#csi-next-page').show();
+            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+            return;
+        }
+        
+        if (currentPageCount == 1) {
+            jQuery('#csi-previous-page').prop('disabled', true);
+            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+            return;
+        }
+
+        if (currentPageCount == totalPageCount) {
+            jQuery('#csi-next-page').prop('disabled', true);
+            jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+            return;
+        }
+
+        jQuery('#csi-previous-page').prop('disabled', false);
+        jQuery('#csi-next-page').prop('disabled', false);
         jQuery('#csi-previous-page').show();
         jQuery('#csi-next-page').show();
+        jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
+        return;
     }
-    else {
-        jQuery('#csi-current-page').text('Geen pagina\'s.');
-        jQuery('#csi-previous-page').hide();
-        jQuery('#csi-next-page').hide();
-    }
+
+    jQuery('#csi-current-page').text('Geen pagina\'s.');
+    jQuery('#csi-previous-page').hide();
+    jQuery('#csi-next-page').hide();
 }
 
 //Generic functions
 function arrayUnique(arr) {
-    return arr.filter(function(item, pos) {
+    return arr.filter(function (item, pos) {
         return arr.indexOf(item) == pos;
     });
 }
@@ -233,17 +284,20 @@ function renderOutput(arr) {
     let htmlString = '';
 
     if (arr !== null && arr.length > 0) {
-        arr.forEach(element => {            
+        arr.forEach(element => {
+            let sbiCode = getSingleSbiCode(element.sbi);
+
             htmlString += '<div class="csi-element-container csi-element-item">';
             htmlString += '<h1><a class="csi-public-info-modal-open" href="#/" data-sub-id="' + element.id + '">' + element.project_name + '</a></h1>';
             htmlString += '<table class="csi-item-table">';
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + (element.minor == '' ? 'Geen minor.' : element.minor) + '</td></tr>';
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Project Stage: </th><td class="csi-item-td">' + element.project_stage +'</td></tr>';
+
+            if (element.minor != '') {
+                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + element.minor + '</td></tr>';
+            }
+
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Michael Porter\'s Value Chain: </th><td class="csi-item-td">' + element.porter.join(', ') + '</td></tr>';
 
-            jQuery.when(getSbiDataPerNumber(element.sbi)).done(function(data) {
-                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + data.Code + ' - ' + data.Title + '</td></tr>';
-            });
+            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + sbiCode.Code + ' - ' + sbiCode.Title + '</td></tr>';
 
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Meta Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
             htmlString += '</table>';
@@ -257,12 +311,14 @@ function renderOutput(arr) {
     }
 
     contentSelector.html(jQuery.parseHTML(htmlString));
+
+    //Reset modal event handlers
+    renderInfoPage();
 }
 
 function renderSidePanel(arr) {
     let contentSelector = jQuery('#csi-side-panel');
     let uniqueMinorArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'minor')));
-    let uniqueProjectStageArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'project_stage')));
     let uniquePorterArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'porter')));
     let uniqueMetaTrendsArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'meta_trends')));
 
@@ -270,49 +326,38 @@ function renderSidePanel(arr) {
 
     if (arr !== null && arr.length > 0) {
         htmlString += '<div>';
-        htmlString += '<h1>Windesheim Minor</h1>';
-        htmlString += '<ul class="csi-side-panel-ul">';
-        
-        uniqueMinorArr.forEach(element => {
-            htmlString += '<li><label for="minor"><input class="csi-side-panel-checkbox" type="checkbox" name="minor" value="' + element + '"/>' + element + '</label></li>';
-        });
-
-        htmlString += '</ul>';
-        htmlString += '</div>';
-
-        htmlString += '<div>';
-        htmlString += '<h1>Project Stage</h1>';
-        htmlString += '<ul class="csi-side-panel-ul">';
-
-        uniqueProjectStageArr.forEach(element => {
-            htmlString += '<li><label for="project-stage"><input class="csi-side-panel-checkbox" type="checkbox" name="project_stage" value="' + element + '"/>' + element + '</label></li>';
-        });
-        
-        htmlString += '</ul>';
-        htmlString += '</div>';
-        
-        htmlString += '<div>';
-        htmlString += '<h1>Michael Porter\'s Value Chain</h1>';
-        htmlString += '<ul class="csi-side-panel-ul">';
-
-        uniquePorterArr.forEach(element => {
-            htmlString += '<li><label for="porter"><input class="csi-side-panel-checkbox" type="checkbox" name="porter" value="' + element + '"/>' + element + '</label></li>';
-        });
-        
-        htmlString += '</ul>';
-        htmlString += '</div>';
-
-        htmlString += '<h1>SBI-code</h1>';
-        htmlString += '<div id="sbi-tree-view-container"></div>';
-        
-        htmlString += '<div>';
-        htmlString += '<h1>Meta Trends</h1>';
+        htmlString += '<h1>Trends</h1>';
         htmlString += '<ul class="csi-side-panel-ul">';
 
         uniqueMetaTrendsArr.forEach(element => {
             htmlString += '<li><label for="meta-trends"><input class="csi-side-panel-checkbox" type="checkbox" name="meta_trends" value="' + element + '"/>' + element + '</label></li>';
         });
-        
+
+        htmlString += '</ul>';
+        htmlString += '</div>';
+
+        htmlString += '<div>';
+        htmlString += '<h1>Value Chain (Michael Porter)</h1>';
+        htmlString += '<ul class="csi-side-panel-ul">';
+
+        uniquePorterArr.forEach(element => {
+            htmlString += '<li><label for="porter"><input class="csi-side-panel-checkbox" type="checkbox" name="porter" value="' + element + '"/>' + element + '</label></li>';
+        });
+
+        htmlString += '</ul>';
+        htmlString += '</div>';
+
+        htmlString += '<h1>Sector (SBI-code)</h1>';
+        htmlString += '<div id="sbi-tree-view-container"></div>';
+
+        htmlString += '<div>';
+        htmlString += '<h1>Windesheim Minor</h1>';
+        htmlString += '<ul class="csi-side-panel-ul">';
+
+        uniqueMinorArr.forEach(element => {
+            htmlString += '<li><label for="minor"><input class="csi-side-panel-checkbox" type="checkbox" name="minor" value="' + element + '"/>' + element + '</label></li>';
+        });
+
         htmlString += '</ul>';
         htmlString += '</div>';
 
@@ -327,50 +372,61 @@ function renderSidePanel(arr) {
     contentSelector.html(jQuery.parseHTML(htmlString));
 }
 
-function renderSbiTree() {
-    jQuery.when(getSbiSectionData()).then(function(data) {
-        let contentSelector = jQuery('#sbi-tree-view-container');
-        let htmlString = '';
-
-        htmlString += '<ul id="csi-sbi-ul">';
-
-        data.forEach((element) => {
-            htmlString += '<li id="sbi-tree-view-section-' + element.Letter + '" class="sbi-tree-view-section" data-sbi-section-letter="' + element.Letter  + '">' +'<span class="csi-sbi-caret">' + element.Letter + ' - ' + element.Title + '</span></li>';
-        });
-
-        htmlString += '</ul>';
-        contentSelector.html(jQuery.parseHTML(htmlString));
-    }).done(function() {
+async function renderSbiTree() {
+    renderSbiTreeSections().then(function () {
         let letterArr = [];
 
-        jQuery('.sbi-tree-view-section').each(function() {
+        jQuery('.sbi-tree-view-section').each(function () {
             letterArr.push(jQuery(this).data('sbi-section-letter'));
         });
 
         letterArr.forEach((element) => {
-            jQuery.when(getSbiDataPerSection(element)).then(function(data) {
-                let htmlString = "";
-                let contentSelector = jQuery('#sbi-tree-view-section-' + element);
+            renderSbiTreePerSection(element);
+        });
 
-                htmlString += '<ul class="csi-sbi-nested">';
+        initSbiTreeEvents();
+    });
+}
 
-                data.forEach((element) => {
-                    htmlString += '<li class="csi-sbi-li"><label for="sbi"><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.Code + '"/>' + element.Code + ' - ' + element.Title + '</label>';
-                });
+async function renderSbiTreeSections() {
+    let sbiSectionData = await getSbiSectionData(public_csi_ajax_sbi_sections_obj.url, public_csi_ajax_sbi_sections_obj.nonce);
 
-                htmlString += '</ul>';
+    let contentSelector = jQuery('#sbi-tree-view-container');
+    let htmlString = '';
 
-                contentSelector.append(jQuery.parseHTML(htmlString));
-            }).done(function() {
-                let toggler = jQuery('.csi-sbi-caret');
-                
-                toggler.each(function() {
-                    jQuery(this).on('click', function() {
-                        this.parentElement.querySelector(".csi-sbi-nested").classList.toggle("active");
-                        this.classList.toggle("caret-down");
-                    });
-                });
-            });
+    htmlString += '<ul id="csi-sbi-ul">';
+
+    sbiSectionData.forEach((element) => {
+        htmlString += '<li id="sbi-tree-view-section-' + element.Letter + '" class="sbi-tree-view-section" data-sbi-section-letter="' + element.Letter + '">' + '<span class="csi-sbi-caret">' + element.Letter + ' - ' + element.Title + '</span></li>';
+    });
+
+    htmlString += '</ul>';
+    contentSelector.html(jQuery.parseHTML(htmlString));
+}
+
+async function renderSbiTreePerSection(element) {
+    let sbiPerSectionData = await getSbiDataPerSection(element, public_csi_ajax_sbi_per_section_obj.url, public_csi_ajax_sbi_per_section_obj.nonce);
+    let htmlString = "";
+    let contentSelector = jQuery('#sbi-tree-view-section-' + element);
+
+    htmlString += '<ul class="csi-sbi-nested">';
+
+    sbiPerSectionData.forEach((element) => {
+        htmlString += '<li class="csi-sbi-li"><label for="sbi"><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.Code + '"/>' + element.Code + ' - ' + element.Title + '</label>';
+    });
+
+    htmlString += '</ul>';
+
+    contentSelector.append(jQuery.parseHTML(htmlString));
+}
+
+function initSbiTreeEvents() {
+    let toggler = jQuery('.csi-sbi-caret');
+
+    toggler.each(function () {
+        jQuery(this).on('click', function () {
+            this.parentElement.querySelector(".csi-sbi-nested").classList.toggle("sbi-tree-active");
+            this.classList.toggle("sbi-tree-caret-down");
         });
     });
 }
@@ -384,43 +440,119 @@ function renderModal(header, body, footer) {
     htmlString += '<div class="csi-public-info-modal-content">';
     htmlString += '<div class="csi-public-info-modal-header">';
     htmlString += '<span id="csi-public-info-modal-close">&times;</span>';
-    htmlString += '<h1>' + header + '</h1>';
+    htmlString += '<h1 id="csi-public-info-modal-header-h1">' + header + '</h1>';
     htmlString += '</div>';
     htmlString += '<div class="csi-public-info-modal-body">';
     htmlString += body;
     htmlString += '</div>';
     htmlString += '<div class="csi-public-info-modal-footer">';
-    htmlString += '<p>' + footer + '</p>';
+    htmlString += '<p id="csi-public-info-modal-footer-p">' + footer + '</p>';
     htmlString += '</div>';
     htmlString += '</div>';
     htmlString += '</div>';
 
     contentSelector.html(jQuery.parseHTML(htmlString));
-
-    //Events
-    let modal = jQuery("#csi-public-info-modal");
-    let span = jQuery("#csi-public-info-modal-close");
 }
 
 function renderInfoPage() {
-    jQuery('.csi-public-info-modal-open').click(function(event) {
+    jQuery('.csi-public-info-modal-open').click(function (event) {
         event.preventDefault();
         let subID = event.currentTarget.getAttribute("data-sub-id");
-
-        jQuery.when(getCsiData(public_csi_ajax_info_obj.url + subID, public_csi_ajax_info_obj.nonce)).done(function(data) {
-            renderModal('test', data.id, 'Made by Mike Harman');
-            let modal = jQuery("#csi-public-info-modal");
-            let span = jQuery("#csi-public-info-modal-close");
-
-            modal.css('display', 'block');
-
-            span.click(function() {
-                modal.css('display', 'none');
-            });
+        
+        jQuery.when(getCsiData(public_csi_ajax_info_obj.url + subID, public_csi_ajax_info_obj.nonce)).done(function (data) {
+            renderModal('Case studie informatie', renderInfoModalBody(data), 'Copyright © 2022 Windesheim Technology Radar');
+            initModalEvents();
         });
     });
+}
 
+function renderInfoModalBody(data) {
+    let htmlString = '';
 
+    htmlString += '<div id="csi-public-info-modal-body-container">';
+
+    htmlString += '<div id="csi-public-info-modal-body-content">';
+
+    htmlString += '<div id="csi-public-info-modal-body-content-contact">';
+    htmlString += '<h2>Contactinformatie</h2>';
+    htmlString += '<table id="csi-public-info-modal-body-content-contact-table">';
+    htmlString += '<tr><th>Projectnaam</th></tr>';
+    htmlString += '<tr><td>' + data.project_name + '</td></tr>';
+    htmlString += '<tr><th>Projecteigenaar</th></tr>';
+    htmlString += '<tr><td>' + data.project_owner + '</td></tr>';
+    htmlString += '<tr><th>Projectemail</th></tr>';
+    htmlString += '<tr><td>' + data.project_owner_email + '</td></tr>';
+    htmlString += '</table>';
+    htmlString += '</div>';
+    
+    htmlString += '<div id="csi-public-info-modal-body-content-details">';
+    htmlString += '<h2>Details</h2>';
+    htmlString += '<table id="csi-public-info-modal-body-content-details-table">';
+    htmlString += data.minor != '' ? '<tr><th>Minor</th></tr><tr><td>' + data.minor + '</td></tr>' : '';
+    htmlString += '<tr><th>SBI-code</th></tr>';
+    htmlString += '<tr><td>' + data.sbi + '</td></tr>';
+    htmlString += '<tr><th>Technologie innovaties</th></tr>';
+    htmlString += '<tr><td>' + data.tech_innovations + '</td></tr>';
+    htmlString += '<tr><th>Technologieleveranciers</th></tr>';
+    htmlString += '<tr><td>' + data.tech_providers + '</td></tr>';
+    htmlString += '<tr><th>Trends</th></tr>';
+    htmlString += '<tr><td>' + data.meta_trends.join(', ') + '</td></tr>';
+    htmlString += '<tr><th>Value Chain (Michael Porter)</th></tr>';
+    htmlString += '<tr><td>' + data.porter + '</td></tr>';
+    htmlString += '<tr><th>Bedrijfssector</th></tr>';
+    htmlString += '<tr><td>' + data.company_sector + '</td></tr>';
+    htmlString += '</table>';
+    htmlString += '</div>';
+
+    htmlString += '<div id="csi-public-info-modal-body-content-context">';
+    htmlString += '<h2>Project context</h2>';
+    htmlString += '<table id="csi-public-info-modal-body-content-context-table">';
+    htmlString += '<tr><th>Projectcontext</th></tr>';
+    htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_context + '</td></tr>';
+    htmlString += '<tr><th>Projectprobleem</th></tr>';
+    htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_problem + '</td></tr>';
+    htmlString += '<tr><th>Projectdoel</th></tr>';
+    htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_goal + '</td></tr>';
+    htmlString += '</table>';
+    htmlString += '</div>';
+
+    htmlString += '<div id="csi-public-info-modal-body-content-links">';
+    htmlString += '<h2>Links</h2>';
+    htmlString += '<table id="csi-public-info-modal-body-content-links-table">';
+    htmlString += '<tr><th>Website link</th></tr>';
+    htmlString += '<tr><td><a href="' + (data.case_study_url.includes('http') ? data.case_study_url : 'http://' + data.case_study_url) + '" target="_blank">' + data.case_study_url + '</a></td></tr>';
+    htmlString += '<tr><th>Film link</th></tr>';
+    htmlString += '<tr><td><a href="' + (data.case_study_movie_url.includes('http') ? data.case_study_movie_url : 'http://' + data.case_study_movie_url) + '" target="_blank">' + data.case_study_movie_url + '</a></td></tr>';
+    htmlString += '</table>';
+    htmlString += '</div>';
+
+    htmlString += '</div>';
+
+    htmlString += '<div id="csi-public-info-modal-body-image">';
+    htmlString += '<img src=' + data.case_study_image_url + '>';
+    htmlString += '</div>';
+
+    htmlString += '<div id="csi-public-info-modal-body-actions">';
+    // htmlString += '<p>actions</p>';
+    htmlString += '</div>';
+
+    htmlString += '</div>';
+
+    return htmlString;
+}
+
+function initModalEvents() {
+    let modal = jQuery("#csi-public-info-modal");
+    let span = jQuery("#csi-public-info-modal-close");
+    let body = jQuery("body");
+
+    modal.css('display', 'block');
+    body.css('overflow', 'hidden');
+    
+    span.click(function () {
+        modal.css('display', 'none');
+        body.css('overflow', 'auto');
+    });
 }
 
 //JSON storage funcions
@@ -449,7 +581,7 @@ function initMobileResponsive() {
     //Init state
     screenRules(sidePanel, content, pagination, filterButton);
 
-    filterButton.click(function() {
+    filterButton.click(function () {
         if (filterButton.data('csi-filter-toggle') == 'true') {
             filterButton.data('csi-filter-toggle', 'false');
             sidePanel.show();
@@ -464,7 +596,7 @@ function initMobileResponsive() {
         }
     });
 
-    submitButton.click(function() {
+    submitButton.click(function () {
         if (screen.width <= 550) {
             filterButton.data('csi-filter-toggle', 'true');
             sidePanel.hide();
@@ -474,7 +606,7 @@ function initMobileResponsive() {
     });
 
     //On change state
-    jQuery(window).resize(function() {
+    jQuery(window).resize(function () {
         screenRules(sidePanel, content, pagination, filterButton);
     });
 }

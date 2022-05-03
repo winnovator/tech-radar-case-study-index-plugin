@@ -3,45 +3,53 @@ if (!defined('ABSPATH')) {
     wp_die();
 }
 
-require_once(ABSPATH . 'wp-content/plugins/tech-radar-case-study-index-plugin/includes/nf.php');
+require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/nf.php');
 require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-info-controller.php");
 
-class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
+class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-        if (empty($this->wpCsiData) || empty($this->nfSubData)) { echo esc_js("<script>location.href = '" . esc_url(admin_url('admin.php?page=admin-csi')) . "';</script>"); }
+        if (empty($this->wpCsiData) || empty($this->nfSubData)) {
+            echo "<script>location.href = '" . esc_url(admin_url('admin.php?page=admin-csi')) . "';</script>";
+            wp_die();
+        }
     }
-    
-    public function renderCsiData() {
-        if (empty($this->wpCsiData) || empty($this->nfSubData)) { return; }
+
+    public function renderCsiData()
+    {
+        if (empty($this->wpCsiData) || empty($this->nfSubData)) {
+            return;
+        }
 
         $output = '';
 
         $output .= '<table id="csi-info-data-table">';
         $output .= '<tr>';
         $output .= '<th>Status</th>';
-        $output .= '<td>' . ($this->wpCsiData[0]->new == 1 ? esc_html('New') : esc_html('Existing')) . '</td>';
+        $output .= '<td id="admin-csi-status" data-admin-csi-status="' . esc_attr($this->wpCsiData[0]->new) . '">' . ($this->wpCsiData[0]->new == 1 ? esc_html('New') : esc_html('Existing')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Published</th>';
+        $output .= '<th>Gepubliceerd</th>';
         $output .= '<td>' . ($this->wpCsiData[0]->published == 1 ? 'Yes' : 'No') . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Project Name</th>';
+        $output .= '<th>Projectnaam</th>';
         $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_name')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Project Owner</th>';
+        $output .= '<th>Projecteigenaar</th>';
         $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_owner')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Project Owner Email</th>';
-        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_owner_email')) . '</td>';
+        $output .= '<th>Projecteigenaar email</th>';
+        $output .= '<td id="admin-csi-email" data-admin-csi-email="' . esc_attr($this->nfSubData->get_field_value('project_owner_email')) . '">' . esc_html($this->nfSubData->get_field_value('project_owner_email')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
@@ -50,53 +58,63 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Michael Porter</th>';
+        $output .= '<th>Value Chain (Michael Porter)</th>';
         $output .= '<td>' . esc_html(implode(', ', $this->nfSubData->get_field_value('porter'))) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>SBI-code</th>';
+        $output .= '<th>Sector (SBI-code)</th>';
         $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('sbi')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Technology Innovatiob</th>';
+        $output .= '<th>Technologie Innovaties</th>';
         $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('tech_innovations')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Technology Providers</th>';
+        $output .= '<th>Technologie aanbieders</th>';
         $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('tech_providers')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Meta Trends</th>';
+        $output .= '<th>Trends</th>';
         $output .= '<td>' .  esc_html(implode(', ', $this->nfSubData->get_field_value('meta_trends'))) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Company Sector</th>';
+        $output .= '<th>Bedrijfssector</th>';
         $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('company_sector')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Project Context</th>';
+        $output .= '<th>Project context</th>';
         $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('project_context')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Project Problem</th>';
-        $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('project_problem')) . '</td>';
+        $output .= '<th>Project probleem</th>';
+        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_problem')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Project Goal</th>';
-        $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('project_goal')) . '</td>';
+        $output .= '<th>Projectdoel</th>';
+        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_goal')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Case Study URL</th>';
-        $output .= '<td><a href="' .  esc_url($this->nfSubData->get_field_value('case_study_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_url')) .'</a></td>';
+        $output .= '<th>Case studie informatie link</th>';
+        $output .= '<td><a href="' . esc_url($this->nfSubData->get_field_value('case_study_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_url')) . '</a></td>';
+        $output .= '</tr>';
+
+        $output .= '<tr>';
+        $output .= '<th>Case studie video link</th>';
+        $output .= '<td><a href="' . esc_url($this->nfSubData->get_field_value('case_study_movie_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_movie_url')) . '</a></td>';
+        $output .= '</tr>';
+
+        $output .= '<tr>';
+        $output .= '<th>Case studie afbeelding link</th>';
+        $output .= '<td><a href="' . esc_url($this->nfSubData->get_field_value('case_study_image_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_image_url')) . '</a></td>';
         $output .= '</tr>';
 
         $output .= '</table>';
@@ -104,13 +122,16 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
         echo $output;
     }
 
-    public function renderSubmitButton() {
-        if (empty($this->wpCsiData) || empty($this->nfSubData)) { return; }
+    public function renderSubmitButton()
+    {
+        if (empty($this->wpCsiData) || empty($this->nfSubData)) {
+            return;
+        }
 
         $output = '';
 
         $output .= '<div id="submit-wrap">';
-        
+
         if ($this->wpCsiData[0]->published == 1) {
             $output .= '<button id="admin-csi-info-depublish-button" class="submit-button button action" type="button">Depublish</button>';
         }
@@ -126,7 +147,7 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
     }
 }
 
-    $adminCsiInfoControllerObj = new AdminCaseStudyIndexInfoView();
+$adminCsiInfoControllerObj = new AdminCaseStudyIndexInfoView();
 ?>
 
 <div class="wrap">
