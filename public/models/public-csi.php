@@ -45,15 +45,19 @@ class PublicCaseStudyIndex
 
     protected function getAllSbiCodes() {
         $dataArr = [];
-        $letterArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U'];
+        $sections = NULL;
+
+        if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json')) {
+            $sections = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json'));
+        }
         
-        foreach ($letterArr as $letter) {
-            if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $letter . '.json')) {
-                $url = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $letter . '.json'));
-                array_push($dataArr, $url);
+        foreach ($sections as $section) {
+            if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->Letter . '.json')) {
+                $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->Letter . '.json'));
+                array_push($dataArr, ['Letter' => $section->Letter, 'Title' => ucfirst(strtolower($section->Title)), 'Codes' => $codes]);
             }
         }
 
-        return array_merge(...$dataArr);
+        return $dataArr;
     }
 }

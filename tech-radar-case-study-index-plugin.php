@@ -87,8 +87,6 @@ class TechRadarCaseStudyIndexPlugin {
             wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
             wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/public-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_ajax_info_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
-            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_sections_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/sections")), 'nonce' => wp_create_nonce('wp_rest')));
-            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_per_section_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/section/")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_ajax_all_sbi_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/all")), 'nonce' => wp_create_nonce('wp_rest')));
         }
     }
@@ -102,8 +100,6 @@ class TechRadarCaseStudyIndexPlugin {
             wp_enqueue_script('public.csi.view', plugins_url('/assets/public/js/public.csi.view.js', __FILE__));
             wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_ajax_info_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
-            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_sections_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/sections")), 'nonce' => wp_create_nonce('wp_rest')));
-            wp_localize_script('public.csi.view', 'public_csi_ajax_sbi_per_section_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/section/")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_ajax_all_sbi_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/all")), 'nonce' => wp_create_nonce('wp_rest')));
         }
      }
@@ -112,52 +108,7 @@ class TechRadarCaseStudyIndexPlugin {
         require_once(plugin_dir_path(__FILE__) . 'admin/routers/admin-csi-router.php');
         require_once(plugin_dir_path(__FILE__) . 'admin/routers/admin-csi-info-router.php');
         require_once(plugin_dir_path(__FILE__) . 'public/routers/public-csi-router.php');
-
-        register_rest_route('csi-plugin/v1', '/admin-csi/overview', array(
-            'methods' => 'GET',
-            'callback' => [new AdminCaseStudyIndexRouter(), 'getAllSubData'],
-            'permission_callback' => function() {
-                return current_user_can('manage_options');
-            }
-        ));
-
-        register_rest_route('csi-plugin/v1', '/admin-csi/info', array(
-            'methods' => 'POST',
-            'callback' => [new AdminCaseStudyIndexInfoRouter(), 'postCsiDataSubmit'],
-            'permission_callback' => function() {
-                return current_user_can('manage_options');
-            }
-        ));
-
-        register_rest_route('csi-plugin/v1', '/public-csi/overview', array(
-            'methods' => 'GET',
-            'callback' => [new PublicCaseStudyIndexRouter(), 'getPublicCsiData'],
-            'permission_callback' => '__return_true'
-        ));
-
-        register_rest_route('csi-plugin/v1', '/public-csi/sub/(?P<id>\d+)', array(
-            'methods' => 'GET',
-            'callback' => [new PublicCaseStudyIndexRouter(), 'getSinglePublicCsiData'],
-            'permission_callback' => '__return_true'
-        ));
-
-        register_rest_route('csi-plugin/v1', '/public-csi/sbi/sections', array(
-            'methods' => 'GET',
-            'callback' => [new PublicCaseStudyIndexRouter(), 'getSbiSectionsData'],
-            'permission_callback' => '__return_true'
-        ));
-
-        register_rest_route('csi-plugin/v1', '/public-csi/sbi/section/(?P<id>[A-Z]+)', array(
-            'methods' => 'GET',
-            'callback' => [new PublicCaseStudyIndexRouter(), 'getSbiDataPerSection'],
-            'permission_callback' => '__return_true'
-        ));
-
-        register_rest_route('csi-plugin/v1', '/public-csi/sbi/all', array(
-            'methods' => 'GET',
-            'callback' => [new PublicCaseStudyIndexRouter(), 'getAllSbiData'],
-            'permission_callback' => '__return_true'
-        ));
+        require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/csi-api.php');
     }
 }
 

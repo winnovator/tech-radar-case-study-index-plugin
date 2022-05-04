@@ -46,46 +46,6 @@ class PublicCaseStudyIndexRouter extends PublicCaseStudyIndexController {
         wp_die();
     }
 
-    public function getSbiSectionsData() {
-        if (isset($_GET['public_csi_security_nonce'])) {
-            if (check_ajax_referer('wp_rest', 'public_csi_security_nonce')) {
-                if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json')) {
-                    echo wp_send_json(json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json')), 200);
-                    wp_die();
-                }
-    
-                wp_send_json_error(new WP_Error('Not found', 'Not found.'), 404);
-                wp_die();
-            }
-
-            wp_send_json_error(new WP_Error('Forbidden access', 'You are not allowed on this page.'), 403);
-            wp_die();
-        }
-
-        wp_send_json_error(new WP_Error('Forbidden access', 'You are not allowed on this page.'), 403);
-        wp_die();
-    }
-
-    public function getSbiDataPerSection($request) {
-        if (isset($_GET['public_csi_security_nonce'])) {
-            if (check_ajax_referer('wp_rest', 'public_csi_security_nonce')) {
-                if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $request['id'] . '.json')) {
-                    echo wp_send_json(json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $request['id'] . '.json')), 200);
-                    wp_die();
-                }
-    
-                wp_send_json_error(new WP_Error('Not found', 'Not found.'), 404);
-                wp_die();
-            }
-            
-            wp_send_json_error(new WP_Error('Forbidden access', 'You are not allowed on this page.'), 403);
-            wp_die();
-        }
-
-        wp_send_json_error(new WP_Error('Forbidden access', 'You are not allowed on this page.'), 403);
-        wp_die();
-    }
-
     public function getAllSbiData() {
         if (isset($_GET['public_csi_security_nonce'])) {
             if (check_ajax_referer('wp_rest', 'public_csi_security_nonce')) {

@@ -33,6 +33,7 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
                     'sbi' => $element->get_field_value('sbi'),
                     'meta_trends' => $element->get_field_value('meta_trends'),
                     'case_study_url' => $element->get_field_value('case_study_url'),
+                    'case_study_image_url' => $element->get_field_value('case_study_image_url')
                 ];
 
                 array_push($parentArr, $childArr);

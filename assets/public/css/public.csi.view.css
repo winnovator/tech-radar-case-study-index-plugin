@@ -46,7 +46,7 @@
 .csi-element-container {
     background-color: #f8f9fa;
     border-radius: 8px;
-    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .5);
+    box-shadow: 0 .125rem .7rem rgba(0, 0, 0, .5);
     margin: 10px;
     padding: 20px;
 }
@@ -71,7 +71,7 @@
     padding: 20px;
 }
 
-.csi-item-table,
+.csi-public-item-table,
 .csi-item-tr,
 .csi-item-th,
 .csi-item-td {
@@ -89,6 +89,18 @@
 
 #csi-side-panel {
     display: block;
+}
+
+.csi-public-item-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.csi-public-item-img {
+    display: block;
+    max-height: 250px;
+    max-width: 250px;
+    margin-left: 1vw;
 }
 
 @media screen and (max-width: 550px) {
@@ -112,6 +124,10 @@
             'modal-body-actions';
         grid-template-columns: 1fr;
         grid-template-rows: auto;
+    }
+
+    .csi-public-item-img {
+        display: none;
     }
 }
 

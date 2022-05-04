@@ -77,32 +77,6 @@ function getCsiData(url, nonce, bool = true) {
     });
 }
 
-function getSbiSectionData(url, nonce, bool = true) {
-    return jQuery.ajax({
-        dataType: "json",
-        method: 'GET',
-        url: url,
-        data: { public_csi_security_nonce: nonce },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('X-WP-Nonce', nonce);
-        },
-        async: bool
-    });
-}
-
-function getSbiDataPerSection(letter, url, nonce, bool = true) {
-    return jQuery.ajax({
-        dataType: "json",
-        method: 'GET',
-        url: url + letter,
-        data: { public_csi_security_nonce: nonce },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('X-WP-Nonce', nonce);
-        },
-        async: bool
-    });
-}
-
 function getAllSbiData(url, nonce, bool = true) {
     return jQuery.ajax({
         dataType: "json",
@@ -161,17 +135,63 @@ function getHaystack(arr) {
     return resultArr;
 }
 
-function getSingleSbiCode(code) {
+function getSingleSbiByCode(code) {
     let allSbiData = getStorage(sessionStorage, 'public-csi-sbi-list');
     let result;
 
-    allSbiData.forEach(element => {
-        if (code == element.Code) {
-            result = element;
-        }
+    allSbiData.forEach(SbiElement => {
+        SbiElement.Codes.forEach(element => {
+            if (code == element.Code) {
+                element.Letter = SbiElement.Letter;
+                element.SectionTitle = SbiElement.Title;
+                result = element;
+            }
+        });
     });
 
     return result;
+}
+
+function getAvailableSbiCodes() {
+    let availableSbiData = getStorage(sessionStorage, 'public-csi-default-data');
+    let resultArr = [];
+    
+    availableSbiData.forEach(element => {
+        resultArr.push(getSingleSbiByCode(element.sbi));
+    });
+    
+    return sortByLetter(resultArr);
+}
+
+function getAllSbiByLetter(letter) {
+    let availableSbiData = getAvailableSbiCodes();
+    let resultArr = [];
+
+    availableSbiData.forEach(element => {
+        if (letter == element.Letter) {
+            resultArr.push(element);
+        }
+    });
+
+    return resultArr;
+}
+
+function sortByLetter(dataArr) {
+    let letterArr = [];
+    dataArr.forEach(element => { letterArr.push(element.Letter); });
+    let filteredLetterArr = arrayUnique(letterArr);
+    let sortedLetterArr = filteredLetterArr.sort();
+    let resultArr = [];
+
+    sortedLetterArr.forEach(letterElement => {
+        dataArr.forEach(element => { 
+            if (letterElement == element.Letter) {
+                resultArr.push(element);
+            }
+        });
+    });
+
+    return resultArr;
 }
 
 //Pagination functions
@@ -285,11 +305,12 @@ function renderOutput(arr) {
 
     if (arr !== null && arr.length > 0) {
         arr.forEach(element => {
-            let sbiCode = getSingleSbiCode(element.sbi);
+            let sbiCode = getSingleSbiByCode(element.sbi);
 
             htmlString += '<div class="csi-element-container csi-element-item">';
             htmlString += '<h1><a class="csi-public-info-modal-open" href="#/" data-sub-id="' + element.id + '">' + element.project_name + '</a></h1>';
-            htmlString += '<table class="csi-item-table">';
+            htmlString += '<div class="csi-public-item-content">';
+            htmlString += '<table class="csi-public-item-table">';
 
             if (element.minor != '') {
                 htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + element.minor + '</td></tr>';
@@ -301,6 +322,8 @@ function renderOutput(arr) {
 
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Meta Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
             htmlString += '</table>';
+            htmlString += '<img class="csi-public-item-img" src=' + element.case_study_image_url + '>';
+            htmlString += '</div>';
             htmlString += '</div>';
         });
     }
@@ -372,52 +395,48 @@ function renderSidePanel(arr) {
     contentSelector.html(jQuery.parseHTML(htmlString));
 }
 
-async function renderSbiTree() {
-    renderSbiTreeSections().then(function () {
-        let letterArr = [];
+function renderSbiTree() {
+    let allSbiCodes = getAvailableSbiCodes();
 
-        jQuery('.sbi-tree-view-section').each(function () {
-            letterArr.push(jQuery(this).data('sbi-section-letter'));
-        });
-
-        letterArr.forEach((element) => {
-            renderSbiTreePerSection(element);
-        });
-
-        initSbiTreeEvents();
-    });
+    renderSbiTreeSections(allSbiCodes);
+    renderSbiTreePerSection(allSbiCodes);
+    initSbiTreeEvents();
 }
 
-async function renderSbiTreeSections() {
-    let sbiSectionData = await getSbiSectionData(public_csi_ajax_sbi_sections_obj.url, public_csi_ajax_sbi_sections_obj.nonce);
-
+function renderSbiTreeSections(dataArr) {
     let contentSelector = jQuery('#sbi-tree-view-container');
     let htmlString = '';
+    let existsArr = [];
 
     htmlString += '<ul id="csi-sbi-ul">';
 
-    sbiSectionData.forEach((element) => {
-        htmlString += '<li id="sbi-tree-view-section-' + element.Letter + '" class="sbi-tree-view-section" data-sbi-section-letter="' + element.Letter + '">' + '<span class="csi-sbi-caret">' + element.Letter + ' - ' + element.Title + '</span></li>';
+    dataArr.forEach(element => {
+        if (!existsArr.includes(element.Letter)) {
+            htmlString += '<li id="sbi-tree-view-section-' + element.Letter + '" class="sbi-tree-view-section">' + '<span class="csi-sbi-caret">' + element.Letter + ' - ' + element.SectionTitle + '</span></li>';
+            existsArr.push(element.Letter);
+        }
     });
 
     htmlString += '</ul>';
+
     contentSelector.html(jQuery.parseHTML(htmlString));
 }
 
-async function renderSbiTreePerSection(element) {
-    let sbiPerSectionData = await getSbiDataPerSection(element, public_csi_ajax_sbi_per_section_obj.url, public_csi_ajax_sbi_per_section_obj.nonce);
-    let htmlString = "";
-    let contentSelector = jQuery('#sbi-tree-view-section-' + element);
+function renderSbiTreePerSection(dataArr) {
+    dataArr.forEach(element => {
+        let contentSelector = jQuery('#sbi-tree-view-section-' + element.Letter);
+        let htmlString = '';
 
-    htmlString += '<ul class="csi-sbi-nested">';
+        htmlString += '<ul class="csi-sbi-nested">';
+        
+        getAllSbiByLetter(element.Letter).forEach(element => {
+            htmlString += '<li class="csi-sbi-li"><label for="sbi"><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.Code + '"/>' + element.Code + ' - ' + element.Title + '</label>';
+        });
+        
+        htmlString += '</ul>';
 
-    sbiPerSectionData.forEach((element) => {
-        htmlString += '<li class="csi-sbi-li"><label for="sbi"><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.Code + '"/>' + element.Code + ' - ' + element.Title + '</label>';
+        contentSelector.append(jQuery.parseHTML(htmlString));
     });
-
-    htmlString += '</ul>';
-
-    contentSelector.append(jQuery.parseHTML(htmlString));
 }
 
 function initSbiTreeEvents() {
