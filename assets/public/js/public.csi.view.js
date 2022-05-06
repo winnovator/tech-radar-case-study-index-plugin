@@ -137,29 +137,29 @@ function getHaystack(arr) {
 
 function getSingleSbiByCode(code) {
     let allSbiData = getStorage(sessionStorage, 'public-csi-sbi-list');
-    let result;
 
-    allSbiData.forEach(SbiElement => {
-        SbiElement.Codes.forEach(element => {
-            if (code == element.Code) {
-                element.Letter = SbiElement.Letter;
-                element.SectionTitle = SbiElement.Title;
-                result = element;
+    for (let sbiElement of allSbiData) {
+        for (let element of sbiElement.Codes)
+            if (code === element.Code) {
+                return { Code: code, Title: element.Title, Letter: sbiElement.Letter, SectionTitle: sbiElement.Title }
             }
-        });
-    });
+    }
 
-    return result;
+    return { Code: code, Title: 'Onbekend', Letter: 'Overige', SectionTitle: 'Overige' };
 }
 
 function getAvailableSbiCodes() {
     let availableSbiData = getStorage(sessionStorage, 'public-csi-default-data');
     let resultArr = [];
+    let exist = [];
     
     availableSbiData.forEach(element => {
-        resultArr.push(getSingleSbiByCode(element.sbi));
+        if (!exist.includes(element.sbi)) {
+            resultArr.push(getSingleSbiByCode(element.sbi));
+            exist.push(element.sbi);
+        }
     });
-    
+
     return sortByLetter(resultArr);
 }
 
@@ -397,7 +397,7 @@ function renderSidePanel(arr) {
 
 function renderSbiTree() {
     let allSbiCodes = getAvailableSbiCodes();
-
+    
     renderSbiTreeSections(allSbiCodes);
     renderSbiTreePerSection(allSbiCodes);
     initSbiTreeEvents();
