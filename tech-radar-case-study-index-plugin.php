@@ -70,17 +70,13 @@ class TechRadarCaseStudyIndexPlugin {
     public function csiAdminEnqueue() {
         wp_enqueue_script('jquery');
 
-        if (isset($_GET['page'])) {
-            if ($_GET['page'] == 'admin-csi' || $_GET['page'] = 'admin-csi-info') {
-                wp_enqueue_style('datatables.min', plugins_url('/assets/admin/css/datatables.min.css', __FILE__));
-                wp_enqueue_style('admin.csi.view', plugins_url('/assets/admin/css/admin.csi.view.css', __FILE__));
-                wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
-                wp_enqueue_script('admin.csi.view', plugins_url('/assets/admin/js/admin.csi.view.js', __FILE__));
-                wp_localize_script('admin.csi.view', 'admin_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
-                wp_enqueue_script('admin.csi.info.view', plugins_url('/assets/admin/js/admin.csi.info.view.js', __FILE__));
-                wp_localize_script('admin.csi.info.view', 'admin_csi_info_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/info")), 'nonce' => wp_create_nonce('wp_rest'), "redirect_url" => esc_url_raw(admin_url('admin.php?page=admin-csi'))));
-            }
-        }
+        wp_enqueue_style('datatables.min', plugins_url('/assets/admin/css/datatables.min.css', __FILE__));
+        wp_enqueue_style('admin.csi.view', plugins_url('/assets/admin/css/admin.csi.view.css', __FILE__));
+        wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
+        wp_enqueue_script('admin.csi.view', plugins_url('/assets/admin/js/admin.csi.view.js', __FILE__));
+        wp_localize_script('admin.csi.view', 'admin_csi_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
+        wp_enqueue_script('admin.csi.info.view', plugins_url('/assets/admin/js/admin.csi.info.view.js', __FILE__));
+        wp_localize_script('admin.csi.info.view', 'admin_csi_info_ajax_obj', array('url' => esc_url_raw(rest_url("csi-plugin/v1/admin-csi/info")), 'nonce' => wp_create_nonce('wp_rest'), "redirect_url" => esc_url_raw(admin_url('admin.php?page=admin-csi'))));
 
         if  (is_page('case-study-index')) {
             wp_enqueue_style('public.csi.view', plugins_url('/assets/public/css/public.csi.view.css', __FILE__));
