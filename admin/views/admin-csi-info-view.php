@@ -29,12 +29,12 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
         $output .= '<table id="csi-info-data-table">';
         $output .= '<tr>';
         $output .= '<th>Status</th>';
-        $output .= '<td id="admin-csi-status" data-admin-csi-status="' . esc_attr($this->wpCsiData[0]->new) . '">' . ($this->wpCsiData[0]->new == 1 ? esc_html('New') : esc_html('Existing')) . '</td>';
+        $output .= '<td id="admin-csi-status" data-admin-csi-status="' . esc_attr($this->wpCsiData[0]->new) . '">' . (esc_html($this->wpCsiData[0]->new) == 1 ? esc_html('Nieuw') : esc_html('Bestaand')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Gepubliceerd</th>';
-        $output .= '<td>' . ($this->wpCsiData[0]->published == 1 ? 'Yes' : 'No') . '</td>';
+        $output .= '<td>' . (esc_html($this->wpCsiData[0]->published) == 1 ? esc_html('Ja') : esc_html('Nee')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
@@ -54,7 +54,7 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
 
         $output .= '<tr>';
         $output .= '<th>Minor</th>';
-        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('minor')) . '</td>';
+        $output .= '<td>' . (!empty(esc_html($this->nfSubData->get_field_value('minor'))) ? esc_html($this->nfSubData->get_field_value('minor')) : 'Geen minor' ) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
@@ -113,8 +113,8 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Case studie afbeelding link</th>';
-        $output .= '<td><a href="' . esc_url($this->nfSubData->get_field_value('case_study_image_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_image_url')) . '</a></td>';
+        $output .= '<th>Case studie afbeelding</th>';
+        $output .= '<td><img id="csi-admin-info-img" src="' . esc_url($this->nfSubData->get_field_value('case_study_image_url')) . '">' . '</td>';
         $output .= '</tr>';
 
         $output .= '</table>';

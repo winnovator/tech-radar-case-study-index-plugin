@@ -45,3 +45,9 @@ select[name="nfFormTable_length"] {
 .submit-button {
     margin: 0.2vw !important;
 }
+
+#csi-admin-info-img {
+    max-height: 250px;
+    max-width: 250px;
+    margin: 10px;
+}
