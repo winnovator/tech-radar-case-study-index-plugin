@@ -5,4 +5,5 @@ if (!defined('ABSPATH')) {
 
 class CaseStudyIndexSettings {
     public static $formID = 7;
+    public static $emailOn = true;
 }

@@ -342,9 +342,11 @@
     width: auto;
 }
 
-#csi-public-info-modal-body-content-contact-table, #csi-public-info-modal-body-content-details-table,
-#csi-public-info-modal-body-content-context-table, #csi-public-info-modal-body-content-links-table {
-    table-layout:fixed;
+#csi-public-info-modal-body-content-contact-table,
+#csi-public-info-modal-body-content-details-table,
+#csi-public-info-modal-body-content-context-table,
+#csi-public-info-modal-body-content-links-table {
+    table-layout: fixed;
 }
 
 .csi-public-info-modal-open {
@@ -360,10 +362,20 @@
     height: 60px;
     -webkit-animation: spin 0.5s linear infinite;
     animation: spin 0.5s linear infinite;
-    margin:auto;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    position:fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
