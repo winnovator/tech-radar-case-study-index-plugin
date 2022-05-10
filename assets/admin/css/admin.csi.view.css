@@ -47,7 +47,8 @@ select[name="nfFormTable_length"] {
 }
 
 #csi-admin-info-img {
-    max-height: 250px;
+    height: auto;
     max-width: 250px;
     margin: 10px;
+    object-fit: contain;
 }

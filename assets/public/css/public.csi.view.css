@@ -98,9 +98,10 @@
 
 .csi-public-item-img {
     display: block;
-    max-height: 250px;
+    height: auto;
     max-width: 250px;
-    margin-left: 1vw;
+    margin-left: 10px;
+    object-fit: contain;
 }
 
 @media screen and (max-width: 550px) {
@@ -307,9 +308,11 @@
 
 #csi-public-info-modal-body-image {
     grid-area: modal-body-image;
-    max-height: 250px;
+    display: block;
+    height: auto;
     max-width: 250px;
     margin: 10px;
+    object-fit: contain;
 }
 
 #csi-public-info-modal-body-actions {
@@ -342,4 +345,8 @@
 #csi-public-info-modal-body-content-contact-table, #csi-public-info-modal-body-content-details-table,
 #csi-public-info-modal-body-content-context-table, #csi-public-info-modal-body-content-links-table {
     table-layout:fixed;
+}
+
+.csi-public-info-modal-open {
+    font-size: larger;
 }

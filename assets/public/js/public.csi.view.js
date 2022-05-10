@@ -248,7 +248,7 @@ function convertToSingleTypeArr(arr, prop) {
         });
     }
 
-    return parentArr
+    return parentArr;
 }
 
 function setPaginationButtons(totalPageCount) {
@@ -308,7 +308,7 @@ function renderOutput(arr) {
             let sbiCode = getSingleSbiByCode(element.sbi);
 
             htmlString += '<div class="csi-element-container csi-element-item">';
-            htmlString += '<h1><a class="csi-public-info-modal-open" href="#/" data-sub-id="' + element.id + '">' + element.project_name + '</a></h1>';
+            htmlString += '<h1><button class="csi-public-info-modal-open" data-sub-id="' + element.id + '">' + element.project_name + '</button></h1>';
             htmlString += '<div class="csi-public-item-content">';
             htmlString += '<table class="csi-public-item-table">';
 
@@ -322,7 +322,7 @@ function renderOutput(arr) {
 
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Meta Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
             htmlString += '</table>';
-            htmlString += '<img class="csi-public-item-img" src=' + element.case_study_image_url + '>';
+            htmlString += '<img class="csi-public-item-img" src="' + element.case_study_image_url + '" onerror="this.src=\'' + public_csi_tech_radar_logo_image.url + '\';">';
             htmlString += '</div>';
             htmlString += '</div>';
         });
@@ -548,7 +548,7 @@ function renderInfoModalBody(data) {
     htmlString += '</div>';
 
     htmlString += '<div id="csi-public-info-modal-body-image">';
-    htmlString += '<img src=' + data.case_study_image_url + '>';
+    htmlString += '<img src="' + data.case_study_image_url + '" onerror="this.src=\'' + public_csi_tech_radar_logo_image.url + '\';">';
     htmlString += '</div>';
 
     htmlString += '<div id="csi-public-info-modal-body-actions">';
