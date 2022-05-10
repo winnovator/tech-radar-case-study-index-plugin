@@ -264,12 +264,14 @@ function setPaginationButtons(totalPageCount) {
         
         if (currentPageCount == 1) {
             jQuery('#csi-previous-page').prop('disabled', true);
+            jQuery('#csi-next-page').prop('disabled', false);
             jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
             return;
         }
 
         if (currentPageCount == totalPageCount) {
             jQuery('#csi-next-page').prop('disabled', true);
+            jQuery('#csi-previous-page').prop('disabled', false);
             jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
             return;
         }
