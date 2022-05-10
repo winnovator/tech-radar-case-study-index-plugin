@@ -19,6 +19,9 @@ jQuery(document).ready( function() {
             { data: 'link' }
         ],
         'lengthMenu': [ 5, 10, 25 ],
-        'pageLength': 25
+        'pageLength': 25,
+        language: {
+			url: admin_csi_datatables_dutch_lang.url
+		}
     });
 } );

@@ -43,8 +43,8 @@ class AdminCaseStudyIndexController extends AdminCaseStudyIndex {
                 ];
 
                 $childArrwpPublishedArr = [
-                    'status' => $wpCsiArr[$counter]->new == 1 ? 'New' : 'Existing',
-                    'published' => $wpCsiArr[$counter]->published == 1 ? 'Yes' : 'No',
+                    'status' => $wpCsiArr[$counter]->new == 1 ? 'Nieuw' : 'Bestaand',
+                    'published' => $wpCsiArr[$counter]->published == 1 ? 'Ja' : 'Nee',
                     'link' => '<a href="' . esc_url($url) . '" target="_blank"><span class="dashicons dashicons-admin-page"></span></a>'
                 ];
                 

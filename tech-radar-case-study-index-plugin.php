@@ -75,6 +75,7 @@ class TechRadarCaseStudyIndexPlugin {
         wp_enqueue_script('datatables.min', plugins_url('/assets/admin/js/datatables.min.js', __FILE__));
         wp_enqueue_script('admin.csi.view', plugins_url('/assets/admin/js/admin.csi.view.js', __FILE__));
         wp_localize_script('admin.csi.view', 'admin_csi_ajax_obj', array('url' => esc_url(rest_url("csi-plugin/v1/admin-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
+        wp_localize_script('admin.csi.view', 'admin_csi_datatables_dutch_lang', array('url' => plugins_url('/assets/admin/js/dataTables.dutch.json', __FILE__)));
         wp_enqueue_script('admin.csi.info.view', plugins_url('/assets/admin/js/admin.csi.info.view.js', __FILE__));
         wp_localize_script('admin.csi.info.view', 'admin_csi_info_ajax_obj', array('url' => esc_url(rest_url("csi-plugin/v1/admin-csi/info")), 'nonce' => wp_create_nonce('wp_rest'), "redirect_url" => esc_url_raw(admin_url('admin.php?page=admin-csi'))));
         wp_localize_script('admin.csi.info.view', 'admin_csi_info_tech_radar_logo_image', array('url' => plugins_url('/assets/shared/images/windesheim_tech_radar_logo.png',__FILE__)));

@@ -11,11 +11,11 @@ class AdminCaseStudyIndexView extends AdminCaseStudyIndexController {
     public function renderFormFields() {
         echo '<tr>';
         echo '<th>ID</th>';
-        echo '<th>Project Name</th>';
-        echo '<th>SBI</th>';
-        echo '<th>Project owner</th>';
+        echo '<th>Projectnaam</th>';
+        echo '<th>Sector (SBI-code)</th>';
+        echo '<th>Projecteigenaar</th>';
         echo '<th>Status</th>';
-        echo '<th>Published</th>';
+        echo '<th>Gepubliceerd</th>';
         echo '<th>Link</th>';
         echo '</tr>';
     }
