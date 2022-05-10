@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
  * Description:       Plugin for the Technology Radar Case Study Index. Works with Wordpress version 5.9.3 and Ninja Forms version 3.6.9.
  * Version:           0.2
  * Author:            Mike Harman
- * Text Domain:       tech-radar-case-study-index-plugin-02
+ * Text Domain:       tech-radar-case-study-index-plugin
  * Domain Path:       /languages
 */
 
