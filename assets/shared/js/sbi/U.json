@@ -1,1 +1,1 @@
-[{"Code":"99","Title":"Extraterritoriale organisaties en lichamen"},{"Code":"990","Title":"Extraterritoriale organisaties en lichamen"},{"Code":"9900","Title":"Extraterritoriale organisaties en lichamen"}]
+[{"id":"99","title":"Extraterritoriale organisaties en lichamen","parentId":"U"},{"id":"990","title":"Extraterritoriale organisaties en lichamen","parentId":"99"},{"id":"9900","title":"Extraterritoriale organisaties en lichamen","parentId":"990"}]

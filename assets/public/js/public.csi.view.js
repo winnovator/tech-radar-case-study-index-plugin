@@ -5,7 +5,7 @@ jQuery.noConflict();
 var currentPageCount = 1;
 
 jQuery(document).ready(function () {
-    loadCsi();  
+    loadCsi();
 });
 
 async function loadCsi() {
@@ -137,61 +137,14 @@ function getHaystack(arr) {
 
 function getSingleSbiByCode(code) {
     let allSbiData = getStorage(sessionStorage, 'public-csi-sbi-list');
-
-    for (let sbiElement of allSbiData) {
-        for (let element of sbiElement.Codes)
-            if (code === element.Code) {
-                return { Code: code, Title: element.Title, Letter: sbiElement.Letter, SectionTitle: sbiElement.Title }
-            }
-    }
-
-    return { Code: code, Title: 'Onbekend', Letter: 'Overige', SectionTitle: 'Overige' };
+    return allSbiData.find(element => code == element.id);
 }
 
 function getAvailableSbiCodes() {
-    let availableSbiData = getStorage(sessionStorage, 'public-csi-default-data');
-    let resultArr = [];
-    let exist = [];
-    
-    availableSbiData.forEach(element => {
-        if (!exist.includes(element.sbi)) {
-            resultArr.push(getSingleSbiByCode(element.sbi));
-            exist.push(element.sbi);
-        }
-    });
-
-    return sortByLetter(resultArr);
-}
-
-function getAllSbiByLetter(letter) {
-    let availableSbiData = getAvailableSbiCodes();
-    let resultArr = [];
-
-    availableSbiData.forEach(element => {
-        if (letter == element.Letter) {
-            resultArr.push(element);
-        }
-    });
-
-    return resultArr;
-}
-
-function sortByLetter(dataArr) {
-    let letterArr = [];
-    dataArr.forEach(element => { letterArr.push(element.Letter); });
-    let filteredLetterArr = arrayUnique(letterArr);
-    let sortedLetterArr = filteredLetterArr.sort();
-    let resultArr = [];
-
-    sortedLetterArr.forEach(letterElement => {
-        dataArr.forEach(element => { 
-            if (letterElement == element.Letter) {
-                resultArr.push(element);
-            }
-        });
-    });
-
-    return resultArr;
+    let csiData = getStorage(sessionStorage, 'public-csi-default-data');
+    let allAvailableSbi = csiData.map(element => element.sbi);
+    let allSbiData = getStorage(sessionStorage, 'public-csi-sbi-list');
+    return allSbiData.filter(element => allAvailableSbi.includes(element.id));
 }
 
 //Pagination functions
@@ -261,7 +214,7 @@ function setPaginationButtons(totalPageCount) {
             jQuery('#csi-current-page').text(currentPageCount + ' - ' + totalPageCount);
             return;
         }
-        
+
         if (currentPageCount == 1) {
             jQuery('#csi-previous-page').prop('disabled', true);
             jQuery('#csi-next-page').prop('disabled', false);
@@ -320,7 +273,7 @@ function renderOutput(arr) {
 
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Michael Porter\'s Value Chain: </th><td class="csi-item-td">' + element.porter.join(', ') + '</td></tr>';
 
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + sbiCode.Code + ' - ' + sbiCode.Title + '</td></tr>';
+            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + (sbiCode != null ? sbiCode.id + ' - ' + sbiCode.title : element.sbi + " - Onbekend") + '</td></tr>';
 
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Meta Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
             htmlString += '</table>';
@@ -398,47 +351,75 @@ function renderSidePanel(arr) {
 }
 
 function renderSbiTree() {
-    let allSbiCodes = getAvailableSbiCodes();
-    
-    renderSbiTreeSections(allSbiCodes);
-    renderSbiTreePerSection(allSbiCodes);
-    initSbiTreeEvents();
-}
-
-function renderSbiTreeSections(dataArr) {
-    let contentSelector = jQuery('#sbi-tree-view-container');
     let htmlString = '';
-    let existsArr = [];
+    let allSbiCodes = getAvailableSbiCodes();
+    let allSbiData = getStorage(sessionStorage, 'public-csi-sbi-list');
+    let idOneChar = allSbiData.filter(element => element.id.length == 1);
+    let idTwoChar = allSbiData.filter(element => element.id.length == 2);
+    let idThreeChar = allSbiData.filter(element => element.id.length == 3);
+    let idFourChar = allSbiData.filter(element => element.id.length == 4);
+    let idFiveChar = allSbiData.filter(element => element.id.length == 5);
 
+    //First rows
     htmlString += '<ul id="csi-sbi-ul">';
+    for (let element of idOneChar) {
+        htmlString += '<li class="csi-sbi-root-li">' + '<span class="csi-sbi-caret">' + element.id + ' - ' + element.title + '<b class="csi-sbi-element-count"></b></span><ul class="csi-sbi-nested" data-sbi-parent-id="' + element.id + '"></ul></li>';
+    }
+    htmlString += '</ul>';
+    jQuery('#sbi-tree-view-container').append(jQuery.parseHTML(htmlString));
 
-    dataArr.forEach(element => {
-        if (!existsArr.includes(element.Letter)) {
-            htmlString += '<li id="sbi-tree-view-section-' + element.Letter + '" class="sbi-tree-view-section">' + '<span class="csi-sbi-caret">' + element.Letter + ' - ' + element.SectionTitle + '</span></li>';
-            existsArr.push(element.Letter);
+    //Second rows
+    for (let element of idTwoChar) {
+        htmlString = '';
+        htmlString += '<li class="csi-sbi-li"><span class="csi-sbi-caret"></span><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '<ul class="csi-sbi-nested" data-sbi-parent-id="' + element.id + '"></ul></i>';
+        jQuery('.csi-sbi-nested[data-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(htmlString));
+    }
+
+    //Third rows
+    for (let element of idThreeChar) {
+        htmlString = '';
+        htmlString += '<li class="csi-sbi-li"><span class="csi-sbi-caret"></span><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '<ul class="csi-sbi-nested" data-sbi-parent-id="' + element.id + '"></ul></i>';
+        jQuery('.csi-sbi-nested[data-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(htmlString));
+    }
+
+    //Fourth rows
+    for (let element of idFourChar) {
+        htmlString = '';
+        htmlString += '<li class="csi-sbi-li"><span class="csi-sbi-caret"></span><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '<ul class="csi-sbi-nested" data-sbi-parent-id="' + element.id + '"></ul></i>';
+        jQuery('.csi-sbi-nested[data-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(htmlString));
+    }
+
+    //Fifth rows
+    for (let element of idFiveChar) {
+        htmlString = '';
+        htmlString += '<li class="csi-sbi-li"></span><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '</i>';
+        jQuery('.csi-sbi-nested[data-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(htmlString));
+    }
+
+    //Styling sanitization
+    jQuery('.csi-sbi-nested:empty').parent('.csi-sbi-li').find('span').remove();
+    jQuery('.csi-sbi-nested:empty').remove();
+    jQuery('input[name="sbi"]').attr('disabled', true);
+
+    for (let element of allSbiCodes) {
+        jQuery('input[name="sbi"][value="' + element.id + '"]').removeAttr('disabled');
+    }
+
+    jQuery('.csi-sbi-root-li').each(function() {
+        let elementCount = jQuery(this).find('input[name="sbi"]').not(':disabled').length;
+
+        if (elementCount > 0) {
+            jQuery(this).find('.csi-sbi-element-count').text(' - ' + elementCount + ' filters');
+            jQuery(this).find('.csi-sbi-element-count').css('font-size', '15px');
+        }
+
+        if (elementCount == 0) {
+            jQuery(this).remove();
         }
     });
 
-    htmlString += '</ul>';
-
-    contentSelector.html(jQuery.parseHTML(htmlString));
-}
-
-function renderSbiTreePerSection(dataArr) {
-    dataArr.forEach(element => {
-        let contentSelector = jQuery('#sbi-tree-view-section-' + element.Letter);
-        let htmlString = '';
-
-        htmlString += '<ul class="csi-sbi-nested">';
-        
-        getAllSbiByLetter(element.Letter).forEach(element => {
-            htmlString += '<li class="csi-sbi-li"><label for="sbi"><input class="csi-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.Code + '"/>' + element.Code + ' - ' + element.Title + '</label>';
-        });
-        
-        htmlString += '</ul>';
-
-        contentSelector.append(jQuery.parseHTML(htmlString));
-    });
+    //Init events
+    initSbiTreeEvents();
 }
 
 function initSbiTreeEvents() {
@@ -479,7 +460,7 @@ function renderInfoPage() {
     jQuery('.csi-public-info-modal-open').click(function (event) {
         event.preventDefault();
         let subID = event.currentTarget.getAttribute("data-sub-id");
-        
+
         jQuery.when(getCsiData(public_csi_ajax_info_obj.url + subID, public_csi_ajax_info_obj.nonce)).done(function (data) {
             renderModal('Case studie informatie', renderInfoModalBody(data), 'Copyright © 2022 Windesheim Technology Radar');
             initModalEvents();
@@ -505,7 +486,7 @@ function renderInfoModalBody(data) {
     htmlString += '<tr><td>' + data.project_owner_email + '</td></tr>';
     htmlString += '</table>';
     htmlString += '</div>';
-    
+
     htmlString += '<div id="csi-public-info-modal-body-content-details">';
     htmlString += '<h2>Details</h2>';
     htmlString += '<table id="csi-public-info-modal-body-content-details-table">';
@@ -569,7 +550,7 @@ function initModalEvents() {
 
     modal.css('display', 'block');
     body.css('overflow', 'hidden');
-    
+
     span.click(function () {
         modal.css('display', 'none');
         body.css('overflow', 'auto');

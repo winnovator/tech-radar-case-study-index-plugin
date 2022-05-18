@@ -52,12 +52,13 @@ class PublicCaseStudyIndex
         }
         
         foreach ($sections as $section) {
-            if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->Letter . '.json')) {
-                $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->Letter . '.json'));
-                array_push($dataArr, ['Letter' => $section->Letter, 'Title' => ucfirst(strtolower($section->Title)), 'Codes' => $codes]);
+            if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json')) {
+                $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json'));
+                array_unshift($codes, ['id' => $section->id, 'title' => $section->title, 'parentId' => $section->parent]);
+                array_push($dataArr, $codes);
             }
         }
 
-        return $dataArr;
+        return array_merge(...$dataArr);
     }
 }
