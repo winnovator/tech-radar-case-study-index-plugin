@@ -10,14 +10,15 @@ jQuery(document).ready(function () {
 
 async function loadCsi() {
     let csiData = await getCsiData(public_csi_ajax_obj.url, public_csi_ajax_obj.nonce);
-    let sbiData = await getAllSbiData(public_csi_ajax_all_sbi_obj.url, public_csi_ajax_all_sbi_obj.nonce)
-
     removeStorage(sessionStorage, 'public-csi-default-data');
     removeStorage(sessionStorage, 'public-csi-filtered-data');
     saveStorage(sessionStorage, 'public-csi-default-data', csiData);
 
-    removeStorage(sessionStorage, 'public-csi-sbi-list');
-    saveStorage(sessionStorage, 'public-csi-sbi-list', sbiData);
+    if (!checkIfStorageKeyExists(sessionStorage, 'public-csi-sbi-list')) {
+        let sbiData = await getAllSbiData(public_csi_ajax_all_sbi_obj.url, public_csi_ajax_all_sbi_obj.nonce)
+        removeStorage(sessionStorage, 'public-csi-sbi-list');
+        saveStorage(sessionStorage, 'public-csi-sbi-list', sbiData);
+    }
 
     let jsonDefaultData = getStorage(sessionStorage, 'public-csi-default-data');
     let totalPageCount = divideArr(jsonDefaultData).length;
@@ -570,6 +571,13 @@ function getStorage(type, name) {
 
 function removeStorage(type, name) {
     type.removeItem(name);
+}
+
+function checkIfStorageKeyExists(type, name) {
+    if (type.getItem(name) === null) {
+        return false;
+    }
+    return true;
 }
 
 //Mobile responsive functionalities
