@@ -363,7 +363,7 @@ function renderSbiTree() {
     //First rows
     htmlString += '<ul id="csi-sbi-ul">';
     for (let element of idOneChar) {
-        htmlString += '<li class="csi-sbi-root-li">' + '<span class="csi-sbi-caret">' + element.id + ' - ' + element.title + '<b class="csi-sbi-element-count"></b></span><ul class="csi-sbi-nested" data-sbi-parent-id="' + element.id + '"></ul></li>';
+        htmlString += '<li class="csi-sbi-li">' + '<span class="csi-sbi-caret">' + element.id + ' - ' + element.title + '<b class="csi-sbi-element-count"></b></span><ul class="csi-sbi-nested" data-sbi-parent-id="' + element.id + '"></ul></li>';
     }
     htmlString += '</ul>';
     jQuery('#sbi-tree-view-container').append(jQuery.parseHTML(htmlString));
@@ -397,15 +397,13 @@ function renderSbiTree() {
     }
 
     //Styling sanitization
-    jQuery('.csi-sbi-nested:empty').parent('.csi-sbi-li').find('span').remove();
-    jQuery('.csi-sbi-nested:empty').remove();
     jQuery('input[name="sbi"]').attr('disabled', true);
 
     for (let element of allSbiCodes) {
         jQuery('input[name="sbi"][value="' + element.id + '"]').removeAttr('disabled');
     }
 
-    jQuery('.csi-sbi-root-li').each(function() {
+    jQuery('.csi-sbi-li').each(function() {
         let elementCount = jQuery(this).find('input[name="sbi"]').not(':disabled').length;
 
         if (elementCount > 0) {
@@ -415,6 +413,8 @@ function renderSbiTree() {
 
         if (elementCount == 0) {
             jQuery(this).remove();
+            jQuery('.csi-sbi-nested:empty').parent('.csi-sbi-li').find('span').remove();
+            jQuery('.csi-sbi-nested:empty').remove();
         }
     });
 
