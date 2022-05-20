@@ -272,11 +272,11 @@ function renderOutput(arr) {
                 htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + element.minor + '</td></tr>';
             }
 
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Michael Porter\'s Value Chain: </th><td class="csi-item-td">' + element.porter.join(', ') + '</td></tr>';
+            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Value Chain (Michael Porter): </th><td class="csi-item-td">' + element.porter.join(', ') + '</td></tr>';
 
             htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + (sbiCode != null ? sbiCode.id + ' - ' + sbiCode.title : element.sbi + " - Onbekend") + '</td></tr>';
 
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Meta Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
+            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
             htmlString += '</table>';
             htmlString += '<img class="csi-public-item-img" src="' + element.case_study_image_url + '" onerror="this.src=\'' + public_csi_tech_radar_logo_image.url + '\';">';
             htmlString += '</div>';
