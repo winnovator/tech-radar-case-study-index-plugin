@@ -461,6 +461,9 @@ function renderInfoPage() {
     jQuery('.csi-public-info-modal-open').click(function (event) {
         event.preventDefault();
         let subID = event.currentTarget.getAttribute("data-sub-id");
+        let spanOpen = jQuery('.csi-public-info-modal-open');
+        
+        spanOpen.attr('disabled', 'disabled');
 
         jQuery.when(getCsiData(public_csi_ajax_info_obj.url + subID, public_csi_ajax_info_obj.nonce)).done(function (data) {
             renderModal('Case studie informatie', renderInfoModalBody(data), 'Copyright © 2022 Windesheim Technology Radar');
@@ -547,12 +550,14 @@ function renderInfoModalBody(data) {
 function initModalEvents() {
     let modal = jQuery("#csi-public-info-modal");
     let span = jQuery("#csi-public-info-modal-close");
+    let spanOpen = jQuery('.csi-public-info-modal-open');
     let body = jQuery("body");
 
     modal.css('display', 'block');
     body.css('overflow', 'hidden');
 
     span.click(function () {
+        spanOpen.removeAttr('disabled');
         modal.css('display', 'none');
         body.css('overflow', 'auto');
     });
@@ -607,7 +612,7 @@ function initMobileResponsive() {
     });
 
     submitButton.click(function () {
-        if (screen.width <= 550) {
+        if (screen.width <= 900) {
             filterButton.data('csi-filter-toggle', 'true');
             sidePanel.hide();
             content.show();
