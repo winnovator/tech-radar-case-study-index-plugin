@@ -622,7 +622,7 @@ function initMobileResponsive() {
 }
 
 function screenRules(sidePanel, content, pagination, filterButton) {
-    if (screen.width > 550) {
+    if (screen.width > 900) {
         sidePanel.show();
         content.show();
         pagination.show();
