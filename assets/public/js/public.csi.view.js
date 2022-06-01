@@ -527,8 +527,12 @@ function renderInfoModalBody(data) {
     htmlString += '<table id="csi-public-info-modal-body-content-links-table">';
     htmlString += '<tr><th>Website link</th></tr>';
     htmlString += '<tr><td><a href="' + (data.case_study_url.includes('http') ? data.case_study_url : 'http://' + data.case_study_url) + '" target="_blank">' + data.case_study_url + '</a></td></tr>';
-    htmlString += '<tr><th>Film link</th></tr>';
-    htmlString += '<tr><td><a href="' + (data.case_study_movie_url.includes('http') ? data.case_study_movie_url : 'http://' + data.case_study_movie_url) + '" target="_blank">' + data.case_study_movie_url + '</a></td></tr>';
+    
+    if (data.case_study_movie_url != '') {
+        htmlString += '<tr><th>Film link</th></tr>';
+        htmlString += '<tr><td><a href="' + (data.case_study_movie_url.includes('http') ? data.case_study_movie_url : 'http://' + data.case_study_movie_url) + '" target="_blank">' + data.case_study_movie_url + '</a></td></tr>';
+    }
+
     htmlString += '</table>';
     htmlString += '</div>';
 
