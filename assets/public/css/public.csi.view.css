@@ -96,7 +96,7 @@
     justify-content: space-between;
 }
 
-.csi-public-item-img {
+.csi-public-item-img, .csi-public-item-video {
     display: block;
     height: auto;
     max-width: 250px;

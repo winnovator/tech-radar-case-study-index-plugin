@@ -51,7 +51,7 @@ class TechRadarCaseStudyIndexPlugin {
     }
 
     public function addCsiAdminPages() {
-        add_menu_page('Case Study Index', 'Case Study Index', 'manage_options', 'admin-csi', [$this, 'adminCsiView'], 'dashicons-editor-table', 110);
+        add_menu_page('Case Studie Index', 'Case Studie Index', 'manage_options', 'admin-csi', [$this, 'adminCsiView'], 'dashicons-editor-table', 110);
         add_submenu_page(null, 'Case Study Index Info', 'Case Study Index Info', 'manage_options', 'admin-csi-info', [$this, 'adminCsiInfoView']);
     }
 

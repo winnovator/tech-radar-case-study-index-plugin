@@ -88,6 +88,11 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
         $output .= '</tr>';
 
         $output .= '<tr>';
+        $output .= '<th>SDG\'s</th>';
+        $output .= '<td>' .  esc_html(implode(', ', $this->nfSubData->get_field_value('sdg'))) . '</td>';
+        $output .= '</tr>';
+
+        $output .= '<tr>';
         $output .= '<th>Project context</th>';
         $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('project_context')) . '</td>';
         $output .= '</tr>';
@@ -103,18 +108,22 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Case studie informatie link</th>';
+        $output .= '<th>Case studie informatie</th>';
         $output .= '<td><a href="' . esc_url($this->nfSubData->get_field_value('case_study_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_url')) . '</a></td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Case studie video link</th>';
-        $output .= '<td><a href="' . esc_url($this->nfSubData->get_field_value('case_study_movie_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_movie_url')) . '</a></td>';
+        $output .= '<th>Video</th>';
+        $output .= '<td>';
+        $output .= '<video controls id="csi-admin-info-img">';
+        $output .= '<source src="' . esc_url(implode('', $this->nfSubData->get_field_value('case_study_video'))) . '" type="video/mp4">';
+        $output .= 'Sorry voor het ongemakt, de video werkt niet op het moment. </video>';
+        $output .= '</td>';
         $output .= '</tr>';
-
+    
         $output .= '<tr>';
-        $output .= '<th>Case studie afbeelding</th>';
-        $output .= '<td><img id="csi-admin-info-img" src="' . esc_url($this->nfSubData->get_field_value('case_study_image_url')) . '">' . '</td>';
+        $output .= '<th>Afbeelding</th>';
+        $output .= '<td><img id="csi-admin-info-img" src="' . esc_url(implode('', $this->nfSubData->get_field_value('case_study_image'))) . '">' . '</td>';
         $output .= '</tr>';
 
         $output .= '</table>';
@@ -133,14 +142,14 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
         $output .= '<div id="submit-wrap">';
 
         if ($this->wpCsiData[0]->published == 1) {
-            $output .= '<button id="admin-csi-info-depublish-button" class="submit-button button action" type="button">Depublish</button>';
+            $output .= '<button id="admin-csi-info-depublish-button" class="submit-button button action" type="button">Verbergen</button>';
         }
 
         if ($this->wpCsiData[0]->published == 0) {
-            $output .= '<button id="admin-csi-info-publish-button" class="submit-button button action" type="button">Publish</button>';
+            $output .= '<button id="admin-csi-info-publish-button" class="submit-button button action" type="button">Publiceren</button>';
         }
 
-        $output .= '<button id="admin-csi-info-delete-button" class="submit-button button action" type="button">Delete</button>';
+        $output .= '<button id="admin-csi-info-delete-button" class="submit-button button action" type="button">Verwijderen</button>';
         $output .= '</div>';
 
         echo $output;

@@ -32,8 +32,9 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
                     'porter' => $element->get_field_value('porter'),
                     'sbi' => $element->get_field_value('sbi'),
                     'meta_trends' => $element->get_field_value('meta_trends'),
+                    'sdg' => $element->get_field_value('sdg'),
                     'case_study_url' => $element->get_field_value('case_study_url'),
-                    'case_study_image_url' => $element->get_field_value('case_study_image_url')
+                    'case_study_image' => $element->get_field_value('case_study_image')
                 ];
 
                 array_push($parentArr, $childArr);
@@ -63,12 +64,13 @@ class PublicCaseStudyIndexController extends PublicCaseStudyIndex {
             'tech_providers' => $subArr->get_field_value('tech_providers'),
             'meta_trends' => $subArr->get_field_value('meta_trends'),
             'company_sector' => $subArr->get_field_value('company_sector'),
+            'sdg' => $subArr->get_field_value('sdg'),
             'project_context' => $subArr->get_field_value('project_context'),
             'project_problem' => $subArr->get_field_value('project_problem'),
             'project_goal' => $subArr->get_field_value('project_goal'),
             'case_study_url' => $subArr->get_field_value('case_study_url'),
-            'case_study_movie_url' => $subArr->get_field_value('case_study_movie_url'),
-            'case_study_image_url' => $subArr->get_field_value('case_study_image_url')
+            'case_study_video' => $subArr->get_field_value('case_study_video'),
+            'case_study_image' => $subArr->get_field_value('case_study_image')
             ];
 
         return $arr;

@@ -15,7 +15,7 @@ select[name="nfFormTable_length"] {
 }
 
 .paginate_button {
-    margin: 10px;
+    margin: 3px;
     color: #2271b1 !important;
     border-color: #2271b1 !important;
     background: #f6f7f7 !important;
@@ -39,6 +39,8 @@ select[name="nfFormTable_length"] {
 }
 
 #csi-info-data-table > tbody > tr > td {
+    display: flex;
+    justify-content: flex-start;
     word-break: break-all;
 }
 
@@ -46,9 +48,8 @@ select[name="nfFormTable_length"] {
     margin: 0.2vw !important;
 }
 
-#csi-admin-info-img {
+#csi-admin-info-img, #csi-admin-info-video {
     height: auto;
     max-width: 250px;
-    margin: 10px;
     object-fit: contain;
 }

@@ -112,7 +112,7 @@ function filter(needle, arr) {
                 resultsArr.push(arr[index]);
             }
         });
-
+        console.log(haystack);
         return resultsArr;
     }
     else {
@@ -126,10 +126,7 @@ function getHaystack(arr) {
     if (arr !== null && arr.length > 0) {
         arr.forEach(element => {
             mainArr = [element.minor, element.project_stage, element.sbi];
-            porterArr = element.porter;
-            metaArr = element.meta_trends;
-
-            resultArr.push(mainArr.concat(porterArr, metaArr));
+            resultArr.push(mainArr.concat(element.porter, element.meta_trends, element.sdg));
         });
     }
 
@@ -259,26 +256,48 @@ function renderOutput(arr) {
     let contentSelector = jQuery('#csi-content');
     let htmlString = '';
 
-    if (arr !== null && arr.length > 0) {
+    if (arr) {
         arr.forEach(element => {
-            let sbiCode = getSingleSbiByCode(element.sbi);
-
             htmlString += '<div class="csi-element-container csi-element-item">';
-            htmlString += '<h1><button class="csi-public-info-modal-open" data-sub-id="' + element.id + '">' + element.project_name + '</button></h1>';
+
+            if (element.id && element.project_name) {
+                htmlString += '<h1><button class="csi-public-info-modal-open" data-sub-id="' + element.id + '">' + element.project_name + '</button></h1>';
+            }
+
             htmlString += '<div class="csi-public-item-content">';
             htmlString += '<table class="csi-public-item-table">';
 
-            if (element.minor != '') {
+            if (element.minor) {
                 htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Minor: </th><td class="csi-item-td">' + element.minor + '</td></tr>';
             }
 
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Value Chain (Michael Porter): </th><td class="csi-item-td">' + element.porter.join(', ') + '</td></tr>';
+            if (element.porter) {
+                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Value Chain (Michael Porter): </th><td class="csi-item-td">' + element.porter.join(', ') + '</td></tr>';
+            }
+            
+            if (element.sbi) {
+                let sbiCode = getSingleSbiByCode(element.sbi);
+                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + (sbiCode ? sbiCode.id + ' - ' + sbiCode.title : element.sbi + " - Onbekend") + '</td></tr>';
+            }
 
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SBI-code: </th><td class="csi-item-td">' + (sbiCode != null ? sbiCode.id + ' - ' + sbiCode.title : element.sbi + " - Onbekend") + '</td></tr>';
+            if (element.meta_trends) {
+                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
 
-            htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">Trends: </th><td class="csi-item-td">' + (Array.isArray(element.meta_trends) ? element.meta_trends.join(', ') : (element.meta_trends.length > 0 ? element.meta_trends : 'Geen trends')) + '</td></tr>';
+            }
+            
+            if (element.sdg) {
+                htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SDG\'s: </th><td class="csi-item-td">' + element.sdg.join(', ') + '</td></tr>';
+            }
+
             htmlString += '</table>';
-            htmlString += '<img class="csi-public-item-img" src="' + element.case_study_image_url + '" onerror="this.src=\'' + public_csi_tech_radar_logo_image.url + '\';">';
+
+            if (element.case_study_image) {
+                htmlString += '<img class="csi-public-item-img" src="' + Object.values(element.case_study_image).join('') + '" onerror="this.src=\'' + public_csi_tech_radar_logo_image.url + '\';">';
+            }
+            else {
+                htmlString += '<img class="csi-public-item-img" src="' + public_csi_tech_radar_logo_image.url + '">';
+            }
+
             htmlString += '</div>';
             htmlString += '</div>';
         });
@@ -300,45 +319,65 @@ function renderSidePanel(arr) {
     let uniqueMinorArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'minor')));
     let uniquePorterArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'porter')));
     let uniqueMetaTrendsArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'meta_trends')));
+    let uniqueSdgArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'sdg')));
 
     let htmlString = '';
 
-    if (arr !== null && arr.length > 0) {
-        htmlString += '<div>';
-        htmlString += '<h1>Trends</h1>';
-        htmlString += '<ul class="csi-side-panel-ul">';
+    if (arr) {
+        if (uniqueMetaTrendsArr) {
+            htmlString += '<div>';
+            htmlString += '<h1>Trends</h1>';
+            htmlString += '<ul class="csi-side-panel-ul">';
+    
+            uniqueMetaTrendsArr.forEach(element => {
+                htmlString += '<li><label for="meta-trends"><input class="csi-side-panel-checkbox" type="checkbox" name="meta_trends" value="' + element + '"/>' + element + '</label></li>';
+            });
+    
+            htmlString += '</ul>';
+            htmlString += '</div>';
+        }
 
-        uniqueMetaTrendsArr.forEach(element => {
-            htmlString += '<li><label for="meta-trends"><input class="csi-side-panel-checkbox" type="checkbox" name="meta_trends" value="' + element + '"/>' + element + '</label></li>';
-        });
-
-        htmlString += '</ul>';
-        htmlString += '</div>';
-
-        htmlString += '<div>';
-        htmlString += '<h1>Value Chain (Michael Porter)</h1>';
-        htmlString += '<ul class="csi-side-panel-ul">';
-
-        uniquePorterArr.forEach(element => {
-            htmlString += '<li><label for="porter"><input class="csi-side-panel-checkbox" type="checkbox" name="porter" value="' + element + '"/>' + element + '</label></li>';
-        });
-
-        htmlString += '</ul>';
-        htmlString += '</div>';
+        if (uniquePorterArr) {
+            htmlString += '<div>';
+            htmlString += '<h1>Value Chain (Michael Porter)</h1>';
+            htmlString += '<ul class="csi-side-panel-ul">';
+    
+            uniquePorterArr.forEach(element => {
+                htmlString += '<li><label for="porter"><input class="csi-side-panel-checkbox" type="checkbox" name="porter" value="' + element + '"/>' + element + '</label></li>';
+            });
+    
+            htmlString += '</ul>';
+            htmlString += '</div>';
+        }
 
         htmlString += '<h1>Sector (SBI-code)</h1>';
         htmlString += '<div id="sbi-tree-view-container"></div>';
 
-        htmlString += '<div>';
-        htmlString += '<h1>Windesheim Minor</h1>';
-        htmlString += '<ul class="csi-side-panel-ul">';
+        if (uniqueMinorArr) {
+            htmlString += '<div>';
+            htmlString += '<h1>Windesheim Minor</h1>';
+            htmlString += '<ul class="csi-side-panel-ul">';
+    
+            uniqueMinorArr.forEach(element => {
+                htmlString += '<li><label for="minor"><input class="csi-side-panel-checkbox" type="checkbox" name="minor" value="' + element + '"/>' + element + '</label></li>';
+            });
+    
+            htmlString += '</ul>';
+            htmlString += '</div>';
+        }
 
-        uniqueMinorArr.forEach(element => {
-            htmlString += '<li><label for="minor"><input class="csi-side-panel-checkbox" type="checkbox" name="minor" value="' + element + '"/>' + element + '</label></li>';
-        });
+        if (uniqueSdgArr && uniqueSdgArr.length > 0) {
+            htmlString += '<div>';
+            htmlString += '<h1>SDG\'s</h1>';
+            htmlString += '<ul class="csi-side-panel-ul">';
 
-        htmlString += '</ul>';
-        htmlString += '</div>';
+            uniqueSdgArr.forEach(element => {
+                htmlString += '<li><label for="sdg"><input class="csi-side-panel-checkbox" type="checkbox" name="sdg" value="' + element + '"/>' + element + '</label></li>';
+            });
+    
+            htmlString += '</ul>';
+            htmlString += '</div>';
+        }
 
         htmlString += '<div id="csi-submit-container"><button id="csi-submit">Verzenden</button></div>';
     }
@@ -475,78 +514,140 @@ function renderInfoPage() {
 function renderInfoModalBody(data) {
     let htmlString = '';
 
-    htmlString += '<div id="csi-public-info-modal-body-container">';
-
-    htmlString += '<div id="csi-public-info-modal-body-content">';
-
-    htmlString += '<div id="csi-public-info-modal-body-content-contact">';
-    htmlString += '<h2>Contactinformatie</h2>';
-    htmlString += '<table id="csi-public-info-modal-body-content-contact-table">';
-    htmlString += '<tr><th>Projectnaam</th></tr>';
-    htmlString += '<tr><td>' + data.project_name + '</td></tr>';
-    htmlString += '<tr><th>Projecteigenaar</th></tr>';
-    htmlString += '<tr><td>' + data.project_owner + '</td></tr>';
-    htmlString += '<tr><th>Projectemail</th></tr>';
-    htmlString += '<tr><td>' + data.project_owner_email + '</td></tr>';
-    htmlString += '</table>';
-    htmlString += '</div>';
-
-    htmlString += '<div id="csi-public-info-modal-body-content-details">';
-    htmlString += '<h2>Details</h2>';
-    htmlString += '<table id="csi-public-info-modal-body-content-details-table">';
-    htmlString += data.minor != '' ? '<tr><th>Minor</th></tr><tr><td>' + data.minor + '</td></tr>' : '';
-    htmlString += '<tr><th>SBI-code</th></tr>';
-    htmlString += '<tr><td>' + data.sbi + '</td></tr>';
-    htmlString += '<tr><th>Technologie innovaties</th></tr>';
-    htmlString += '<tr><td>' + data.tech_innovations + '</td></tr>';
-    htmlString += '<tr><th>Technologieleveranciers</th></tr>';
-    htmlString += '<tr><td>' + data.tech_providers + '</td></tr>';
-    htmlString += '<tr><th>Trends</th></tr>';
-    htmlString += '<tr><td>' + data.meta_trends.join(', ') + '</td></tr>';
-    htmlString += '<tr><th>Value Chain (Michael Porter)</th></tr>';
-    htmlString += '<tr><td>' + data.porter + '</td></tr>';
-    htmlString += '<tr><th>Bedrijfssector</th></tr>';
-    htmlString += '<tr><td>' + data.company_sector + '</td></tr>';
-    htmlString += '</table>';
-    htmlString += '</div>';
-
-    htmlString += '<div id="csi-public-info-modal-body-content-context">';
-    htmlString += '<h2>Project context</h2>';
-    htmlString += '<table id="csi-public-info-modal-body-content-context-table">';
-    htmlString += '<tr><th>Projectcontext</th></tr>';
-    htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_context + '</td></tr>';
-    htmlString += '<tr><th>Projectprobleem</th></tr>';
-    htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_problem + '</td></tr>';
-    htmlString += '<tr><th>Projectdoel</th></tr>';
-    htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_goal + '</td></tr>';
-    htmlString += '</table>';
-    htmlString += '</div>';
-
-    htmlString += '<div id="csi-public-info-modal-body-content-links">';
-    htmlString += '<h2>Links</h2>';
-    htmlString += '<table id="csi-public-info-modal-body-content-links-table">';
-    htmlString += '<tr><th>Website link</th></tr>';
-    htmlString += '<tr><td><a href="' + (data.case_study_url.includes('http') ? data.case_study_url : 'http://' + data.case_study_url) + '" target="_blank">' + data.case_study_url + '</a></td></tr>';
+    if (data) {
+        htmlString += '<div id="csi-public-info-modal-body-container">';
+        htmlString += '<div id="csi-public-info-modal-body-content">';
     
-    if (data.case_study_movie_url != '') {
-        htmlString += '<tr><th>Film link</th></tr>';
-        htmlString += '<tr><td><a href="' + (data.case_study_movie_url.includes('http') ? data.case_study_movie_url : 'http://' + data.case_study_movie_url) + '" target="_blank">' + data.case_study_movie_url + '</a></td></tr>';
+        htmlString += '<div id="csi-public-info-modal-body-content-contact">';
+        htmlString += '<h2>Contactinformatie</h2>';
+        htmlString += '<table id="csi-public-info-modal-body-content-contact-table">';
+    
+        if (data.project_name) {
+            htmlString += '<tr><th>Projectnaam</th></tr>';
+            htmlString += '<tr><td>' + data.project_name + '</td></tr>';
+        }
+    
+        if (data.project_owner) {
+            htmlString += '<tr><th>Projecteigenaar</th></tr>';
+            htmlString += '<tr><td>' + data.project_owner + '</td></tr>';
+        }
+        
+        if (data.project_owner_email) {
+            htmlString += '<tr><th>Projectemail</th></tr>';
+            htmlString += '<tr><td>' + data.project_owner_email + '</td></tr>';
+        }
+    
+        htmlString += '</table>';
+        htmlString += '</div>';
+    
+        htmlString += '<div id="csi-public-info-modal-body-content-details">';
+        htmlString += '<h2>Details</h2>';
+        htmlString += '<table id="csi-public-info-modal-body-content-details-table">';
+    
+        if (data.minor) {
+            htmlString += '<tr><th>Minor</th></tr><tr><td>' + data.minor + '</td></tr>'
+        }
+    
+        if (data.sbi) {
+            htmlString += '<tr><th>SBI-code</th></tr>';
+            htmlString += '<tr><td>' + data.sbi + '</td></tr>';
+        }
+        
+        if (data.tech_innovations) {
+            htmlString += '<tr><th>Technologie innovaties</th></tr>';
+            htmlString += '<tr><td>' + data.tech_innovations + '</td></tr>';
+        }
+    
+        if (data.tech_providers) {
+            htmlString += '<tr><th>Technologieleveranciers</th></tr>';
+            htmlString += '<tr><td>' + data.tech_providers + '</td></tr>';
+        }
+    
+        if (data.meta_trends) {
+            htmlString += '<tr><th>Trends</th></tr>';
+            htmlString += '<tr><td>' + data.meta_trends.join(', ') + '</td></tr>';
+        }
+    
+        if (data.porter) {
+            htmlString += '<tr><th>Value Chain (Michael Porter)</th></tr>';
+            htmlString += '<tr><td>' + data.porter + '</td></tr>';
+        }
+    
+        if (data.company_sector) {
+            htmlString += '<tr><th>Bedrijfssector</th></tr>';
+            htmlString += '<tr><td>' + data.company_sector + '</td></tr>';
+        }
+    
+        if (data.sdg) {
+            htmlString += '<tr><th>SDG\'s</th></tr>';
+            htmlString += '<tr><td>' + data.sdg.join(', ') + '</td></tr>';
+        }
+    
+        htmlString += '</table>';
+        htmlString += '</div>';
+    
+        htmlString += '<div id="csi-public-info-modal-body-content-context">';
+        htmlString += '<h2>Projectinformatie</h2>';
+        htmlString += '<table id="csi-public-info-modal-body-content-context-table">';
+    
+        if (data.project_context) {
+            htmlString += '<tr><th>Projectcontext</th></tr>';
+            htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_context + '</td></tr>';
+        }
+    
+        if (data.project_problem) {
+            htmlString += '<tr><th>Projectprobleem</th></tr>';
+            htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_problem + '</td></tr>';
+        }
+        
+        if (data.project_goal) {
+            htmlString += '<tr><th>Projectdoel</th></tr>';
+            htmlString += '<tr><td class="csi-public-info-modal-body-content-context-td">' + data.project_goal + '</td></tr>';
+        }
+    
+        htmlString += '</table>';
+        htmlString += '</div>';
+    
+        htmlString += '<div id="csi-public-info-modal-body-content-links">';
+        htmlString += '<h2>Links</h2>';
+        htmlString += '<table id="csi-public-info-modal-body-content-links-table">';
+    
+        if (data.case_study_url) {
+            htmlString += '<tr><th>Website link</th></tr>';
+            htmlString += '<tr><td><a href="' + (data.case_study_url.includes('http') ? data.case_study_url : 'http://' + data.case_study_url) + '" target="_blank">' + data.case_study_url + '</a></td></tr>';    
+        }
+        
+        if (data.case_study_video) {
+            htmlString += '<tr><th>Video</th></tr>';
+            htmlString += '<tr>';
+            htmlString += '<td>';
+            htmlString += '<video class="csi-public-item-video" width="250" controls id="csi-admin-info-img">';
+            htmlString += '<source src="' + Object.values(data.case_study_video).join('') + '" type="video/mp4">';
+            htmlString += 'Sorry voor het ongemakt, de video werkt niet op het moment. </video>';
+            htmlString += '</td>';
+            htmlString += '</tr>';
+        }
+    
+        htmlString += '</table>';
+        htmlString += '</div>';
+    
+        htmlString += '</div>';
+    
+        if (data.case_study_image || public_csi_tech_radar_logo_image.url) {
+            htmlString += '<div id="csi-public-info-modal-body-image">';
+            htmlString += '<img src="' + Object.values(data.case_study_image).join('') + '" onerror="this.src=\'' + public_csi_tech_radar_logo_image.url + '\';">';
+            htmlString += '</div>';
+        }
+    
+        htmlString += '<div id="csi-public-info-modal-body-actions">';
+
+        // Action buttons for future development
+        // htmlString += '<p>actions</p>';
+
+        htmlString += '</div>';
+    
+        htmlString += '</div>';
     }
-
-    htmlString += '</table>';
-    htmlString += '</div>';
-
-    htmlString += '</div>';
-
-    htmlString += '<div id="csi-public-info-modal-body-image">';
-    htmlString += '<img src="' + data.case_study_image_url + '" onerror="this.src=\'' + public_csi_tech_radar_logo_image.url + '\';">';
-    htmlString += '</div>';
-
-    htmlString += '<div id="csi-public-info-modal-body-actions">';
-    // htmlString += '<p>actions</p>';
-    htmlString += '</div>';
-
-    htmlString += '</div>';
 
     return htmlString;
 }
