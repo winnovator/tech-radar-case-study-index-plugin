@@ -1,0 +1,107 @@
+[
+    {
+        "id": "A",
+        "title": "Landbouw, bosbouw en visserij",
+        "parentId": null
+    },
+    {
+        "id": "B",
+        "title": "Winning van delfstoffen",
+        "parentId": null
+    },
+    {
+        "id": "C",
+        "title": "Industrie",
+        "parentId": null
+    },
+    {
+        "id": "D",
+        "title": "Productie en distributie van en handel in elektriciteit, aardgas, stoom en gekoelde lucht",
+        "parentId": null
+    },
+    {
+        "id": "E",
+        "title": "Winning en distributie van water; afval- en afvalwaterbeheer en sanering",
+        "parentId": null
+    },
+    {
+        "id": "F",
+        "title": "Bouwnijverheid",
+        "parentId": null
+    },
+    {
+        "id": "G",
+        "title": "Groot- en detailhandel; reparatie van auto's",
+        "parentId": null
+    },
+    {
+        "id": "H",
+        "title": "Vervoer en opslag",
+        "parentId": null
+    },
+    {
+        "id": "I",
+        "title": "Logies-, maaltijd- en drankverstrekking",
+        "parentId": null
+    },
+    {
+        "id": "J",
+        "title": "Informatie en communicatie",
+        "parentId": null
+    },
+    {
+        "id": "K",
+        "title": "Financiële instellingen",
+        "parentId": null
+    },
+    {
+        "id": "L",
+        "title": "Verhuur van en handel in onroerend goed",
+        "parentId": null
+    },
+    {
+        "id": "M",
+        "title": "Advisering, onderzoek en overige specialistische zakelijke dienstverlening",
+        "parentId": null
+    },
+    {
+        "id": "N",
+        "title": "Verhuur van roerende goederen en overige zakelijke dienstverlening",
+        "parentId": null
+    },
+    {
+        "id": "O",
+        "title": "Openbaar bestuur, overheidsdiensten en verplichte sociale verzekeringen",
+        "parentId": null
+    },
+    {
+        "id": "P",
+        "title": "Onderwijs",
+        "parentId": null
+    },
+    {
+        "id": "Q",
+        "title": "Gezondheids- en welzijnszorg",
+        "parentId": null
+    },
+    {
+        "id": "R",
+        "title": "Cultuur, sport en recreatie",
+        "parentId": null
+    },
+    {
+        "id": "S",
+        "title": "Overige dienstverlening",
+        "parentId": null
+    },
+    {
+        "id": "T",
+        "title": "Huishoudens als werkgever; niet-gedifferentieerde productie van goederen en diensten door huishoudens voor eigen gebruik",
+        "parentId": null
+    },
+    {
+        "id": "U",
+        "title": "Extraterritoriale organisaties En lichamen",
+        "parentId": null
+    }
+]
