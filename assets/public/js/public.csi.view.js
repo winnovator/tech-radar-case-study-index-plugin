@@ -112,7 +112,7 @@ function filter(needle, arr) {
                 resultsArr.push(arr[index]);
             }
         });
-        console.log(haystack);
+        
         return resultsArr;
     }
     else {
