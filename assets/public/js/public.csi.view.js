@@ -112,7 +112,7 @@ function filter(needle, arr) {
                 resultsArr.push(arr[index]);
             }
         });
-        console.log(haystack);
+        
         return resultsArr;
     }
     else {
@@ -285,7 +285,7 @@ function renderOutput(arr) {
 
             }
             
-            if (element.sdg) {
+            if (element.sdg && element.sdg.length > 0) {
                 htmlString += '<tr class="csi-item-tr"><th class="csi-item-th">SDG\'s: </th><td class="csi-item-td">' + element.sdg.join(', ') + '</td></tr>';
             }
 
@@ -578,7 +578,7 @@ function renderInfoModalBody(data) {
             htmlString += '<tr><td>' + data.company_sector + '</td></tr>';
         }
     
-        if (data.sdg) {
+        if (data.sdg && data.sdg.length > 0) {
             htmlString += '<tr><th>SDG\'s</th></tr>';
             htmlString += '<tr><td>' + data.sdg.join(', ') + '</td></tr>';
         }
@@ -614,18 +614,12 @@ function renderInfoModalBody(data) {
     
         if (data.case_study_url) {
             htmlString += '<tr><th>Website link</th></tr>';
-            htmlString += '<tr><td><a href="' + (data.case_study_url.includes('http') ? data.case_study_url : 'http://' + data.case_study_url) + '" target="_blank">' + data.case_study_url + '</a></td></tr>';    
+            htmlString += '<tr><td><a href="' + (data.case_study_url.includes('http') ? data.case_study_url : 'https://' + data.case_study_url) + '" target="_blank">' + data.case_study_url + '</a></td></tr>';    
         }
         
         if (data.case_study_video) {
             htmlString += '<tr><th>Video</th></tr>';
-            htmlString += '<tr>';
-            htmlString += '<td>';
-            htmlString += '<video class="csi-public-item-video" width="250" controls id="csi-admin-info-img">';
-            htmlString += '<source src="' + Object.values(data.case_study_video).join('') + '" type="video/mp4">';
-            htmlString += 'Sorry voor het ongemakt, de video werkt niet op het moment. </video>';
-            htmlString += '</td>';
-            htmlString += '</tr>';
+            htmlString += '<tr><td><a href="' + (data.case_study_video.includes('http') ? data.case_study_video : 'https://' + data.case_study_video) + '" target="_blank">' + data.case_study_video + '</a></td></tr>';
         }
     
         htmlString += '</table>';

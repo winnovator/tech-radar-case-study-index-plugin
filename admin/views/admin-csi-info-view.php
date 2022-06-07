@@ -113,17 +113,13 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Video</th>';
-        $output .= '<td>';
-        $output .= '<video controls id="csi-admin-info-img">';
-        $output .= '<source src="' . esc_url(implode('', $this->nfSubData->get_field_value('case_study_video'))) . '" type="video/mp4">';
-        $output .= 'Sorry voor het ongemakt, de video werkt niet op het moment. </video>';
-        $output .= '</td>';
-        $output .= '</tr>';
-    
-        $output .= '<tr>';
         $output .= '<th>Afbeelding</th>';
         $output .= '<td><img id="csi-admin-info-img" src="' . esc_url(implode('', $this->nfSubData->get_field_value('case_study_image'))) . '">' . '</td>';
+        $output .= '</tr>';
+
+        $output .= '<tr>';
+        $output .= '<th>Video</th>';
+        $output .= '<td><a id="csi-admin-info-video" href="' . esc_url($this->nfSubData->get_field_value('case_study_video')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_video')) . '</a></td>';
         $output .= '</tr>';
 
         $output .= '</table>';
