@@ -58,4 +58,30 @@ class AdminCaseStudyIndexInfo {
         $subModel = $this->getSubBySubID($subID);
         $subModel->delete();
     }
+
+    protected function getSingleSbiCode($code) {
+        $sections = NULL;
+        $result = NULL;
+
+        if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json')) {
+            $sections = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json'));
+        }
+        
+        foreach ($sections as $section) {
+            if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json')) {
+                $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json'));
+                foreach ($codes as $element) {
+                    if ($code == $element->id) {
+                        $result = $element->title;
+                    }
+                }
+            }
+        }
+
+        if ($result === NULL) {
+            return "Onbekend";
+        }
+
+        return $result;
+    }
 }

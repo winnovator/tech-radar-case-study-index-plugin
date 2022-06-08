@@ -67,8 +67,8 @@ async function loadCsi() {
 //Start API call functions
 function getCsiData(url, nonce, bool = true) {
     return jQuery.ajax({
-        dataType: "json",
-        method: "GET",
+        dataType: 'json',
+        method: 'GET',
         url: url,
         data: { public_csi_security_nonce: nonce },
         beforeSend: function (xhr) {
@@ -80,7 +80,7 @@ function getCsiData(url, nonce, bool = true) {
 
 function getAllSbiData(url, nonce, bool = true) {
     return jQuery.ajax({
-        dataType: "json",
+        dataType: 'json',
         method: 'GET',
         url: url,
         data: { public_csi_security_nonce: nonce },
@@ -88,6 +88,35 @@ function getAllSbiData(url, nonce, bool = true) {
             xhr.setRequestHeader('X-WP-Nonce', nonce);
         },
         async: bool
+    });
+}
+
+//API call to Google Safebrowsing
+function googleSafeBrowsingApi(url) {
+    let requestBody = {
+        client: {
+            clientId: 'Windesheim Technology Radar',
+            clientVersion: '1.0'
+        },
+        threatInfo: {
+            threatTypes: ['MALWARE', 'SOCIAL_ENGINEERING', 'UNWANTED_SOFTWARE', 'POTENTIALLY_HARMFUL_APPLICATION'],
+            platformTypes: ['ALL_PLATFORMS'],
+            threatEntryTypes: ['URL'],
+            threatEntries: [
+                { 'url': url }
+            ]
+        }
+    }
+
+    return jQuery.ajax({
+        dataType: 'json',
+        method: 'POST',
+        url: 'https://safebrowsing.googleapis.com/v4/threatMatches:find?key=' + public_google_safe_browsing_api.key,
+        data: JSON.stringify(requestBody),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-Type', 'application/json');
+        },
+        async: false
     });
 }
 
@@ -570,7 +599,7 @@ function renderInfoModalBody(data) {
     
         if (data.porter) {
             htmlString += '<tr><th>Value Chain (Michael Porter)</th></tr>';
-            htmlString += '<tr><td>' + data.porter + '</td></tr>';
+            htmlString += '<tr><td>' + data.porter.join(', ') + '</td></tr>';
         }
     
         if (data.company_sector) {
@@ -611,15 +640,35 @@ function renderInfoModalBody(data) {
         htmlString += '<div id="csi-public-info-modal-body-content-links">';
         htmlString += '<h2>Links</h2>';
         htmlString += '<table id="csi-public-info-modal-body-content-links-table">';
-    
+
         if (data.case_study_url) {
-            htmlString += '<tr><th>Website link</th></tr>';
-            htmlString += '<tr><td><a href="' + (data.case_study_url.includes('http') ? data.case_study_url : 'https://' + data.case_study_url) + '" target="_blank">' + data.case_study_url + '</a></td></tr>';    
+            let url = data.case_study_url.includes('http://') || data.case_study_url.includes('https://') ? data.case_study_url : 'https://' + data.case_study_url
+
+            googleSafeBrowsingApi(data.case_study_url).done(function (callBackData) {
+                if (jQuery.isEmptyObject(callBackData)) {
+                    htmlString += '<tr><th>Website link</th></tr>';
+                    htmlString += '<tr><td><a href="' + url + '" target="_blank">' + url + '</a></td></tr>';
+                }
+                else {
+                    htmlString += '<tr><th>Website link</th></tr>';
+                    htmlString += '<tr><td>Geen website link bekend.</td></tr>';
+                }
+            });
         }
         
         if (data.case_study_video) {
-            htmlString += '<tr><th>Video</th></tr>';
-            htmlString += '<tr><td><a href="' + (data.case_study_video.includes('http') ? data.case_study_video : 'https://' + data.case_study_video) + '" target="_blank">' + data.case_study_video + '</a></td></tr>';
+            googleSafeBrowsingApi(data.case_study_video).done(function (callBackData) {
+                let url = data.case_study_video.includes('http://') || data.case_study_video.includes('https://') ? data.case_study_video : 'https://' + data.case_study_video
+
+                if (jQuery.isEmptyObject(callBackData)) {
+                    htmlString += '<tr><th>Videolink</th></tr>';
+                    htmlString += '<tr><td><a href="' + url + '" target="_blank">' + url + '</a></td></tr>';
+                }
+                else {
+                    htmlString += '<tr><th>Videolink</th></tr>';
+                    htmlString += '<tr><td>Geen videolink bekend.</td></tr>';
+                }
+            });
         }
     
         htmlString += '</table>';

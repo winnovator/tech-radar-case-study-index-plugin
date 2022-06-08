@@ -6,11 +6,8 @@ if (!defined('ABSPATH')) {
 require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/nf.php');
 require_once(plugin_dir_path(__DIR__) . "controllers/admin-csi-info-controller.php");
 
-class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
-{
-
-    public function __construct()
-    {
+class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
+    public function __construct() {
         parent::__construct();
         if (empty($this->wpCsiData) || empty($this->nfSubData)) {
             echo "<script>location.href = '" . esc_url(admin_url('admin.php?page=admin-csi')) . "';</script>";
@@ -18,108 +15,272 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController
         }
     }
 
-    public function renderCsiData()
-    {
+    public function renderCsiData() {
         if (empty($this->wpCsiData) || empty($this->nfSubData)) {
             return;
         }
 
         $output = '';
+        $status = $this->wpCsiData[0]->new;
+        $published = $this->wpCsiData[0]->published;
+        $projectName = $this->nfSubData->get_field_value('project_name');
+        $projectOwner = $this->nfSubData->get_field_value('project_owner');
+        $projectOwnerEmail = $this->nfSubData->get_field_value('project_owner_email');
+        $minor = $this->nfSubData->get_field_value('minor');
+        $porter = $this->nfSubData->get_field_value('porter');
+        $sbi = $this->nfSubData->get_field_value('sbi');
+        $techInnovations = $this->nfSubData->get_field_value('tech_innovations');
+        $techProviders = $this->nfSubData->get_field_value('tech_providers');
+        $trends = $this->nfSubData->get_field_value('meta_trends');
+        $companySector = $this->nfSubData->get_field_value('company_sector');
+        $sdg = $this->nfSubData->get_field_value('sdg');
+        $projectContext = $this->nfSubData->get_field_value('project_context');
+        $projectProblem = $this->nfSubData->get_field_value('project_problem');
+        $projectGoal = $this->nfSubData->get_field_value('project_goal');
+        $caseStudyUrl = $this->nfSubData->get_field_value('case_study_url');
+        $caseStudyImage = $this->nfSubData->get_field_value('case_study_image');
+        $caseStudyVideo = $this->nfSubData->get_field_value('case_study_video');
 
         $output .= '<table id="csi-info-data-table">';
+        
         $output .= '<tr>';
         $output .= '<th>Status</th>';
-        $output .= '<td id="admin-csi-status" data-admin-csi-status="' . esc_attr($this->wpCsiData[0]->new) . '">' . (esc_html($this->wpCsiData[0]->new) == 1 ? esc_html('Nieuw') : esc_html('Bestaand')) . '</td>';
+        $output .= '<td id="admin-csi-status" data-admin-csi-status="' . esc_attr($status) . '">' . (esc_html($status) == 1 ? esc_html('Nieuw') : esc_html('Bestaand')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Gepubliceerd</th>';
-        $output .= '<td>' . (esc_html($this->wpCsiData[0]->published) == 1 ? esc_html('Ja') : esc_html('Nee')) . '</td>';
+        $output .= '<td>' . (esc_html($published) == 1 ? esc_html('Ja') : esc_html('Nee')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Projectnaam</th>';
-        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_name')) . '</td>';
+
+        if ($projectName) {
+            $output .= '<td>' . esc_html($projectName) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen naam bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Projecteigenaar</th>';
-        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_owner')) . '</td>';
+
+        if ($projectOwner) {
+            $output .= '<td>' . esc_html($projectOwner) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen projecteigenaar bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Projecteigenaar email</th>';
-        $output .= '<td id="admin-csi-email" data-admin-csi-email="' . esc_attr($this->nfSubData->get_field_value('project_owner_email')) . '">' . esc_html($this->nfSubData->get_field_value('project_owner_email')) . '</td>';
+
+        if ($projectOwnerEmail) {
+            $output .= '<td id="admin-csi-email" data-admin-csi-email="' . esc_attr($projectOwnerEmail) . '">' . esc_html($projectOwnerEmail) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen projectemail bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Minor</th>';
-        $output .= '<td>' . (!empty(esc_html($this->nfSubData->get_field_value('minor'))) ? esc_html($this->nfSubData->get_field_value('minor')) : 'Geen minor' ) . '</td>';
+
+        if ($minor) {
+            $output .= '<td>' . esc_html($minor) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen minor bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Value Chain (Michael Porter)</th>';
-        $output .= '<td>' . esc_html(implode(', ', $this->nfSubData->get_field_value('porter'))) . '</td>';
+
+        if ($porter) {
+            $output .= '<td>' . esc_html(implode(', ', $porter)) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen Value Chain (Michael Porter) onderdelen bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Sector (SBI-code)</th>';
-        $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('sbi')) . '</td>';
+
+        if ($sbi) {
+            $output .= '<td>' . esc_html($sbi . ' - ' . $this->getSingleSbiCode($sbi)) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen SBI-code bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Technologie Innovaties</th>';
-        $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('tech_innovations')) . '</td>';
+
+        if ($techInnovations) {
+            $output .= '<td>' . esc_html($techInnovations) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen technologie innovaties bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Technologie aanbieders</th>';
-        $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('tech_providers')) . '</td>';
+
+        if ($techProviders) {
+            $output .= '<td>' . esc_html($techProviders) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen technologie aanbieders bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Trends</th>';
-        $output .= '<td>' .  esc_html(implode(', ', $this->nfSubData->get_field_value('meta_trends'))) . '</td>';
+
+        if ($trends) {
+            $output .= '<td>' . esc_html(implode(', ', $trends)) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen trends bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Bedrijfssector</th>';
-        $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('company_sector')) . '</td>';
+
+        if ($companySector) {
+            $output .= '<td>' . esc_html($companySector) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen bedrijfssector bekend.</td>';
+        }
+        
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>SDG\'s</th>';
-        $output .= '<td>' .  esc_html(implode(', ', $this->nfSubData->get_field_value('sdg'))) . '</td>';
+
+        if ($sdg) {
+            $output .= '<td>' . esc_html(implode(', ', $sdg)) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen SDG\'s bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Project context</th>';
-        $output .= '<td>' .  esc_html($this->nfSubData->get_field_value('project_context')) . '</td>';
+
+        if ($projectContext) {
+            $output .= '<td>' . esc_html($projectContext) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen project context bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Project probleem</th>';
-        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_problem')) . '</td>';
+
+        if ($projectProblem) {
+            $output .= '<td>' . esc_html($projectProblem) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen project probleem bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Projectdoel</th>';
-        $output .= '<td>' . esc_html($this->nfSubData->get_field_value('project_goal')) . '</td>';
+
+        if ($projectGoal) {
+            $output .= '<td>' . esc_html($projectGoal) . '</td>';
+        }
+        else {
+            $output .= '<td>Geen projectdoel bekend.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
-        $output .= '<th>Case studie informatie</th>';
-        $output .= '<td><a href="' . esc_url($this->nfSubData->get_field_value('case_study_url')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_url')) . '</a></td>';
+        $output .= '<th>Case studie link</th>';
+
+        if ($caseStudyUrl) {
+            if (count((array) json_decode($this->checkMaliciousUrl($caseStudyUrl)['body'])) > 0) {
+                $output .= '<td>De opgegeven link is onveilig. Het is geadviseerd om deze case studie te verwijderen.</td>';
+            }
+            else {
+                $url = str_contains($caseStudyUrl, 'https://') || str_contains($caseStudyUrl, 'http://') ? $caseStudyUrl : 'https://' . $caseStudyUrl;
+                $headers = @get_headers($url . (str_contains($url, '.html') ? '' : '/'));
+
+                if ($headers && strpos($headers[0], '200')) {
+                    $output .= '<td><a href="' . esc_url($url . (str_contains($url, '.html') ? '' : '/')) . '" target="_blank">' . esc_html($url . (str_contains($url, '.html') ? '' : '/')) . '</a></td>';
+                }
+                else {
+                    $output .= '<td>De volgende link is ongeldig: ' . esc_html($caseStudyUrl) . '</td>';
+                }
+            }
+        }
+        else {
+            $output .= '<td>Geen case studie link bekend.</td>';
+        }
+        
+        $output .= '</tr>';
+
+        $output .= '<tr>';
+        $output .= '<th>Case studie videolink</th>';
+        
+        if ($caseStudyVideo) {
+            if (count((array) json_decode($this->checkMaliciousUrl($caseStudyVideo)['body'])) > 0) {
+                $output .= '<td>De opgegeven videolink is onveilig. Het is geadviseerd om deze case studie te verwijderen.</td>';
+            }
+            else {
+                $url = str_contains($caseStudyVideo, 'https://') || str_contains($caseStudyVideo, 'http://') ? $caseStudyVideo : 'https://' . $caseStudyVideo;
+                $headers = @get_headers($url . (str_contains($url, '.html') ? '' : '/'));
+
+                if ($headers && strpos($headers[0], '200')) {
+                    $output .= '<td><a id="csi-admin-info-video" href="' . esc_url($url . (str_contains($url, '.html') ? '' : '/')) . '" target="_blank">' . esc_html($url . (str_contains($url, '.html') ? '' : '/')) . '</a></td>';
+                }
+                else {
+                    $output .= '<td>De volgende videolink is ongeldig: ' . esc_html($caseStudyVideo) . '</a></td>';
+                }
+            }
+        }
+        else {
+            $output .= '<td>Geen case studie videolink beschikbaar.</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '<tr>';
         $output .= '<th>Afbeelding</th>';
-        $output .= '<td><img id="csi-admin-info-img" src="' . esc_url(implode('', $this->nfSubData->get_field_value('case_study_image'))) . '">' . '</td>';
-        $output .= '</tr>';
 
-        $output .= '<tr>';
-        $output .= '<th>Video</th>';
-        $output .= '<td><a id="csi-admin-info-video" href="' . esc_url($this->nfSubData->get_field_value('case_study_video')) . '" target="_blank">' . esc_html($this->nfSubData->get_field_value('case_study_video')) . '</a></td>';
+        if ($caseStudyImage) {
+            $output .= '<td><img id="csi-admin-info-img" src="' . esc_url(implode('', $caseStudyImage)) . '">' . '</td>';
+        }
+        else {
+            $output .= '<td><img id="csi-admin-info-img" src="' . esc_url(plugins_url('/assets/shared/images/windesheim_tech_radar_logo.png', __FILE__)) . '">' . '</td>';
+        }
+
         $output .= '</tr>';
 
         $output .= '</table>';

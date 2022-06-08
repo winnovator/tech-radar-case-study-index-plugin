@@ -39,8 +39,6 @@ select[name="nfFormTable_length"] {
 }
 
 #csi-info-data-table > tbody > tr > td {
-    display: flex;
-    justify-content: flex-start;
     word-break: break-all;
 }
 

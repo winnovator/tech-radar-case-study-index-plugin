@@ -87,6 +87,10 @@ class TechRadarCaseStudyIndexPlugin {
             wp_localize_script('public.csi.view', 'public_csi_ajax_info_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_ajax_all_sbi_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/all")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_tech_radar_logo_image', array('url' => plugins_url('/assets/shared/images/windesheim_tech_radar_logo.png', __FILE__)));
+            
+            //Google Safe Browsing API key
+            require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/csi-settings.php');
+            wp_localize_script('public.csi.view', 'public_google_safe_browsing_api', array('key' => CaseStudyIndexSettings::$googleSafeBrowsingApiKey));
         }
     }
 
@@ -100,7 +104,11 @@ class TechRadarCaseStudyIndexPlugin {
             wp_localize_script('public.csi.view', 'public_csi_ajax_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/overview")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_ajax_info_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
             wp_localize_script('public.csi.view', 'public_csi_ajax_all_sbi_obj', array('url' => esc_url(rest_url("csi-plugin/v1/public-csi/sbi/all")), 'nonce' => wp_create_nonce('wp_rest')));
-            wp_localize_script('public.csi.view', 'public_csi_tech_radar_logo_image', array('url' => plugins_url('/assets/shared/images/windesheim_tech_radar_logo.png',__FILE__)));
+            wp_localize_script('public.csi.view', 'public_csi_tech_radar_logo_image', array('url' => plugins_url('/assets/shared/images/windesheim_tech_radar_logo.png', __FILE__)));
+            
+            //Google Safe Browsing API key
+            require_once(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/includes/csi-settings.php');
+            wp_localize_script('public.csi.view', 'public_google_safe_browsing_api', array('key' => CaseStudyIndexSettings::$googleSafeBrowsingApiKey));
         }
      }
 
