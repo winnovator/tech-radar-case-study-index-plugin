@@ -285,7 +285,7 @@ function renderOutput(arr) {
     let contentSelector = jQuery('#csi-content');
     let htmlString = '';
 
-    if (arr) {
+    if (arr.length > 0) {
         arr.forEach(element => {
             htmlString += '<div class="csi-element-container csi-element-item">';
 
@@ -348,12 +348,12 @@ function renderSidePanel(arr) {
     let uniqueMinorArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'minor')));
     let uniquePorterArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'porter')));
     let uniqueMetaTrendsArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'meta_trends')));
-    let uniqueSdgArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'sdg')));
-
+    let uniqueSdgArr = removeEmptyElements(arrayUnique(convertToSingleTypeArr(arr, 'sdg'))).sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; });
+    let allSbiData = getStorage(sessionStorage, 'public-csi-sbi-list');
     let htmlString = '';
 
-    if (arr) {
-        if (uniqueMetaTrendsArr) {
+    if (arr.length > 0) {
+        if (uniqueMetaTrendsArr.length > 0) {
             htmlString += '<div>';
             htmlString += '<h1>Trends</h1>';
             htmlString += '<ul class="csi-side-panel-ul">';
@@ -366,7 +366,7 @@ function renderSidePanel(arr) {
             htmlString += '</div>';
         }
 
-        if (uniquePorterArr) {
+        if (uniquePorterArr.length > 0) {
             htmlString += '<div>';
             htmlString += '<h1>Value Chain (Michael Porter)</h1>';
             htmlString += '<ul class="csi-side-panel-ul">';
@@ -379,10 +379,12 @@ function renderSidePanel(arr) {
             htmlString += '</div>';
         }
 
-        htmlString += '<h1>Sector (SBI-code)</h1>';
-        htmlString += '<div id="sbi-tree-view-container"></div>';
+        if (allSbiData.length > 0) {
+            htmlString += '<h1>Sector (SBI-code)</h1>';
+            htmlString += '<div id="sbi-tree-view-container"></div>';
+        }
 
-        if (uniqueMinorArr) {
+        if (uniqueMinorArr.length > 0) {
             htmlString += '<div>';
             htmlString += '<h1>Windesheim Minor</h1>';
             htmlString += '<ul class="csi-side-panel-ul">';
@@ -395,7 +397,7 @@ function renderSidePanel(arr) {
             htmlString += '</div>';
         }
 
-        if (uniqueSdgArr && uniqueSdgArr.length > 0) {
+        if (uniqueSdgArr.length > 0) {
             htmlString += '<div>';
             htmlString += '<h1>SDG\'s</h1>';
             htmlString += '<ul class="csi-side-panel-ul">';

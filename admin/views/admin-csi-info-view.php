@@ -50,7 +50,7 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
 
         $output .= '<tr>';
         $output .= '<th>Gepubliceerd</th>';
-        $output .= '<td>' . (esc_html($published) == 1 ? esc_html('Ja') : esc_html('Nee')) . '</td>';
+       	$output .= '<td>' . (esc_html($published) == 1 ? esc_html('Ja') : esc_html('Nee')) . '</td>';
         $output .= '</tr>';
 
         $output .= '<tr>';
@@ -229,11 +229,12 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
                 $output .= '<td>De opgegeven link is onveilig. Het is geadviseerd om deze case studie te verwijderen.</td>';
             }
             else {
-                $url = str_contains($caseStudyUrl, 'https://') || str_contains($caseStudyUrl, 'http://') ? $caseStudyUrl : 'https://' . $caseStudyUrl;
-                $headers = @get_headers($url . (str_contains($url, '.html') ? '' : '/'));
-
-                if ($headers && strpos($headers[0], '200')) {
-                    $output .= '<td><a href="' . esc_url($url . (str_contains($url, '.html') ? '' : '/')) . '" target="_blank">' . esc_html($url . (str_contains($url, '.html') ? '' : '/')) . '</a></td>';
+                $url = substr($caseStudyUrl, 0, 4) === "http" || substr($caseStudyUrl, 0, 4) == 'https' ? $caseStudyUrl : 'https://' . $caseStudyUrl;
+                $headers = @get_headers($url);
+				$stat = substr($headers[0], 9, 3);
+				
+                if ($stat >= '200' && $stat < '400') {
+                    $output .= '<td><a href="' . esc_url($url) . '" target="_blank">' . esc_html($url) . '</a></td>';
                 }
                 else {
                     $output .= '<td>De volgende link is ongeldig: ' . esc_html($caseStudyUrl) . '</td>';
@@ -254,11 +255,12 @@ class AdminCaseStudyIndexInfoView extends AdminCaseStudyIndexInfoController {
                 $output .= '<td>De opgegeven videolink is onveilig. Het is geadviseerd om deze case studie te verwijderen.</td>';
             }
             else {
-                $url = str_contains($caseStudyVideo, 'https://') || str_contains($caseStudyVideo, 'http://') ? $caseStudyVideo : 'https://' . $caseStudyVideo;
-                $headers = @get_headers($url . (str_contains($url, '.html') ? '' : '/'));
+                $url = substr($caseStudyVideo, 0, 4) === "http" || substr($caseStudyVideo, 0, 4) == 'https' ? $caseStudyVideo : 'https://' . $caseStudyVideo;
+                $headers = @get_headers($url);
+				$stat = substr($headers[0], 9, 3);
 
-                if ($headers && strpos($headers[0], '200')) {
-                    $output .= '<td><a id="csi-admin-info-video" href="' . esc_url($url . (str_contains($url, '.html') ? '' : '/')) . '" target="_blank">' . esc_html($url . (str_contains($url, '.html') ? '' : '/')) . '</a></td>';
+                if ($stat >= '200' && $stat < '400') {
+                    $output .= '<td><a id="csi-admin-info-video" href="' . esc_url($url) . '" target="_blank">' . esc_html($url) . '</a></td>';
                 }
                 else {
                     $output .= '<td>De volgende videolink is ongeldig: ' . esc_html($caseStudyVideo) . '</a></td>';
