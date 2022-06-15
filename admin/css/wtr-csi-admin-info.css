@@ -1,0 +1,44 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+#wtr-csi-admin-info-table-wrap {
+    margin-top: 2vh;
+}
+
+#wtr-csi-admin-info-submit-wrap {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 2vh;
+}
+
+#wtr-csi-admin-info-table > tbody > tr > th, #wtr-csi-admin-info-table > tbody > tr > td {
+    text-align: left;
+    background-color: #f7f7f9;
+    border-radius: 8px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.1);
+    padding: 10px;
+}
+
+#wtr-csi-admin-info-table {
+    border-spacing: 4px;
+}
+
+#wtr-csi-admin-info-table > tbody > tr > td {
+    word-break: break-all;
+}
+
+.wtr-csi-admin-info-submit-button {
+    margin: 0.2vw !important;
+}
+
+#wtr-csi-admin-info-img {
+    height: auto;
+    max-width: 250px;
+    object-fit: contain;
+}
+
+#wpfooter {
+    position: relative !important;
+}
