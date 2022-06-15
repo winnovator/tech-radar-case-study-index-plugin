@@ -369,16 +369,16 @@ function filter_side_panel_item(title, arr, label_for, input_name) {
 
 function render_side_panel(arr) {
     let content_selector = jQuery('#wtr-csi-public-side-panel');
-    let unique_tech_trends_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'tech_trends')));
-    let unique_value_chain_Arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'value_chain')));
-    let unique_minor_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'minor')));
-    let unique_sdg_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'sdg')));
+    let unique_tech_trends_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'tech_trends'))).sort();
+    let unique_value_chain_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'value_chain'))).sort();
+    let unique_minor_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'minor'))).sort();
+    let unique_sdg_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'sdg'))).sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; });
     let all_sbi_data = get_storage(sessionStorage, 'wtr-csi-public-sbi-list');
     let html_string = '';
 
     if (arr.length > 0) {
         html_string += filter_side_panel_item('Trends', unique_tech_trends_arr, 'tech-trends', 'tech_trends');
-        html_string += filter_side_panel_item('Value Chain (Michael Porter)', unique_value_chain_Arr, 'value-chain', 'value_chain');
+        html_string += filter_side_panel_item('Value Chain (Michael Porter)', unique_value_chain_arr, 'value-chain', 'value_chain');
 
         if (all_sbi_data.length > 0) {
             html_string += '<h1>Sector (SBI-code)</h1>';
