@@ -102,24 +102,7 @@ class Wtr_Csi_Public {
 		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub")), 'nonce' => wp_create_nonce('wp_rest')));
 		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax_info', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
 		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax_all_sbi', array('url' => esc_url(rest_url("wtr-csi/v1/public/sbi")), 'nonce' => wp_create_nonce('wp_rest')));
-		wp_localize_script('wtr-csi-public', 'wtr_csi_public_tech_radar_logo_image', array('url' => plugin_dir_url(__DIR__) . 'shared/images/windesheim_tech_radar_logo.png'));
-	}
-	
-	/**
-	 * wtr_csi_public_page
-	 *
-	 * @return string
-	 */
-	public function wtr_csi_public_page() {
-		ob_start();
-
-		require_once WTR_CSI_PLUGIN_PATH . 'public/partials/wtr-csi-public-template.php';
-
-		$template = ob_get_contents();
-
-		ob_end_clean();
-
-		echo $template;
+		wp_localize_script('wtr-csi-public', 'wtr_csi_public_tech_radar_logo_image', array('url' => WTR_CSI_PLUGIN_PATH . 'shared/images/windesheim_tech_radar_logo.png'));
 	}
 	
 	/**
@@ -127,25 +110,12 @@ class Wtr_Csi_Public {
 	 *
 	 * @return void
 	 */
-	public function wtr_csi_public_register_shortcodes() {
-		add_shortcode('csi', array($this, 'short_code_contents'));
-	}
-	
-	/**
-	 * short_code_contents
-	 *
-	 * @return string
-	 */
-	public function short_code_contents() {
+	public function wtr_csi_public_get_contents() {
 		ob_start();
-
 		require_once WTR_CSI_PLUGIN_PATH . 'public/partials/wtr-csi-public-template.php';
-
 		$template = ob_get_contents();
-
 		ob_end_clean();
-
-		echo $template;
+		return $template;
 	}
 	
 	/**

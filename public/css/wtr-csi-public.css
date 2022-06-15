@@ -2,6 +2,11 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+ 
  #wtr-csi-public-grid-container {
     display: grid;
     grid-template-areas:
@@ -87,7 +92,7 @@
     width: 12vw;
 }
 
-#wtr-csi-public-pagination-container {
+#wtr-csi-public-filter-button-container {
     display: none;
 }
 
@@ -117,7 +122,7 @@
         grid-template-columns: 1fr;
     }
 
-    #wtr-csi-public-pagination-container {
+    #wtr-csi-public-filter-button-container {
         display: flex;
         justify-content: end;
     }

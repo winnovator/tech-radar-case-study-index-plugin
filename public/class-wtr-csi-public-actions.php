@@ -80,14 +80,14 @@ class Wtr_Csi_Public_Actions {
      * @return array
      */
     public function get_all_sbi_data() {
-        $sections = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json'));
+        $sections = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/Sections.json'));
         if (!$sections) { return false; }
         $dataArr = array();
 
         foreach ($sections as $section) {
-            $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json'));
+            $codes = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/' . $section->id . '.json'));
             if (!$codes) { return false; }
-            array_unshift($codes, array('id' => $section->id, 'title' => $section->title, 'parentId' => $section->parent));
+            array_unshift($codes, array('id' => $section->id, 'title' => $section->title, 'parent_id' => isset($section->parent) ? $section->parent : NULL));
             array_push($dataArr, $codes);
         }     
 

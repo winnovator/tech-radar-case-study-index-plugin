@@ -200,28 +200,24 @@ class Wtr_Csi_Admin_Actions {
         $db_conn->delete("{$db_conn->prefix}csi", array('seq_num' => $sub_id));
     }
     
-    /**
-     * get_all_sbi_codes
-     *
-     * @return array
-     */
-    public function get_all_sbi_codes() {
-        $result = array();
+    // /**
+    //  * get_all_sbi_data
+    //  *
+    //  * @return array
+    //  */
+    public function get_all_sbi_data() {
+        $sections = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/Sections.json'));
+        if (!$sections) { return false; }
+        $dataArr = array();
 
-        if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json')) {
-            $sections = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json'));
+        foreach ($sections as $section) {
+            $codes = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/' . $section->id . '.json'));
+            if (!$codes) { return false; }
+            array_unshift($codes, array('id' => $section->id, 'title' => $section->title, 'parent_id' => isset($section->parent) ? $section->parent : NULL));
+            array_push($dataArr, $codes);
+        }     
 
-            foreach ($sections as $section) {
-                if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json')) {
-                    $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json'));
-                    array_push($result, $codes);
-                }
-            }
-
-            return array_merge(...$result);
-        }
-
-        return false;
+        return array_merge(...$dataArr);
     }
     
     /**
@@ -232,12 +228,14 @@ class Wtr_Csi_Admin_Actions {
      */
     public function get_sbi_code_title($code) {
         if (!$code) { return false; }
-        $codes = $this->get_all_sbi_codes();
+        $codes = $this->get_all_sbi_data();
         if (!$codes) { return false; }
         
         foreach ($codes as $element) {
-            if ($element->id == $code) {
-                return $element->title;
+            if (isset($element->id)) {
+                if ($element->id == $code) {
+                    return $element->title;
+                }
             }
         }
 

@@ -181,7 +181,7 @@ class Wtr_Csi {
 		$this->loader->add_action( 'rest_api_init', $plugin_public, 'wtr_csi_public_rest_api_endpoints');
 
 		//Load shortcode hook for case study index
-		$this->loader->add_action( 'init', $plugin_public, 'wtr_csi_public_register_shortcodes' );
+		$this->loader->add_shortcode('csi', $plugin_public, 'wtr_csi_public_get_contents');
 	}
 
 	/**

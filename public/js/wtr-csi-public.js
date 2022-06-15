@@ -320,10 +320,10 @@ function render_output(arr) {
             html_string += '<table class="wtr-csi-public-item-table">';
 
             html_string += output_table_row('Windesheim Minor:', element.minor, 'text');
-            html_string += output_table_row('Value Chain (Michael Porter):', element.value_chain, 'array');
+            html_string += output_table_row('Value Chain (Michael Porter):', element.value_chain.sort(), 'array');
             html_string += output_table_row('SBI-code:', element.sbi + ' - ' + get_sbi_code_title(element.sbi), 'text');
-            html_string += output_table_row('Trends:', element.tech_trends, 'array');
-            html_string += output_table_row('SDG\'s', element.sdg, 'text');
+            html_string += output_table_row('Trends:', element.tech_trends.sort(), 'array');
+            html_string += output_table_row('SDG\'s', element.sdg.sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; }), 'text');
 
             html_string += '</table>';
 
@@ -369,10 +369,10 @@ function filter_side_panel_item(title, arr, label_for, input_name) {
 
 function render_side_panel(arr) {
     let content_selector = jQuery('#wtr-csi-public-side-panel');
-    let unique_tech_trends_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'tech_trends')));
-    let unique_value_chain_Arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'value_chain')));
-    let unique_minor_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'minor')));
-    let unique_sdg_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'sdg')));
+    let unique_tech_trends_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'tech_trends'))).sort();
+    let unique_value_chain_Arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'value_chain'))).sort();
+    let unique_minor_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'minor'))).sort();
+    let unique_sdg_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'sdg'))).sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; });
     let all_sbi_data = get_storage(sessionStorage, 'wtr-csi-public-sbi-list');
     let html_string = '';
 
@@ -391,9 +391,7 @@ function render_side_panel(arr) {
         html_string += '<div id="wtr-csi-public-submit-container"><button id="wtr-csi-public-submit">Verzenden</button></div>';
     }
     else {
-        html_string += '<div class="wtr-csi-public-element-container wtr-csi-public-element-item">';
         html_string += '<p>Geen filters beschikbaar.</p>';
-        html_string += '</div>';
     }
 
     content_selector.html(jQuery.parseHTML(html_string));
@@ -402,6 +400,7 @@ function render_side_panel(arr) {
 function render_sbi_tree() {
     let html_string = '';
     let available_sbi_codes = get_available_sbi_codes();
+    if (!available_sbi_codes) { return false; }
     let all_sbi_data = get_storage(sessionStorage, 'wtr-csi-public-sbi-list');
     let id_one_char = all_sbi_data.filter(element => element.id.length == 1);
     let id_two_char = all_sbi_data.filter(element => element.id.length == 2);
@@ -421,33 +420,33 @@ function render_sbi_tree() {
     for (let element of id_two_char) {
         html_string = '';
         html_string += '<li class="wtr-csi-public-sbi-li"><span class="wtr-csi-public-sbi-caret"></span><input class="wtr-csi-public-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '<ul class="wtr-csi-public-sbi-nested" data-wtr-csi-public-sbi-parent-id="' + element.id + '"></ul></i>';
-        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(html_string));
+        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parent_id + '"]').append(jQuery.parseHTML(html_string));
     }
 
     //Third rows
     for (let element of id_three_char) {
         html_string = '';
         html_string += '<li class="wtr-csi-public-sbi-li"><span class="wtr-csi-public-sbi-caret"></span><input class="wtr-csi-public-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '<ul class="wtr-csi-public-sbi-nested" data-wtr-csi-public-sbi-parent-id="' + element.id + '"></ul></i>';
-        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(html_string));
+        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parent_id + '"]').append(jQuery.parseHTML(html_string));
     }
 
     //Fourth rows
     for (let element of id_four_char) {
         html_string = '';
         html_string += '<li class="wtr-csi-public-sbi-li"><span class="wtr-csi-public-sbi-caret"></span><input class="wtr-csi-public-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '<ul class="wtr-csi-public-sbi-nested" data-wtr-csi-public-sbi-parent-id="' + element.id + '"></ul></i>';
-        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(html_string));
+        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parent_id + '"]').append(jQuery.parseHTML(html_string));
     }
 
     //Fifth rows
     for (let element of id_five_char) {
         html_string = '';
         html_string += '<li class="wtr-csi-public-sbi-li"></span><input class="wtr-csi-public-side-panel-checkbox" type="checkbox" name="sbi" value="' + element.id + '"/>' + element.id + ' - ' + element.title + '</i>';
-        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parentId + '"]').append(jQuery.parseHTML(html_string));
+        jQuery('.wtr-csi-public-sbi-nested[data-wtr-csi-public-sbi-parent-id="' + element.parent_id + '"]').append(jQuery.parseHTML(html_string));
     }
 
     //Styling sanitization
     jQuery('input[name="sbi"]').attr('disabled', true);
-
+    
     for (let element of available_sbi_codes) {
         jQuery('input[name="sbi"][value="' + element.id + '"]').removeAttr('disabled');
     }
@@ -568,8 +567,8 @@ function render_info_modal_body(data) {
                 html_string += info_model_item('SBI-code', data.sbi + ' - ' + get_sbi_code_title(data.sbi), 'text');
                 html_string += info_model_item('Technologie innovaties', data.tech_innovations, 'text');
                 html_string += info_model_item('Technologieleveranciers', data.tech_providers, 'text');
-                html_string += info_model_item('Trends', data.tech_trends, 'array');
-                html_string += info_model_item('Value Chain (Michael Porter)', data.value_chain, 'array');
+                html_string += info_model_item('Trends', data.tech_trends.sort(), 'array');
+                html_string += info_model_item('Value Chain (Michael Porter)', data.value_chain.sort(), 'array');
                 html_string += info_model_item('Bedrijfssector', data.company_sector, 'text');
                 html_string += '</table>';
         }
@@ -579,7 +578,7 @@ function render_info_modal_body(data) {
             html_string += '<h2>SDG\'s</h2>';
 
             html_string += '<table>';
-            html_string += info_model_item('Categorieën', data.sdg, 'array');
+            html_string += info_model_item('Categorieën', data.sdg.sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; }), 'array');
             html_string += info_model_item('SDG impact (positief)', data.sdg_impact_positive, 'text');
             html_string += info_model_item('SDG impact (negatief)', data.sdg_impact_negative, 'text');
             html_string += '</table>';
