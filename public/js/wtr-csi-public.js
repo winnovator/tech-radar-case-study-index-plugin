@@ -320,10 +320,10 @@ function render_output(arr) {
             html_string += '<table class="wtr-csi-public-item-table">';
 
             html_string += output_table_row('Windesheim Minor:', element.minor, 'text');
-            html_string += output_table_row('Value Chain (Michael Porter):', element.value_chain.sort(), 'array');
+            html_string += output_table_row('Value Chain (Michael Porter):', element.value_chain, 'array');
             html_string += output_table_row('SBI-code:', element.sbi + ' - ' + get_sbi_code_title(element.sbi), 'text');
-            html_string += output_table_row('Trends:', element.tech_trends.sort(), 'array');
-            html_string += output_table_row('SDG\'s', element.sdg.sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; }), 'text');
+            html_string += output_table_row('Trends:', element.tech_trends, 'array');
+            html_string += output_table_row('SDG\'s', element.sdg, 'text');
 
             html_string += '</table>';
 
@@ -369,10 +369,10 @@ function filter_side_panel_item(title, arr, label_for, input_name) {
 
 function render_side_panel(arr) {
     let content_selector = jQuery('#wtr-csi-public-side-panel');
-    let unique_tech_trends_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'tech_trends'))).sort();
-    let unique_value_chain_Arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'value_chain'))).sort();
-    let unique_minor_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'minor'))).sort();
-    let unique_sdg_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'sdg'))).sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; });
+    let unique_tech_trends_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'tech_trends')));
+    let unique_value_chain_Arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'value_chain')));
+    let unique_minor_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'minor')));
+    let unique_sdg_arr = remove_empty_elements(array_unique(convert_to_single_type_arr(arr, 'sdg')));
     let all_sbi_data = get_storage(sessionStorage, 'wtr-csi-public-sbi-list');
     let html_string = '';
 
@@ -567,8 +567,8 @@ function render_info_modal_body(data) {
                 html_string += info_model_item('SBI-code', data.sbi + ' - ' + get_sbi_code_title(data.sbi), 'text');
                 html_string += info_model_item('Technologie innovaties', data.tech_innovations, 'text');
                 html_string += info_model_item('Technologieleveranciers', data.tech_providers, 'text');
-                html_string += info_model_item('Trends', data.tech_trends.sort(), 'array');
-                html_string += info_model_item('Value Chain (Michael Porter)', data.value_chain.sort(), 'array');
+                html_string += info_model_item('Trends', data.tech_trends, 'array');
+                html_string += info_model_item('Value Chain (Michael Porter)', data.value_chain, 'array');
                 html_string += info_model_item('Bedrijfssector', data.company_sector, 'text');
                 html_string += '</table>';
         }
@@ -578,7 +578,7 @@ function render_info_modal_body(data) {
             html_string += '<h2>SDG\'s</h2>';
 
             html_string += '<table>';
-            html_string += info_model_item('Categorieën', data.sdg.sort(function (a, b) { return a.split('.')[0] - b.split('.')[0]; }), 'array');
+            html_string += info_model_item('Categorieën', data.sdg, 'array');
             html_string += info_model_item('SDG impact (positief)', data.sdg_impact_positive, 'text');
             html_string += info_model_item('SDG impact (negatief)', data.sdg_impact_negative, 'text');
             html_string += '</table>';

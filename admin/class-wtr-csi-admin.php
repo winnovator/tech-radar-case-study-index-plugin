@@ -78,7 +78,6 @@ class Wtr_Csi_Admin {
 		 */
 
 		$this->check_nf_status();
-
 		wp_enqueue_style('dashicons', array(), $this->version, 'all');
 		wp_enqueue_style('datatables.min', plugin_dir_url(__FILE__) . 'css/datatables.min.css',  array(), $this->version, 'all');
         wp_enqueue_style('wtr-csi-admin-main', plugin_dir_url(__FILE__) . 'css/wtr-csi-admin-main.css', array(), $this->version, 'all');
@@ -104,13 +103,11 @@ class Wtr_Csi_Admin {
 		 */
 
 		$this->check_nf_status();
-
 		wp_enqueue_script('jquery', array('jquery'), $this->version, false);
 		wp_enqueue_script('datatables.min', plugin_dir_url(__FILE__) . 'js/datatables.min.js', array('jquery'), $this->version, false);
 		wp_enqueue_script('wtr-csi-admin-main', plugin_dir_url(__FILE__) . 'js/wtr-csi-admin-main.js', array('jquery'), $this->version, false);
         wp_localize_script('wtr-csi-admin-main', 'wtr_csi_admin_main', array('url' => esc_url(rest_url("wtr-csi/v1/admin-main/sub")), 'nonce' => wp_create_nonce('wp_rest')));
         wp_localize_script('wtr-csi-admin-main', 'wtr_csi_admin_datatables_dutch_lang', array('url' => plugin_dir_url(__FILE__) . 'js/dataTables.dutch.json'));
-
 		wp_enqueue_script('wtr-csi-admin-info', plugin_dir_url(__FILE__) . 'js/wtr-csi-admin-info.js', array('jquery'), $this->version, false);
         wp_localize_script('wtr-csi-admin-info', 'wtr_csi_admin_info', array('url' => esc_url(rest_url("wtr-csi/v1/admin-info/sub")), 'nonce' => wp_create_nonce('wp_rest'), "redirect_url" => esc_url_raw(admin_url('admin.php?page=wtr-csi-admin-main'))));
 	}

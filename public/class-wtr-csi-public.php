@@ -75,7 +75,8 @@ class Wtr_Csi_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+		
+		wp_enqueue_style('dashicons', array(), $this->version, 'all');
 		wp_enqueue_style('wtr-csi-public', plugin_dir_url( __FILE__ ) . 'css/wtr-csi-public.css', array(), $this->version, 'all');
 	}
 
@@ -97,7 +98,8 @@ class Wtr_Csi_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+		
+        wp_enqueue_script('jquery', array(), $this->version, false);
 		wp_enqueue_script('wtr-csi-public', plugin_dir_url( __FILE__ ) . 'js/wtr-csi-public.js', array( 'jquery' ), $this->version, false );
 		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub")), 'nonce' => wp_create_nonce('wp_rest')));
 		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax_info', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub/")), 'nonce' => wp_create_nonce('wp_rest')));

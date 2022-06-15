@@ -125,15 +125,15 @@ class Wtr_Csi_Public_Actions {
         $parent_arr = array();
 
         foreach ($published_subs as $element) {
-
+                   
             $child_arr = array(
                 'id' => $element->get_extra_value('_seq_num'),
                 'project_name'=> $element->get_field_value('project_name'),
                 'minor' => $element->get_field_value('minor'),
-                'value_chain' => $element->get_field_value('value_chain'),
+                'value_chain' => $this->sort_array($element->get_field_value('value_chain')),
                 'sbi' => $element->get_field_value('sbi'),
-                'tech_trends' => $element->get_field_value('tech_trends'),
-                'sdg' => $element->get_field_value('sdg'),
+                'tech_trends' => $this->sort_array($element->get_field_value('tech_trends')),
+                'sdg' => $this->sort_array($element->get_field_value('sdg')),
                 'case_study_image' => $element->get_field_value('case_study_image')
             );
 
@@ -162,13 +162,13 @@ class Wtr_Csi_Public_Actions {
             'project_owner_email' => $sub->get_field_value('project_owner_email'),
             'project_stage' => $sub->get_field_value('project_stage'),
             'minor' => $sub->get_field_value('minor'),
-            'value_chain' => $sub->get_field_value('value_chain'),
+            'value_chain' => $this->sort_array($sub->get_field_value('value_chain')),
             'sbi' => $sub->get_field_value('sbi'),
             'tech_innovations' => $sub->get_field_value('tech_innovations'),
             'tech_providers' => $sub->get_field_value('tech_providers'),
-            'tech_trends' => $sub->get_field_value('tech_trends'),
+            'tech_trends' => $this->sort_array($sub->get_field_value('tech_trends')),
             'company_sector' => $sub->get_field_value('company_sector'),
-            'sdg' => $sub->get_field_value('sdg'),
+            'sdg' => $this->sort_array($sub->get_field_value('sdg')),
             'sdg_impact_positive' => $sub->get_field_value('sdg_impact_positive'),
             'sdg_impact_negative' => $sub->get_field_value('sdg_impact_negative'),
             'project_context' => $sub->get_field_value('project_context'),
@@ -237,5 +237,17 @@ class Wtr_Csi_Public_Actions {
         }
 
         return false;
+    }
+    
+    /**
+     * sort_array
+     *
+     * @param  mixed $array
+     * @return void
+     */
+    public function sort_array($array) {
+        if (!$array || !is_array($array)) { return false; }
+        sort($array, SORT_NATURAL);
+        return $array;
     }
 }
