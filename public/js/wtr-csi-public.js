@@ -605,7 +605,7 @@ function render_info_modal_body(data) {
         
         html_string += '</div>';
 
-        if (data.case_study_image || wtr_csi_public_tech_radar_logo_image.url) {
+        if (data.case_study_image) {
             html_string += '<div id="wtr-csi-public-info-modal-body-image">';
             html_string += '<img class="wtr-csi-public-item-img" src="' + Object.values(data.case_study_image).join('') + '">';
             html_string += '</div>';
