@@ -194,7 +194,7 @@ function next_page(max_page_count) {
 }
 
 function divide_arr(arr) {
-    let cases_per_page = 10;
+    let cases_per_page = 16;
     let result_arr = [];
 
     if (arr !== null && arr.length > 0) {
@@ -286,6 +286,10 @@ function remove_empty_elements(arr) {
     return arr.filter(item => item);
 }
 
+function get_words(str, count) {
+    return str.split(/\s+/).slice(0, count).join(" ");
+}
+
 function output_table_row(title, element, type) {
     let output = '';
 
@@ -310,31 +314,24 @@ function render_output(arr) {
 
     if (arr.length > 0) {
         arr.forEach(element => {
-            html_string += '<div class="wtr-csi-public-element-container wtr-csi-public-element-item">';
+            html_string += '<div class="wtr-csi-public-element-container card">';
 
-            if (element.id && element.project_name) {
-                html_string += '<h1><button class="wtr-csi-public-info-modal-open" data-wtr-csi-public-sub-id="' + element.id + '">' + element.project_name + '</button></h1>';
-            }
-
-            html_string += '<div class="wtr-csi-public-item-content">';
-            html_string += '<table class="wtr-csi-public-item-table">';
-
-            html_string += output_table_row('Windesheim Minor:', element.minor, 'text');
-            html_string += output_table_row('Value Chain (Michael Porter):', element.value_chain, 'array');
-            html_string += output_table_row('SBI-code:', element.sbi + ' - ' + get_sbi_code_title(element.sbi), 'text');
-            html_string += output_table_row('Trends:', element.tech_trends, 'array');
-            html_string += output_table_row('SDG\'s', element.sdg, 'array');
-
-            html_string += '</table>';
-
+            html_string += '<div class="card-image-container">';
             if (element.case_study_image) {
-                html_string += '<img class="wtr-csi-public-item-img" src="' + Object.values(element.case_study_image).join('') + '">';
+                html_string += '<img class="card-image" src="' + Object.values(element.case_study_image).join('') + '">';
             }
             else {
-                html_string += '<img class="wtr-csi-public-item-img" src="' + wtr_csi_public_tech_radar_logo_image.url + '">';
+                html_string += '<img class="card-image" src="' + wtr_csi_public_tech_radar_logo_image.url + '">';
             }
-
             html_string += '</div>';
+
+            html_string += '<hr>';
+            html_string += '<div class="card-body">';
+            html_string += '<h4 class="card-body-title"><b>' + get_words(element.project_name, 5)  + '...</b></h4>';
+            html_string += '<p class="card-body-description">' + element.project_goal.substr(0, 35) + '...</p>';
+            html_string += '<button class="wtr-csi-public-info-modal-open" data-wtr-csi-public-sub-id="' + element.id + '">VERDER LEZEN</button>';
+            html_string += '</div>';
+
             html_string += '</div>';
         });
     }

@@ -6,5 +6,6 @@ if (!defined('ABSPATH')) {
 class Wtr_Csi_Config {
     public static $form_id = 3;
     public static $email_on = true;
-    public static $google_api_key = 'AIzaSyDjeBLwCKQpTdjBHkIld54jM5oxUq18yqU';
+    public static $google_api_key = '';
+    public static $theme = 'default';
 }

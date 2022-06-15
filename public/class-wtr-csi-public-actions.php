@@ -134,9 +134,10 @@ class Wtr_Csi_Public_Actions {
                 'sbi' => $element->get_field_value('sbi'),
                 'tech_trends' => $this->sort_array($element->get_field_value('tech_trends')),
                 'sdg' => $this->sort_array($element->get_field_value('sdg')),
-                'case_study_image' => $element->get_field_value('case_study_image')
+                'case_study_image' => $element->get_field_value('case_study_image'),
+                'project_goal' => $element->get_field_value('project_goal')
             );
-
+            
             array_push($parent_arr, $child_arr);
         }
 
