@@ -1,0 +1,30 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+select[name="wtr-csi-admin-main-form-table_length"] {
+    padding: 5px 30px 5px 5px !important;
+}
+
+#wtr-csi-admin-main-table-wrap {
+    margin-top: 2vh;
+}
+
+#wtr-csi-admin-main-submit-wrap {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 2vh;
+}
+
+.paginate_button {
+    margin: 3px;
+    color: #2271b1 !important;
+    border-color: #2271b1 !important;
+    background: #f6f7f7 !important;
+    border-radius: 3px !important;
+}
+
+#wtr-csi-admin-main-form-table > thead > tr > th,  #wtr-csi-admin-main-form-table > tbody > tr > td {
+    text-align: left;
+}
