@@ -34,18 +34,32 @@ var current_page_count = 1;
 
 jQuery(document).ready(function () {
     load_csi();
+    refresh_data(300000);
 });
 
+function refresh_data(ms_time) {
+    setInterval(function () {
+        get_csi_data(wtr_csi_public_ajax.url, wtr_csi_public_ajax.nonce).done(function (data) {
+             remove_storage(sessionStorage, 'wtr-csi-public-default-data');
+            save_storage(sessionStorage, 'wtr-csi-public-default-data', data);
+            console.info('Data refresh successful');
+        });
+    }, ms_time);
+}
+
 async function load_csi() {
-    let csi_data = await get_csi_data(wtr_csi_public_ajax.url, wtr_csi_public_ajax.nonce);
-    remove_storage(sessionStorage, 'wtr-csi-public-default-data');
     remove_storage(sessionStorage, 'wtr-csi-public-filtered-data');
-    save_storage(sessionStorage, 'wtr-csi-public-default-data', csi_data);
 
     if (!check_if_storage_key_exists(sessionStorage, 'wtr-csi-public-sbi-list')) {
         let sbi_data = await get_all_sbi_data(wtr_csi_public_ajax_all_sbi.url, wtr_csi_public_ajax_all_sbi.nonce)
         remove_storage(sessionStorage, 'wtr-csi-public-sbi-list');
         save_storage(sessionStorage, 'wtr-csi-public-sbi-list', sbi_data);
+    }
+
+    if (!check_if_storage_key_exists(sessionStorage, 'wtr-csi-public-default-data')) {
+        let csi_data = await get_csi_data(wtr_csi_public_ajax.url, wtr_csi_public_ajax.nonce);
+        remove_storage(sessionStorage, 'wtr-csi-public-default-data');
+        save_storage(sessionStorage, 'wtr-csi-public-default-data', csi_data);
     }
 
     let json_default_data = get_storage(sessionStorage, 'wtr-csi-public-default-data');

@@ -352,7 +352,12 @@
     height: 60px;
     -webkit-animation: spin 0.5s linear infinite;
     animation: spin 0.5s linear infinite;
-    margin: auto;
+}
+
+.wtr-csi-public-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
 
 @keyframes spin {
