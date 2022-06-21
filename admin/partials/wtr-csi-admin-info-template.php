@@ -64,7 +64,6 @@ if (!$sub) {
                         break;
                     case 'check':
                         if ($element['value']) {
-                            sort($element['value']);
                             echo '<td>' . esc_html(implode(', ', $element['value'])) . '</td>';
                         }
                         else {

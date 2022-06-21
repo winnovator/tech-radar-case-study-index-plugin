@@ -80,14 +80,14 @@ class Wtr_Csi_Public_Actions {
      * @return array
      */
     public function get_all_sbi_data() {
-        $sections = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json'));
+        $sections = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/Sections.json'));
         if (!$sections) { return false; }
         $dataArr = array();
 
         foreach ($sections as $section) {
-            $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json'));
+            $codes = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/' . $section->id . '.json'));
             if (!$codes) { return false; }
-            array_unshift($codes, array('id' => $section->id, 'title' => $section->title, 'parentId' => $section->parent));
+            array_unshift($codes, array('id' => $section->id, 'title' => $section->title, 'parent_id' => isset($section->parent) ? $section->parent : NULL));
             array_push($dataArr, $codes);
         }     
 
@@ -125,18 +125,19 @@ class Wtr_Csi_Public_Actions {
         $parent_arr = array();
 
         foreach ($published_subs as $element) {
-
+                   
             $child_arr = array(
                 'id' => $element->get_extra_value('_seq_num'),
                 'project_name'=> $element->get_field_value('project_name'),
                 'minor' => $element->get_field_value('minor'),
-                'value_chain' => $element->get_field_value('value_chain'),
+                'value_chain' => $this->sort_array($element->get_field_value('value_chain')),
                 'sbi' => $element->get_field_value('sbi'),
-                'tech_trends' => $element->get_field_value('tech_trends'),
-                'sdg' => $element->get_field_value('sdg'),
-                'case_study_image' => $element->get_field_value('case_study_image')
+                'tech_trends' => $this->sort_array($element->get_field_value('tech_trends')),
+                'sdg' => $this->sort_array($element->get_field_value('sdg')),
+                'case_study_image' => $element->get_field_value('case_study_image'),
+                'project_goal' => $element->get_field_value('project_goal')
             );
-
+            
             array_push($parent_arr, $child_arr);
         }
 
@@ -162,13 +163,13 @@ class Wtr_Csi_Public_Actions {
             'project_owner_email' => $sub->get_field_value('project_owner_email'),
             'project_stage' => $sub->get_field_value('project_stage'),
             'minor' => $sub->get_field_value('minor'),
-            'value_chain' => $sub->get_field_value('value_chain'),
+            'value_chain' => $this->sort_array($sub->get_field_value('value_chain')),
             'sbi' => $sub->get_field_value('sbi'),
             'tech_innovations' => $sub->get_field_value('tech_innovations'),
             'tech_providers' => $sub->get_field_value('tech_providers'),
-            'tech_trends' => $sub->get_field_value('tech_trends'),
+            'tech_trends' => $this->sort_array($sub->get_field_value('tech_trends')),
             'company_sector' => $sub->get_field_value('company_sector'),
-            'sdg' => $sub->get_field_value('sdg'),
+            'sdg' => $this->sort_array($sub->get_field_value('sdg')),
             'sdg_impact_positive' => $sub->get_field_value('sdg_impact_positive'),
             'sdg_impact_negative' => $sub->get_field_value('sdg_impact_negative'),
             'project_context' => $sub->get_field_value('project_context'),
@@ -237,5 +238,17 @@ class Wtr_Csi_Public_Actions {
         }
 
         return false;
+    }
+    
+    /**
+     * sort_array
+     *
+     * @param  mixed $array
+     * @return void
+     */
+    public function sort_array($array) {
+        if (!$array || !is_array($array)) { return false; }
+        sort($array, SORT_NATURAL);
+        return $array;
     }
 }

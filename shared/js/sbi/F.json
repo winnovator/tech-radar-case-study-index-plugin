@@ -2,211 +2,211 @@
     {
         "id": "41",
         "title": "Algemene burgerlijke en utiliteitsbouw en projectontwikkeling",
-        "parentId": "F"
+        "parent_id": "F"
     },
     {
         "id": "42",
         "title": "Grond-, water- en wegenbouw (geen grondverzet)",
-        "parentId": "F"
+        "parent_id": "F"
     },
     {
         "id": "43",
         "title": "Gespecialiseerde werkzaamheden in de bouw",
-        "parentId": "F"
+        "parent_id": "F"
     },
     {
         "id": "411",
         "title": "Projectontwikkeling",
-        "parentId": "41"
+        "parent_id": "41"
     },
     {
         "id": "412",
         "title": "Algemene burgerlijke en utiliteitsbouw",
-        "parentId": "41"
+        "parent_id": "41"
     },
     {
         "id": "4110",
         "title": "Projectontwikkeling",
-        "parentId": "411"
+        "parent_id": "411"
     },
     {
         "id": "4120",
         "title": "Algemene burgerlijke en utiliteitsbouw",
-        "parentId": "412"
+        "parent_id": "412"
     },
     {
         "id": "421",
         "title": "Bouw van wegen, spoorwegen en kunstwerken",
-        "parentId": "42"
+        "parent_id": "42"
     },
     {
         "id": "422",
         "title": "Leggen van kabels en buizen",
-        "parentId": "42"
+        "parent_id": "42"
     },
     {
         "id": "429",
         "title": "Bouw van overige civieltechnische werken",
-        "parentId": "42"
+        "parent_id": "42"
     },
     {
         "id": "4211",
         "title": "Wegenbouw en stratenmaken",
-        "parentId": "421"
+        "parent_id": "421"
     },
     {
         "id": "4212",
         "title": "Bouw van boven- en ondergrondse spoorwegen",
-        "parentId": "421"
+        "parent_id": "421"
     },
     {
         "id": "4213",
         "title": "Bouw van kunstwerken",
-        "parentId": "421"
+        "parent_id": "421"
     },
     {
         "id": "42111",
         "title": "Wegenbouw",
-        "parentId": "4211"
+        "parent_id": "4211"
     },
     {
         "id": "42112",
         "title": "Stratenmaken",
-        "parentId": "4211"
+        "parent_id": "4211"
     },
     {
         "id": "4221",
         "title": "Leggen van rioleringen, buizen en pijpleidingen; aanleg van bronbemaling",
-        "parentId": "422"
+        "parent_id": "422"
     },
     {
         "id": "4222",
         "title": "Leggen van elektriciteits- en telecommunicatiekabels",
-        "parentId": "422"
+        "parent_id": "422"
     },
     {
         "id": "4291",
         "title": "Natte waterbouw",
-        "parentId": "429"
+        "parent_id": "429"
     },
     {
         "id": "4299",
         "title": "Bouw van overige civieltechnische werken (rest)",
-        "parentId": "429"
+        "parent_id": "429"
     },
     {
         "id": "431",
         "title": "Slopen van gebouwen, grondverzet en proefboren",
-        "parentId": "43"
+        "parent_id": "43"
     },
     {
         "id": "432",
         "title": "Bouwinstallatie",
-        "parentId": "43"
+        "parent_id": "43"
     },
     {
         "id": "433",
         "title": "Afwerking van gebouwen",
-        "parentId": "43"
+        "parent_id": "43"
     },
     {
         "id": "439",
         "title": "Dakbouw en overige gespecialiseerde werkzaamheden in de bouw",
-        "parentId": "43"
+        "parent_id": "43"
     },
     {
         "id": "4311",
         "title": "Slopen van bouwwerken",
-        "parentId": "431"
+        "parent_id": "431"
     },
     {
         "id": "4312",
         "title": "Grondverzet",
-        "parentId": "431"
+        "parent_id": "431"
     },
     {
         "id": "4313",
         "title": "Proefboren",
-        "parentId": "431"
+        "parent_id": "431"
     },
     {
         "id": "4321",
         "title": "Elektrotechnische bouwinstallatie",
-        "parentId": "432"
+        "parent_id": "432"
     },
     {
         "id": "4322",
         "title": "Loodgieters- en fitterswerk; installatie van sanitair en van verwarmings- en luchtbehandelingsapparatuur",
-        "parentId": "432"
+        "parent_id": "432"
     },
     {
         "id": "4329",
         "title": "Overige bouwinstallatie",
-        "parentId": "432"
+        "parent_id": "432"
     },
     {
         "id": "43221",
         "title": "Loodgieters- en fitterswerk; installatie van sanitair",
-        "parentId": "4322"
+        "parent_id": "4322"
     },
     {
         "id": "43222",
         "title": "Installatie van verwarmings- en luchtbehandelingsapparatuur",
-        "parentId": "4322"
+        "parent_id": "4322"
     },
     {
         "id": "4331",
         "title": "Stukadoren",
-        "parentId": "433"
+        "parent_id": "433"
     },
     {
         "id": "4332",
         "title": "Bouwtimmeren",
-        "parentId": "433"
+        "parent_id": "433"
     },
     {
         "id": "4333",
         "title": "Afwerken van vloeren en wanden",
-        "parentId": "433"
+        "parent_id": "433"
     },
     {
         "id": "4334",
         "title": "Schilderen en glaszetten",
-        "parentId": "433"
+        "parent_id": "433"
     },
     {
         "id": "4339",
         "title": "Overige afwerken van gebouwen",
-        "parentId": "433"
+        "parent_id": "433"
     },
     {
         "id": "4391",
         "title": "Dakdekken en bouwen van dakconstructies",
-        "parentId": "439"
+        "parent_id": "439"
     },
     {
         "id": "4399",
         "title": "Overige gespecialiseerde werkzaamheden in de bouw",
-        "parentId": "439"
+        "parent_id": "439"
     },
     {
         "id": "43991",
         "title": "Heien en andere funderingswerkzaamheden",
-        "parentId": "4399"
+        "parent_id": "4399"
     },
     {
         "id": "43992",
         "title": "Vlechten van betonstaal",
-        "parentId": "4399"
+        "parent_id": "4399"
     },
     {
         "id": "43993",
         "title": "Metselen en voegen",
-        "parentId": "4399"
+        "parent_id": "4399"
     },
     {
         "id": "43999",
         "title": "Overige gespecialiseerde werkzaamheden in de bouw (rest)",
-        "parentId": "4399"
+        "parent_id": "4399"
     }
 ]

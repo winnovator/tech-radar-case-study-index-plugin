@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Windesheim Technology Radar Case Study Index
  * Plugin URI:        https://www.windesheim.tech
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Plugin for the Windesheim Technology Radar Case Study Index. Works with Wordpress version 6.0 and Ninja Forms version 3.6.11.
  * Version:           1.0.0
  * Author:            Mike Harman
  * Author URI:        https://www.windesheim.tech

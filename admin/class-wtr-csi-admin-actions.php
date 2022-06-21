@@ -200,28 +200,24 @@ class Wtr_Csi_Admin_Actions {
         $db_conn->delete("{$db_conn->prefix}csi", array('seq_num' => $sub_id));
     }
     
-    /**
-     * get_all_sbi_codes
-     *
-     * @return array
-     */
-    public function get_all_sbi_codes() {
-        $result = array();
+    // /**
+    //  * get_all_sbi_data
+    //  *
+    //  * @return array
+    //  */
+    public function get_all_sbi_data() {
+        $sections = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/Sections.json'));
+        if (!$sections) { return false; }
+        $dataArr = array();
 
-        if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json')) {
-            $sections = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/Sections.json'));
+        foreach ($sections as $section) {
+            $codes = json_decode(file_get_contents(WTR_CSI_PLUGIN_PATH . 'shared/js/sbi/' . $section->id . '.json'));
+            if (!$codes) { return false; }
+            array_unshift($codes, array('id' => $section->id, 'title' => $section->title, 'parent_id' => isset($section->parent) ? $section->parent : NULL));
+            array_push($dataArr, $codes);
+        }     
 
-            foreach ($sections as $section) {
-                if (file_exists(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json')) {
-                    $codes = json_decode(file_get_contents(WP_PLUGIN_DIR . '/tech-radar-case-study-index-plugin/assets/shared/js/sbi/' . $section->id . '.json'));
-                    array_push($result, $codes);
-                }
-            }
-
-            return array_merge(...$result);
-        }
-
-        return false;
+        return array_merge(...$dataArr);
     }
     
     /**
@@ -232,12 +228,14 @@ class Wtr_Csi_Admin_Actions {
      */
     public function get_sbi_code_title($code) {
         if (!$code) { return false; }
-        $codes = $this->get_all_sbi_codes();
+        $codes = $this->get_all_sbi_data();
         if (!$codes) { return false; }
         
         foreach ($codes as $element) {
-            if ($element->id == $code) {
-                return $element->title;
+            if (isset($element->id)) {
+                if ($element->id == $code) {
+                    return $element->title;
+                }
             }
         }
 
@@ -260,14 +258,14 @@ class Wtr_Csi_Admin_Actions {
             $wp_csi_data = $this->get_wp_csi_data($id);
             $url = get_admin_url() . 'admin.php?page=wtr-csi-admin-info&sub_id=' . $id;
             
-            $child_arr = [
+            $child_arr = array(
                 'id' => $id,
                 'project_name' => $element->get_field_value('project_name'),
                 'project_owner' => $element->get_field_value('project_owner'),
                 'status' => $wp_csi_data[0]->new == 1 ? 'Nieuw' : 'Bestaand',
                 'published' => $wp_csi_data[0]->published == 1 ? 'Ja' : 'Nee',
                 'link' => '<a href="' . esc_url($url) . '" target="_blank"><span class="dashicons dashicons-admin-page"></span></a>'
-            ];
+            );
 
             array_push($result, $child_arr);
             $index++;
@@ -287,7 +285,7 @@ class Wtr_Csi_Admin_Actions {
         $sub = $this->get_nf_sub($sub_id);
         $wp_csi_data = $this->get_wp_csi_data($sub_id);
         if (!$sub || !$wp_csi_data) { return false; }
-
+        
         $arr = array(
             array('key' => 'id', 'value' => $sub->get_extra_value('_seq_num'), 'label' => 'ID', 'type' => 'text'),
             array('key' => 'status', 'value' => $wp_csi_data[0]->new, 'label' => 'Status', 'type' => 'text'),
@@ -297,13 +295,13 @@ class Wtr_Csi_Admin_Actions {
             array('key' => 'project_owner_email', 'value' => $sub->get_field_value('project_owner_email'), 'label' => 'Email', 'type' => 'text'),
             array('key' => 'project_stage', 'value' => $sub->get_field_value('project_stage'), 'label' => 'Projectfase', 'type' => 'text'),
             array('key' => 'minor', 'value' => $sub->get_field_value('minor'), 'label' => 'Windesheim Minor', 'type' => 'text'),
-            array('key' => 'value_chain', 'value' => $sub->get_field_value('value_chain'), 'label' => 'Value Chain (Michael Porter)', 'type' => 'check'),
+            array('key' => 'value_chain', 'value' => $this->sort_array($sub->get_field_value('value_chain')), 'label' => 'Value Chain (Michael Porter)', 'type' => 'check'),
             array('key' => 'sbi', 'value' => $sub->get_field_value('sbi'), 'label' => 'Sector (SBI-code)', 'type' => 'text'),
             array('key' => 'tech_innovations', 'value' => $sub->get_field_value('tech_innovations'), 'label' => 'Technologie innovaties', 'type' => 'text'),
             array('key' => 'tech_providers', 'value' => $sub->get_field_value('tech_providers'), 'label' => 'Technologieleveranciers', 'type' => 'text'),
-            array('key' => 'tech_trends', 'value' => $sub->get_field_value('tech_trends'), 'label' => 'Trends', 'type' => 'check'),
+            array('key' => 'tech_trends', 'value' => $this->sort_array($sub->get_field_value('tech_trends')), 'label' => 'Trends', 'type' => 'check'),
             array('key' => 'company_sector', 'value' => $sub->get_field_value('company_sector'), 'label' => 'Bedrijfssector', 'type' => 'text'),
-            array('key' => 'sdg', 'value' => $sub->get_field_value('sdg'), 'label' => 'SDG\'s', 'type' => 'check'),
+            array('key' => 'sdg', 'value' => $this->sort_array($sub->get_field_value('sdg')), 'label' => 'SDG\'s', 'type' => 'check'),
             array('key' => 'sdg_impact_positive', 'value' => $sub->get_field_value('sdg_impact_positive'), 'label' => 'SDG impact positief', 'type' => 'text'),
             array('key' => 'sdg_impact_negative', 'value' => $sub->get_field_value('sdg_impact_negative'), 'label' => 'SDG impact negatief', 'type' => 'text'),
             array('key' => 'project_context', 'value' => $sub->get_field_value('project_context'), 'label' => 'Achtegrond', 'type' => 'text'),
@@ -372,5 +370,17 @@ class Wtr_Csi_Admin_Actions {
         }
 
         return false;
+    }
+    
+    /**
+     * sort_array
+     *
+     * @param  mixed $array
+     * @return void
+     */
+    public function sort_array($array) {
+        if (!$array || !is_array($array)) { return false; }
+        sort($array, SORT_NATURAL);
+        return $array;
     }
 }

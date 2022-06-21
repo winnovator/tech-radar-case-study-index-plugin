@@ -76,7 +76,15 @@ class Wtr_Csi_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style('wtr-csi-public', plugin_dir_url( __FILE__ ) . 'css/wtr-csi-public.css', array(), $this->version, 'all');
+		wp_enqueue_style('dashicons', array(), $this->version, 'all');
+
+		if (Wtr_Csi_Config::$theme == 'default') {
+			wp_enqueue_style('wtr-csi-public', plugin_dir_url( __FILE__ ) . 'css/wtr-csi-public.css', array(), $this->version, 'all');
+		}
+
+		if (Wtr_Csi_Config::$theme == 'tile') {
+			wp_enqueue_style('wtr-csi-public-tile', plugin_dir_url( __FILE__ ) . 'css/wtr-csi-public-tile.css', array(), $this->version, 'all');
+		}
 	}
 
 	/**
@@ -97,29 +105,24 @@ class Wtr_Csi_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		
+        wp_enqueue_script('jquery', array(), $this->version, false);
 
-		wp_enqueue_script('wtr-csi-public', plugin_dir_url( __FILE__ ) . 'js/wtr-csi-public.js', array( 'jquery' ), $this->version, false );
-		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub")), 'nonce' => wp_create_nonce('wp_rest')));
-		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax_info', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
-		wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax_all_sbi', array('url' => esc_url(rest_url("wtr-csi/v1/public/sbi")), 'nonce' => wp_create_nonce('wp_rest')));
-		wp_localize_script('wtr-csi-public', 'wtr_csi_public_tech_radar_logo_image', array('url' => plugin_dir_url(__DIR__) . 'shared/images/windesheim_tech_radar_logo.png'));
-	}
-	
-	/**
-	 * wtr_csi_public_page
-	 *
-	 * @return string
-	 */
-	public function wtr_csi_public_page() {
-		ob_start();
+		if (Wtr_Csi_Config::$theme == 'default') {
+			wp_enqueue_script('wtr-csi-public', plugin_dir_url(__FILE__) . 'js/wtr-csi-public.js', array('jquery'), $this->version, false);
+			wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub")), 'nonce' => wp_create_nonce('wp_rest')));
+			wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax_info', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
+			wp_localize_script('wtr-csi-public', 'wtr_csi_public_ajax_all_sbi', array('url' => esc_url(rest_url("wtr-csi/v1/public/sbi")), 'nonce' => wp_create_nonce('wp_rest')));
+			wp_localize_script('wtr-csi-public', 'wtr_csi_public_tech_radar_logo_image', array('url' => esc_url(plugin_dir_url(WTR_CSI_PLUGIN_PATH) . 'wtr-csi/shared/images/windesheim_tech_radar_logo.png')));
+		}
 
-		require_once WTR_CSI_PLUGIN_PATH . 'public/partials/wtr-csi-public-template.php';
-
-		$template = ob_get_contents();
-
-		ob_end_clean();
-
-		echo $template;
+		if (Wtr_Csi_Config::$theme == 'tile') {
+			wp_enqueue_script('wtr-csi-public-tile', plugin_dir_url( __FILE__ ) . 'js/wtr-csi-public-tile.js', array( 'jquery' ), $this->version, false );
+			wp_localize_script('wtr-csi-public-tile', 'wtr_csi_public_ajax', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub")), 'nonce' => wp_create_nonce('wp_rest')));
+			wp_localize_script('wtr-csi-public-tile', 'wtr_csi_public_ajax_info', array('url' => esc_url(rest_url("wtr-csi/v1/public/sub/")), 'nonce' => wp_create_nonce('wp_rest')));
+			wp_localize_script('wtr-csi-public-tile', 'wtr_csi_public_ajax_all_sbi', array('url' => esc_url(rest_url("wtr-csi/v1/public/sbi")), 'nonce' => wp_create_nonce('wp_rest')));
+			wp_localize_script('wtr-csi-public-tile', 'wtr_csi_public_tech_radar_logo_image', array('url' => esc_url(plugin_dir_url(WTR_CSI_PLUGIN_PATH) . 'wtr-csi/shared/images/windesheim_tech_radar_logo.png')));
+		}
 	}
 	
 	/**
@@ -127,25 +130,12 @@ class Wtr_Csi_Public {
 	 *
 	 * @return void
 	 */
-	public function wtr_csi_public_register_shortcodes() {
-		add_shortcode('csi', array($this, 'short_code_contents'));
-	}
-	
-	/**
-	 * short_code_contents
-	 *
-	 * @return string
-	 */
-	public function short_code_contents() {
+	public function wtr_csi_public_get_contents() {
 		ob_start();
-
 		require_once WTR_CSI_PLUGIN_PATH . 'public/partials/wtr-csi-public-template.php';
-
 		$template = ob_get_contents();
-
 		ob_end_clean();
-
-		echo $template;
+		return $template;
 	}
 	
 	/**
