@@ -168,7 +168,6 @@ class Wtr_Csi_Public_Actions {
             'tech_innovations' => $sub->get_field_value('tech_innovations'),
             'tech_providers' => $sub->get_field_value('tech_providers'),
             'tech_trends' => $this->sort_array($sub->get_field_value('tech_trends')),
-            'company_sector' => $sub->get_field_value('company_sector'),
             'sdg' => $this->sort_array($sub->get_field_value('sdg')),
             'sdg_impact_positive' => $sub->get_field_value('sdg_impact_positive'),
             'sdg_impact_negative' => $sub->get_field_value('sdg_impact_negative'),

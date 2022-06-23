@@ -25,7 +25,9 @@ if (!defined('ABSPATH')) {
         <div class="wtr-csi-public-loader"></div>
     </div>
     <div id="wtr-csi-public-info-modal-container"></div>
-    <div id="wtr-csi-public-side-panel"></div>
+    <div id="wtr-csi-public-side-panel">
+        <div class="wtr-csi-public-loader"></div>
+    </div>
     <div id="wtr-csi-public-pagination">
         <div id="wtr-csi-public-pagination-bttns">
             <button id="wtr-csi-public-previous-page"><span class="dashicons dashicons-arrow-left"></span></button>

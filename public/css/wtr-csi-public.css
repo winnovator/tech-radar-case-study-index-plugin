@@ -355,12 +355,6 @@
     animation: spin 0.5s linear infinite;
 }
 
-.wtr-csi-public-loader {
-    position: absolute;
-    left: 50vw;
-    top: 50vh;
-}
-
 @keyframes spin {
     0% {
         transform: rotate(0deg);
