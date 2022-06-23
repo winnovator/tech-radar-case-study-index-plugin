@@ -34,13 +34,13 @@ var current_page_count = 1;
 
 jQuery(document).ready(function () {
     load_csi();
-    refresh_data(300000);
+    refresh_data(180000);
 });
 
 function refresh_data(ms_time) {
     setInterval(function () {
         get_csi_data(wtr_csi_public_ajax.url, wtr_csi_public_ajax.nonce).done(function (data) {
-             remove_storage(sessionStorage, 'wtr-csi-public-default-data');
+            remove_storage(sessionStorage, 'wtr-csi-public-default-data');
             save_storage(sessionStorage, 'wtr-csi-public-default-data', data);
             console.info('Data refresh successful');
         });
@@ -572,7 +572,7 @@ function render_info_modal_body(data) {
         }
 
         if (data.project_stage || data.minor || data.minor || data.tech_innovations || 
-            data.tech_providers || data.tech_trends || data.value_chain || data.company_sector) {
+            data.tech_providers || data.tech_trends || data.value_chain) {
                 html_string += '<h2>Details</h2>';
 
                 html_string += '<table>';
@@ -583,7 +583,6 @@ function render_info_modal_body(data) {
                 html_string += info_model_item('Technologieleveranciers', data.tech_providers, 'text');
                 html_string += info_model_item('Trends', data.tech_trends, 'array');
                 html_string += info_model_item('Value Chain (Michael Porter)', data.value_chain, 'array');
-                html_string += info_model_item('Bedrijfssector', data.company_sector, 'text');
                 html_string += '</table>';
         }
 

@@ -300,7 +300,6 @@ class Wtr_Csi_Admin_Actions {
             array('key' => 'tech_innovations', 'value' => $sub->get_field_value('tech_innovations'), 'label' => 'Technologie innovaties', 'type' => 'text'),
             array('key' => 'tech_providers', 'value' => $sub->get_field_value('tech_providers'), 'label' => 'Technologieleveranciers', 'type' => 'text'),
             array('key' => 'tech_trends', 'value' => $this->sort_array($sub->get_field_value('tech_trends')), 'label' => 'Trends', 'type' => 'check'),
-            array('key' => 'company_sector', 'value' => $sub->get_field_value('company_sector'), 'label' => 'Bedrijfssector', 'type' => 'text'),
             array('key' => 'sdg', 'value' => $this->sort_array($sub->get_field_value('sdg')), 'label' => 'SDG\'s', 'type' => 'check'),
             array('key' => 'sdg_impact_positive', 'value' => $sub->get_field_value('sdg_impact_positive'), 'label' => 'SDG impact positief', 'type' => 'text'),
             array('key' => 'sdg_impact_negative', 'value' => $sub->get_field_value('sdg_impact_negative'), 'label' => 'SDG impact negatief', 'type' => 'text'),
